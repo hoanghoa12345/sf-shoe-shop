@@ -2,7 +2,7 @@ import React from 'react'
 
 const App = () => {
   return (
-    <div>SF Shoe Shop</div>
+    <h1>SF Shoe Shop</h1>
   )
 }
 
