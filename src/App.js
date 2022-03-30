@@ -1,8 +1,10 @@
 import React from 'react'
+import './App.css'
+import Home from './User/pages/Home'
 
 const App = () => {
   return (
-    <h1>SF Shoe Shop</h1>
+    <Home />
   )
 }
 
