@@ -11,7 +11,7 @@ const App = () => {
         <Route index element={<Home />} />
       </Route>
       <Route path="/admin" element={<Outlet />}>
-        <Routes index element={<HomeAdmin />} />
+        <Route index element={<HomeAdmin />} />
       </Route>
     </Routes>
   );
