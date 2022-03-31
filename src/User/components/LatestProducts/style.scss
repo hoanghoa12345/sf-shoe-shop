@@ -1,0 +1,106 @@
+.latest {
+    margin-bottom: 100px;
+    &__list {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    &__item {
+        position: relative;
+        width: calc(25% - 7.5px);
+        text-align: center;
+        padding: 30px;
+        background-color: rgb(250, 250, 250);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        overflow: hidden;
+
+        &:hover {
+            background-color: rgba(black, 0.2);
+        }
+
+        &:hover .latest__image {
+            animation: move 1.5s ease-in-out;
+        }
+
+        &:hover .latest__actions {
+            transform: translateX(0);
+        }
+    }
+
+    &__image {
+        width: 100%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 20px;
+    }
+
+    &__actions {
+        position: absolute;
+        z-index: 99;
+        top: 7px;
+        left: 7px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px 0;
+        transform: translateX(-130%);
+        transition: 0.25s ease-in-out;
+
+        & > * {
+            width: 35px;
+            height: 35px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            color: black;
+            background-color: white;
+            transition: 0.15s linear;
+
+            &:hover {
+                color: white;
+                background-color: black;
+            }
+        }
+    }
+
+    &__name {
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    &__price {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0 5px;
+
+        &-present {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        &-origin {
+            text-decoration: line-through;
+        }
+    }
+}
+
+@keyframes move {
+    0% {
+        top: 0;
+    }
+    60% {
+        top: -15px;
+    }
+    100% {
+        top: 0;
+    }
+}

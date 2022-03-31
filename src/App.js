@@ -1,17 +1,19 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import Checkout from "./User/pages/checkout/Checkout";
+import "./App.css";
+import HomeAdmin from "./Admin/Component/HomeAdmin";
+import Home from "./User/pages/Home";
+import { Routes, Route, Outlet } from "react-router-dom";
+
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Outlet />}>
-          <Route index element={<span>Home</span>}></Route>
-          {/* <Route path='shipping' element={<Shipping/>}></Route> */}
-          <Route path="checkout" element={<Checkout />}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Outlet />}>
+        <Route index element={<Home />} />
+      </Route>
+      <Route path="/admin" element={<Outlet />}>
+        <Route index element={<HomeAdmin />} />
+      </Route>
+    </Routes>
   );
 };
 

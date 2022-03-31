@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+
+.Container {
+    display: flex;
+    background-color: #081c15   ;
+    height: 100vh;
+
+}
+
+.Component_Other {
+    flex: 4;
+    margin-top: 70px;
+    color: #fff;
+    background-color: #1b4332;
+    border-top-left-radius: 23px;}
