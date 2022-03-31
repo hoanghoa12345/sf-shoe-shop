@@ -1,11 +1,20 @@
-import React from 'react'
-import './App.css'
-import Home from './User/pages/Home'
+import React from "react";
+import "./App.css";
+import HomeAdmin from "./Admin/Component/HomeAdmin";
+import Home from "./User/pages/Home";
+import { Routes, Route, Outlet } from "react-router-dom";
 
 const App = () => {
   return (
-    <Home />
-  )
-}
+    <Routes>
+      <Route path="/" element={<Outlet />}>
+        <Route index element={<Home />} />
+      </Route>
+      <Route path="/admin" element={<Outlet />}>
+        <Routes index element={<HomeAdmin />} />
+      </Route>
+    </Routes>
+  );
+};
 
-export default App
+export default App;
