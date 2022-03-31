@@ -1,12 +1,5 @@
 .content {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  vertical-align: baseline;
-  color: #131313;
   .page-head {
-    background-image: url(https://www.giaybq.com.vn/files/uploads/2020/03/banner-header.jpg);
     padding: 50px 0;
     color: #ededed;
     position: relative;
@@ -41,7 +34,6 @@
 }
 
 .container {
-  width: 1170px;
   .row {
     display: flex;
     flex: 0 1 auto;
@@ -58,6 +50,7 @@
     .col-md-6 {
       flex-basis: 50%;
       max-width: 50%;
+      flex: 0 0 auto;
     }
 
     .mt-60 {
@@ -70,7 +63,6 @@
   }
 }
 .container {
-  display: block !important;
   .button {
     padding: 0 5px;
     color: #222;
@@ -146,5 +138,96 @@
     height: 40px;
     line-height: 36px;
     transition: all 0.3s;
+  }
+}
+
+.checkout {
+  display: flex;
+  .message_box {
+    border: 1px solid transparent;
+    display: block;
+    overflow: hidden;
+    padding: 1em;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    margin-top: 1em;
+    line-height: 1.4;
+  }
+
+  .color-info {
+    color: #5e7f96;
+    border-color: #cfebfe;
+    background-color: #dff2fe;
+    font-size: 12px;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  .shop_table {
+    position: static;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-width: 1px 0 0 1px;
+    margin: 1.5em 0 1.75em;
+    width: 100%;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+    th,
+    td {
+      border-collapse: separate;
+      border-width: 0 0 1px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+    }
+  }
+  &-payment {
+    padding: 15px;
+    border: 1px solid #e3e3e3;
+  }
+  .payment_method {
+    li {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  .payment_box {
+    background-color: #f1f1f1;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #999;
+    font-size: 0.92em;
+    line-height: 1.5;
+    margin: 5px 0 15px;
+    padding: 1em;
+    position: relative;
+    width: 100%;
+    &::before {
+      border-color: transparent transparent #f1f1f1;
+      border-image: none;
+      border-style: solid;
+      border-width: 1em;
+      content: "";
+      display: block;
+      left: 0;
+      margin: -1em 0 0 2em;
+      position: absolute;
+      top: -0.75em;
+    }
+  }
+
+  .place-order {
+    height: 40px;
+    line-height: 36px;
+    transition: all 0.3s;
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: 0px;
+    text-transform: uppercase;
   }
 }
