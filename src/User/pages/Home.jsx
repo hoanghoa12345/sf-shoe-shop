@@ -1,17 +1,15 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import LatestProducts from "../components/LatestProducts";
 import NewProduct from "../components/NewProducts";
+import Policy from "../components/Policy";
 import Slider from "../components/Slider";
 
 function Home() {
     return ( 
         <>
-            <Header />
             <Slider />
+            <Policy />
             <LatestProducts />
             <NewProduct />
-            <Footer />
         </>
      );
 }
