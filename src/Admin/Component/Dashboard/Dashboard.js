@@ -13,34 +13,32 @@ function Dashboard() {
         <div className="Dashboard_container">
             <div className="Dashboard_Wapper">
                 <div className="Dashboard_Menu">
-                    <h2 className="DashBoard-title">Admin</h2>
                     <ul className="Dashboard_List">
-
-                    <NavLink  to='/' className="Dashboard_Item"    >
+                    <NavLink  to=''  style={{ textDecoration: 'none'}}   activeclassname="Dashboard_Item"    >
                             <li className='Dashboard_Li'>
                               <AiOutlineHome className="Dashboard_Icon" />  Dashboard
                             </li>
                         </NavLink>
-                        <NavLink  to='/Search' className="Dashboard_Item">
+                        <NavLink  to='search'  style={{ textDecoration: 'none'}}  activeclassname="Dashboard_Item">
                             <li className='Dashboard_Li'>
-                              <BsSearch className="Dashboard_Icon" />  Search Job
+                              <BsSearch className="Dashboard_Icon" />  Tìm kiếm
                             </li>
                         </NavLink>
-                        <NavLink    to='/UserList' className="Dashboard_Item">
+                        <NavLink    to='userlist'  style={{ textDecoration: 'none'}}  activeclassname="Dashboard_Item">
                             <li className='Dashboard_Li' >
-                              <FaUserSecret className="Dashboard_Icon"/>  Users
+                              <FaUserSecret className="Dashboard_Icon"/>  Người dùng
                             </li>
                         </NavLink>
-                        <Link     to='/ProductList' className="Dashboard_Item">
+                        <NavLink     to='productList'  style={{ textDecoration: 'none'}}  activeclassname="Dashboard_Item">
                             <li className='Dashboard_Li'>
-                              <AiOutlineShoppingCart className="Dashboard_Icon"/>  Products
+                              <AiOutlineShoppingCart className="Dashboard_Icon"/>  Sản phẩm
                             </li>
-                        </Link>
-                        <Link      to='/About' className="Dashboard_Item">
+                        </NavLink>
+                        <NavLink      to='about'   style={{ textDecoration: 'none'}}  activeclassname="Dashboard_Item">
                             <li className='Dashboard_Li'>
-                              <FcAbout className="Dashboard_Icon"/>  About
+                              <FcAbout className="Dashboard_Icon"/>  Hổ trợ
                             </li>
-                        </Link>
+                        </NavLink>
                     </ul>
                 </div>
             </div>
