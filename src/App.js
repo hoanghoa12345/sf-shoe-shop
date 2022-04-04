@@ -3,6 +3,8 @@ import './App.css'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 
 import HomeAdmin from './Admin/Component/HomeAdmin'
+// import OrderManager from './Admin/Component/OderManager/OrderManager'
+
 import Home from './User/pages/Home'
 import SignInUser from './User/pages/SignInUser'
 import NotFound from './User/pages/NotFound'
@@ -16,7 +18,7 @@ const App = () => {
             </Route>
             <Route path="/admin" element={<Outlet />}>
                 <Route index element={<HomeAdmin />} />
-                <Route path="" element={<SignInUser />} />
+                {/* <Route path="/order-manager" element={<OrderManager />} /> */}
             </Route>
 
             <Route path="/not-found" element={<Outlet />}>
