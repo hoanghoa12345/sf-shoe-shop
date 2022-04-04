@@ -7,7 +7,7 @@ function Header() {
     return (
         <header className="header">
             <div className="header__main container">
-                <div className="header__logo">
+                <div className="logo">
                     <Link to='/'>ShoesShop</Link>
                 </div>
                 <ul className="header__menu">
