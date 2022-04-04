@@ -1,0 +1,148 @@
+.avatar_user {
+    margin-left: 50px;
+    display: flex;
+    justify-content:center;
+    text-align:center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    
+}
+
+table,
+th,
+td {
+    
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    text-align: center;
+    padding: 15px;
+
+}
+
+tr:hover {
+    background-color: #ccc;
+}
+
+/* 
+th,
+tr,
+td {
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+} */
+
+
+th {
+    background-color: rgb(60, 60, 60);
+    color: #fff;
+}
+/* .listUsercontainer{
+    display: flex;
+} */
+/* .listUseravatar{
+    margin-left: 25px;
+    width: 100%;
+    height:60px;
+    margin-bottom:15px;
+
+} */
+
+
+.listUser_btn {
+    color: #fff;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    background-color: #0033cc;
+    width: 200px;
+    padding: 15px;
+     margin-bottom: 15px; 
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+
+.listUser_btn:hover {
+     background: linear-gradient(to bottom, #0000cc 0%, #3399ff 100%); 
+  
+}
+
+.listUser_btn:after {
+    position: absolute;
+    content: " ";
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    -webkit-transform: scale(.1);
+    transform: scale(.1);
+}
+
+
+.listUser_btn:after {
+   
+    background: rgb(0, 3, 255);
+    background: linear-gradient(0deg, rgba(2, 126, 251, 1) 0%, rgba(0, 3, 255, 1)100%);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+
+.btn_edit{
+    margin-right: 5px;
+    padding:10px 25px;
+    background-color:#0000cc;
+    color:#fff;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+}
+.btn_edit:hover{
+    background: linear-gradient(to bottom, #66ccff 0%, #0066ff 100%);
+}
+.btn_delete{
+    padding:10px 18px;
+    background: linear-gradient(to bottom, #800000 0%, #ff0000 100%);
+    color:#fff;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+}
+.btn_delete:hover{
+    background: linear-gradient(to bottom, #ff0000 0%, #ff6600 100%);
+}
+/* .btn_view{
+  display:none;
+}
+ */

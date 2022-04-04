@@ -1,19 +1,17 @@
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import LatestProducts from '../components/LatestProducts'
-import NewProduct from '../components/NewProducts'
-import Slider from '../components/Slider'
+import LatestProducts from "../components/LatestProducts";
+import NewProduct from "../components/NewProducts";
+import Slider from "../components/Slider";
+import Policy from "../components/Policy";
 
 function Home() {
-    return (
-        <>
-            <Header />
-            <Slider />
-            <LatestProducts />
-            <NewProduct />
-            <Footer />
-        </>
-    )
+  return (
+    <>
+      <Slider />
+      <Policy />
+      <LatestProducts />
+      <NewProduct />
+    </>
+  );
 }
 
-export default Home
+export default Home;

@@ -3,18 +3,17 @@ import { FaGlobeEurope } from 'react-icons/fa'
 import { BsBellFill } from 'react-icons/bs';
 import { VscSearch } from 'react-icons/vsc';
 import { Link } from 'react-router-dom';
-import '../Style/NavBar.css'
+import '../Style/NavBar.css';
+import logo from'../../image/mau-logo-dong-vat-dep-01-removebg-preview.png'
 
 function Navbar() {
     return (
         <div className='topbar'>
             <div className='topbarwapper'>
                 <div className='topleft'>
-                </div>
-                <div className='topcenter active'>
-                <VscSearch className='TopIconCenter'/>
-                    <input placeholder='Search something here...' type='text' className='top_inputSearch' /> 
-                </div>
+                    <img className='logo_nav' src={logo} alt='logo'/> 
+                    <span className='header_nav'>Monster</span>
+                </div>       
                 <div className='topright'>
                     <div className="topIconContainer">
                         <div className='IconContainer' >

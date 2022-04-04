@@ -9,14 +9,19 @@
 
 .Container {
     display: flex;
-    background-color: #081c15   ;
+    background-color: #fff   ;
     height: 100vh;
+  
 
 }
 
 .Component_Other {
+  padding:30px;
     flex: 4;
-    margin-top: 70px;
-    color: #fff;
-    background-color: #1b4332;
-    border-top-left-radius: 23px;}
+ /*    background-color: #f0f0f5; */
+}
+.component_outlet{
+/*     margin-top: 40px; */
+    margin-left:20px;
+    margin-right: 20px;
+}

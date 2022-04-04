@@ -1,0 +1,13 @@
+.edit_user{
+    display:flex;
+}
+.left_edituser{
+    flex: 1;
+    background-color:red;
+
+}
+.right_edituser{
+    flex: 4;
+    background-color:black;
+
+}
