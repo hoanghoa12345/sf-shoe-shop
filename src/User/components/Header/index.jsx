@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import './style.scss';
 
 function Header() {
-    return ( 
+    return (
         <header className="header">
             <div className="header__main container">
                 <div className="header__logo">
@@ -34,7 +34,7 @@ function Header() {
                     <Link to='/cart' className="header__cart">
                         <FaShoppingCart />
                     </Link>
-                    <Link to='/user' className="header__user">
+                    <Link to='/signin' className="header__user">
                         <FaUserAlt />
                     </Link>
                 </div>
