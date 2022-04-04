@@ -13,10 +13,10 @@ const App = () => {
             <Route path="/" element={<Outlet />}>
                 <Route index element={<Home />} />
                 <Route path="signin" element={<SignInUser />} />
-
             </Route>
             <Route path="/admin" element={<Outlet />}>
                 <Route index element={<HomeAdmin />} />
+                <Route path="" element={<SignInUser />} />
             </Route>
 
             <Route path="/not-found" element={<Outlet />}>
