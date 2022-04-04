@@ -1,25 +1,31 @@
-import React from "react";
-import "./App.css";
-import HomeAdmin from "./Admin/Component/HomeAdmin";
-import Home from "./User/pages/Home";
-import { Routes, Route, Outlet } from "react-router-dom";
-import SignInUser from "./User/pages/SignInUser";
+import React from 'react'
+import './App.css'
+import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
+
+import HomeAdmin from './Admin/Component/HomeAdmin'
+import Home from './User/pages/Home'
+import SignInUser from './User/pages/SignInUser'
+import NotFound from './User/pages/NotFound'
 
 const App = () => {
-  return (
-      <Routes>
-          <Route path="/" element={<Outlet />}>
-              <Route index element={<Home />} />
-          </Route>
-          <Route path="/admin" element={<Outlet />}>
-              <Route index element={<HomeAdmin />} />
-          </Route>
+    return (
+        <Routes>
+            <Route path="/" element={<Outlet />}>
+                <Route index element={<Home />} />
+                <Route path="signin" element={<SignInUser />} />
 
-          <Route path="/signin" element={<Outlet />}>
-              <Route index element={<SignInUser />} />
-          </Route>
-      </Routes>
-  )
-};
+            </Route>
+            <Route path="/admin" element={<Outlet />}>
+                <Route index element={<HomeAdmin />} />
+            </Route>
 
-export default App;
+            <Route path="/not-found" element={<Outlet />}>
+                <Route index element={<NotFound />} />
+            </Route>
+
+            <Route path="*" element={<Navigate to="/not-found" replace />} />
+        </Routes>
+    )
+}
+
+export default App
