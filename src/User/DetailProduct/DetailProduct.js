@@ -6,4 +6,4 @@ function DetailProduct() {
   )
 }
 
-export default DetailProduct
+export default DetailProductgit
