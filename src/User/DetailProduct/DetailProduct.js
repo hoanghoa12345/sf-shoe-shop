@@ -1,5 +1,7 @@
 import React from 'react';
 import './detail.css';
+import './script.js';
+
 import hinh1 from './shoes_images/shoe_1.jpg';
 import hinh2 from './shoes_images/shoe_2.jpg';
 import hinh3 from './shoes_images/shoe_3.jpg';
