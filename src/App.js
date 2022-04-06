@@ -12,6 +12,7 @@ import SignInUser from "./User/pages/SignInUser";
 import NotFound from "./User/pages/NotFound";
 import UserLayout from "./User/Layout/UserLayout";
 import Checkout from "./User/pages/checkout/Checkout";
+import DetailProduct from "./User/DetailProduct/DetailProduct";
 const App = () => {
   return (
     <Routes>
@@ -35,6 +36,7 @@ const App = () => {
       </Route>
 
       <Route path="*" element={<Navigate to="/not-found" replace />} />
+      <Route path="/detailProduct" element={<DetailProduct/>}/>
     </Routes>
   );
 };
