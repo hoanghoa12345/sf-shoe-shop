@@ -15,10 +15,10 @@ function DetailProduct() {
                    <div class="product-imgs">
                         <div class="img-display">
                             <div class="img-showcase">
-                                <img src="shoes_images/shoe_1.jpg" alt="shoe image"/>
-                                    <img src="shoes_images/shoe_2.jpg" alt="shoe image"/>
-                                        <img src="shoes_images/shoe_3.jpg" alt="shoe image"/>
-                                            <img src="shoes_images/shoe_4.jpg" alt="shoe image"/>
+                                <img src={hinh1} alt="shoe image"/>
+                                    <img src={hinh2} alt="shoe image"/>
+                                        <img src={hinh3} alt="shoe image"/>
+                                            <img src={hinh4} alt="shoe image"/>
                                             </div>
                                         </div>
                                         <div class="img-select">
