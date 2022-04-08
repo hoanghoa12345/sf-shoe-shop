@@ -2,16 +2,17 @@ import React from 'react';
 import { FaGlobeEurope } from 'react-icons/fa'
 import { BsBellFill } from 'react-icons/bs';
 import { VscSearch } from 'react-icons/vsc';
-import { Link } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import '../Style/NavBar.css';
 import logo from'../../image/mau-logo-dong-vat-dep-01-removebg-preview.png'
 
 function Navbar() {
+ 
     return (
         <div className='topbar'>
             <div className='topbarwapper'>
-                <div className='topleft'>
-                    <img className='logo_nav' src={logo} alt='logo'/> 
+                <div className='topleft' >
+                  <NavLink to=''> <img  className='logo_nav' src={logo} alt='logo'/> </NavLink> 
                     <span className='header_nav'>Monster</span>
                 </div>       
                 <div className='topright'>

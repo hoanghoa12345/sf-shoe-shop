@@ -1,25 +1,25 @@
 .avatar_user {
-    margin-left: 50px;
-    display: flex;
-    justify-content:center;
-    text-align:center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
+    margin-bottom: 5px;
+    margin-left: 30px;
+    margin-right: 10px;
+    width: 37px;
+    height: 37px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    
+
 }
 
 table,
 th,
 td {
-    
+    font-size: 14px;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+   
+
 }
 
 table {
@@ -27,46 +27,43 @@ table {
     width: 100%;
 }
 
+
 th,
 td {
     text-align: center;
-    padding: 15px;
+    padding: 10px 15px 10px 5px;
 
 }
+
 
 tr:hover {
-    background-color: #ccc;
+    background-color: #eee;
 }
-
-/* 
-th,
-tr,
-td {
-
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-} */
-
 
 th {
     background-color: rgb(60, 60, 60);
     color: #fff;
 }
-/* .listUsercontainer{
-    display: flex;
-} */
-/* .listUseravatar{
-    margin-left: 25px;
-    width: 100%;
-    height:60px;
-    margin-bottom:15px;
 
-} */
+.spantitle {
+    margin-left: -15px;
+}
+.btn_with{
+    position:relative;
+    margin-left:210px;
+    
+ 
+}
+.userUpdateInput {
 
+    width:480px;
+    border-bottom: 1px solid #080808;
+    margin-bottom: 10px;
+    
+}
 
 .listUser_btn {
+
     color: #fff;
     border-radius: 10px;
     font-size: 13px;
@@ -76,7 +73,7 @@ th {
     background-color: #0033cc;
     width: 200px;
     padding: 15px;
-     margin-bottom: 15px; 
+    margin-bottom: 20px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -85,64 +82,185 @@ th {
     -moz-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
+    margin-top: -10px;
 }
 
 .listUser_btn:hover {
-     background: linear-gradient(to bottom, #0000cc 0%, #3399ff 100%); 
-  
+    background: linear-gradient(to bottom, #0000cc 0%, #3399ff 100%);
+
 }
 
-.listUser_btn:after {
-    position: absolute;
-    content: " ";
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    transition: all 0.3s ease;
-    -webkit-transform: scale(.1);
-    transform: scale(.1);
-}
-
-
-.listUser_btn:after {
-   
-    background: rgb(0, 3, 255);
-    background: linear-gradient(0deg, rgba(2, 126, 251, 1) 0%, rgba(0, 3, 255, 1)100%);
-    -webkit-transform: scale(1);
-    transform: scale(1);
-}
-
-
-.btn_edit{
+.btn_edit {
     margin-right: 5px;
-    padding:10px 25px;
-    background-color:#0000cc;
-    color:#fff;
-    border-radius:10px;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    -ms-border-radius:10px;
-    -o-border-radius:10px;
+    padding: 10px 25px;
+    background-color: #0000cc;
+    color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
-.btn_edit:hover{
+
+.btn_edit:hover {
     background: linear-gradient(to bottom, #66ccff 0%, #0066ff 100%);
 }
-.btn_delete{
-    padding:10px 18px;
+
+.btn_delete {
+    padding: 10px 18px;
     background: linear-gradient(to bottom, #800000 0%, #ff0000 100%);
-    color:#fff;
-    border-radius:10px;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    -ms-border-radius:10px;
-    -o-border-radius:10px;
+    color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
-.btn_delete:hover{
+.edit_user {
+    display: flex;
+}
+
+.btn_delete:hover {
     background: linear-gradient(to bottom, #ff0000 0%, #ff6600 100%);
 }
-/* .btn_view{
-  display:none;
+
+
+.container_edit {
+ 
+    width:78%;
+    height:625px;
+    margin-top: -10px;
+    margin-left: -10px;
+    position: absolute;
+    background: #99e2b4;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
- */
+
+.left_edituser {
+    color: #fff;
+    height: 300px;
+    margin-left: 60px;
+    margin-top: 25px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    flex: 2;
+    background-color: #036666;
+
+    margin-right: 20px;
+}
+
+.right_edituser {
+    margin-top: 25px;
+    flex: 4;
+    margin-right: 120px;
+    background-color: #469d89;
+    height: auto;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.userUpdateForm {
+    margin-left: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+}
+
+.edit_name{
+    margin-left: 165px;
+}
+.edit_age{
+
+    margin-left:25px;
+
+}
+.edit_gender{
+
+    position: absolute;
+    margin-top:-20px;
+    margin-left:120px;
+}
+.icon_gender{
+ 
+    margin-right: 10px;
+    margin-left:15px;
+}
+.icon_age{
+    
+    margin-right: 10px;
+}
+.left_name{
+    font-weight: 700;
+}
+.center {
+    text-align: center;
+  }
+  
+  .pagination {
+    cursor: pointer;
+    margin-top: 15px;
+    display: inline-block;
+  }
+  
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+  }
+  
+  .pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+
+  .btn_cancel{
+    color: #fff;
+    margin-top: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    overflow: hidden;
+    background-color: #0033cc;
+    width: 200px;
+    padding: 15px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+  }
+ 
+  .btn_cancel:hover{
+    background: linear-gradient(to bottom, #0000cc 0%, #3399ff 100%);
+
+  }
+  .userShowInforTitle {
+    padding-top: 20px;
+    
+   
+}
+::placeholder{
+    color: #fff;
+}

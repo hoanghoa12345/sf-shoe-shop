@@ -10,55 +10,56 @@ import "../Style/Dashboard.css";
 
 function Dashboard() {
   return (
-    <div className="Dashboard_container">
+    <div className="Dashboard_container ">
       <div className="Dashboard_Wapper">
         <div className="Dashboard_Menu">
           <ul className="Dashboard_List">
-            <NavLink
-              to=""
-              style={{ textDecoration: "none" }}
-              activeclassname="Dashboard_Item"
-            >
-              <li className="Dashboard_Li">
-                <AiOutlineHome className="Dashboard_Icon" /> Dashboard
-              </li>
-            </NavLink>
-            <NavLink
-              to="search"
-              style={{ textDecoration: "none" }}
-              activeclassname="Dashboard_Item"
-            >
-              <li className="Dashboard_Li">
+            <li className="Dashboard_Li">
+              <NavLink
+                to=""
+                style={{ textDecoration: "none" }}
+                activeclassname="Dashboard_Item"
+              >
+                <AiOutlineHome className="Dashboard_Icon " /> Dashboard
+              </NavLink>
+            </li>
+            <li className="Dashboard_Li">
+              <NavLink
+                to="search"
+                style={{ textDecoration: "none" }}
+                activeclassname="Dashboard_Item"
+              >
                 <BsSearch className="Dashboard_Icon" /> Tìm kiếm
-              </li>
-            </NavLink>
-            <NavLink
-              to="userlist"
-              style={{ textDecoration: "none" }}
-              activeclassname="Dashboard_Item"
-            >
-              <li className="Dashboard_Li">
+              </NavLink>
+            </li>
+            <li className="Dashboard_Li">
+              <NavLink
+                to="userlist"
+                style={{ textDecoration: "none" }}
+                activeclassname="Dashboard_Item"
+              >
                 <FaUserSecret className="Dashboard_Icon" /> Người dùng
-              </li>
-            </NavLink>
-            <NavLink
-              to="productlist"
-              style={{ textDecoration: "none" }}
-              activeclassname="Dashboard_Item"
-            >
-              <li className="Dashboard_Li">
+              </NavLink>
+            </li>
+            <li className="Dashboard_Li">
+              <NavLink
+                to="productlist"
+                style={{ textDecoration: "none" }}
+                activeclassname="Dashboard_Item"
+              >
                 <AiOutlineShoppingCart className="Dashboard_Icon" /> Sản phẩm
-              </li>
-            </NavLink>
-            <NavLink
-              to="about"
-              style={{ textDecoration: "none" }}
-              activeclassname="Dashboard_Item"
-            >
-              <li className="Dashboard_Li">
+              </NavLink>
+            </li>
+            <li className="Dashboard_Li">
+              <NavLink
+                to="about"
+                style={{ textDecoration: "none" }}
+                activeclassname="Dashboard_Item"
+              >
                 <FcAbout className="Dashboard_Icon" /> Hổ trợ
-              </li>
-            </NavLink>
+              </NavLink>
+            </li>        
+           
           </ul>
         </div>
       </div>

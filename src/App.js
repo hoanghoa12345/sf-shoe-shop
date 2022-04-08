@@ -12,6 +12,7 @@ import SignInUser from "./User/pages/SignInUser";
 import NotFound from "./User/pages/NotFound";
 import UserLayout from "./User/Layout/UserLayout";
 import Checkout from "./User/pages/checkout/Checkout";
+import EditUser from './Admin/Component/User/EditUser';
 const App = () => {
   return (
     <Routes>
@@ -25,9 +26,9 @@ const App = () => {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<HomeAdmin />} />
         <Route path="userlist" element={<UserList />} />
+        <Route path="userlist/*" element={<AddUser />} />
         <Route path="productlist" element={<ProductList />} />
         <Route path="about" element={<About />} />
-        <Route path="userlist/*" element={<AddUser />} />
       </Route>
 
       <Route path="/not-found" element={<Outlet />}>
