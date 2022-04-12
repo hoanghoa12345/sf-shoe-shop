@@ -26,7 +26,7 @@ function AddUser() {
   console.log(addUser);
   const navigater = useNavigate()
   const hanldeClickAdminHome = () => {
-    navigater('')
+    navigater(-1)
   }
   const data = {
     id: addUser.length + 1,
@@ -44,7 +44,7 @@ function AddUser() {
     e.preventDefault();
     dispatch(add_user(data));
     toast.success('Thêm người dùng mới thành công !!');
-    navigater('');
+    navigater(-1);
 
   }
 

@@ -12,7 +12,9 @@ import SignInUser from "./User/pages/SignInUser";
 import NotFound from "./User/pages/NotFound";
 import UserLayout from "./User/Layout/UserLayout";
 import Checkout from "./User/pages/checkout/Checkout";
-import EditUser from './Admin/Component/User/EditUser';
+import Information from "./Admin/Component/User/Information";
+
+
 const App = () => {
   return (
     <Routes>
@@ -26,7 +28,8 @@ const App = () => {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<HomeAdmin />} />
         <Route path="userlist" element={<UserList />} />
-        <Route path="userlist/*" element={<AddUser />} />
+        <Route path="userlist/adduser" element={<AddUser />} />
+        <Route path="userlist/information/:id" element={<Information />} />
         <Route path="productlist" element={<ProductList />} />
         <Route path="about" element={<About />} />
       </Route>
@@ -35,7 +38,7 @@ const App = () => {
         <Route index element={<NotFound />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/not-found" replace />} />
+       <Route path="*" element={<Navigate to="/not-found" replace />} />
     </Routes>
   );
 };

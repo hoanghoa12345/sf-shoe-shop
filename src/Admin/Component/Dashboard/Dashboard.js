@@ -14,6 +14,9 @@ function Dashboard() {
       <div className="Dashboard_Wapper">
         <div className="Dashboard_Menu">
           <ul className="Dashboard_List">
+          <li className="Dashboard_main">
+             -- MAIN
+            </li>
             <li className="Dashboard_Li">
               <NavLink
                 to=""

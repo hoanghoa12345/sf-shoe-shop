@@ -1,26 +1,8 @@
 
 
 
-.edit_avatar {
 
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    margin-top: 50px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
 
-.userShowLeft {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
 
 .title_edit {
     margin-top: 20px;
@@ -33,12 +15,6 @@
 
 
 
-.userUpdateItem {
-
-    display: flex;
-    flex-direction: column;
-    margin-top: 25px;
-}
 
 .userShowInfor {
     display: flex;
