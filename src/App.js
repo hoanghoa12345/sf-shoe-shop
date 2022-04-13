@@ -12,12 +12,14 @@ import SignInUser from "./User/pages/SignInUser";
 import NotFound from "./User/pages/NotFound";
 import UserLayout from "./User/Layout/UserLayout";
 import Checkout from "./User/pages/checkout/Checkout";
+import UserProfile from "./User/pages/profile/UserProfile";
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Route>
 
       <Route path="/signin" element={<SignInUser />} />
