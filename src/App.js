@@ -13,16 +13,24 @@ import SignInUser from "./User/pages/SignInUser";
 import NotFound from "./User/pages/NotFound";
 import UserLayout from "./User/Layout/UserLayout";
 import Checkout from "./User/pages/checkout/Checkout";
+<<<<<<< HEAD
 import DetailProduct from "./User/DetailProduct/DetailProduct";
 import Information from "./Admin/Component/User/Information";
 import Cart from "./User/pages/Cart";
+=======
+import UserProfile from "./User/pages/profile/UserProfile";
+>>>>>>> remotes/origin/hoanghoa
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
         <Route path="/checkout" element={<Checkout />} />
+<<<<<<< HEAD
         <Route path="/cart" element={<Cart />} />
+=======
+        <Route path="/profile" element={<UserProfile />} />
+>>>>>>> remotes/origin/hoanghoa
       </Route>
 
       <Route path="/signin" element={<SignInUser />} />
