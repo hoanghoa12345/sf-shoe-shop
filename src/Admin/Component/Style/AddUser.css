@@ -32,7 +32,7 @@
     flex-wrap: wrap;
 }
 .newUserItem{
-    width: 400px;
+   width: 390px;
     display: flex;
     flex-direction: column;
     margin-top: 10px;
@@ -56,11 +56,19 @@
     -o-border-radius: 5px;
 }
 .newUserGender>input{
-    margin-top: 15px;
-
-
-    
+    margin-top: 15px; 
 }
+.detail_Texttarea{
+    outline: none;
+    width: 805px;
+    border-radius: 5px;
+    height:165px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
 .newUserGender>label{
     margin: 10px;
     font-size: 18px;
@@ -74,7 +82,7 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
-.iconAddUser{
+ .iconAddUser{
     position: absolute;
     margin-top:70px;
 

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { update_user } from '../../Redux/Action';
 import { toast } from 'react-toastify';
-import { DataGrid } from '@mui/x-data-grid';
+
 
 
 
@@ -22,7 +22,7 @@ function Information() {
     const [address, setAddress] = useState('');
     const [gender, setGender] = useState('male');
 
-    const [information, setInformation] = useState(true);
+    const [information, setInformation] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -59,7 +59,7 @@ function Information() {
         console.log(information);
 
     }
-    const hanldeClickOverview = () =>{
+    const hanldeClickOverview = () => {
         setInformation(false);
     }
     const hanldeAvatar = (e) => {
@@ -126,36 +126,7 @@ function Information() {
         },
     ];
 
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'firstName', headerName: 'First name', width: 130 },
-        { field: 'lastName', headerName: 'Last name', width: 130 },
-        {
-            field: 'age',
-            headerName: 'Age',
-            type: 'number',
-            width:70,
-        },
-        {
-            field: 'fullName',
-            headerName: 'Full name',
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
-            width: 100,
-            valueGetter: (params) =>
-                `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-        },
-    ];
 
-
-    const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-       
-    ];
 
 
     return (
@@ -166,12 +137,9 @@ function Information() {
                     <div className="left_edituser">
                         <div className='userShowLeft'>
                             <div >
-                                <label htmlFor='file'>
-                                    {avatar.preview ? (<img className='edit_avatar' src={avatar.preview} alt={id} />)
-                                        :
-                                        (<img className='edit_avatar' src={avatar} />)}
-                                </label>
-                                <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeAvatar} />
+                                {avatar.preview ? (<img className='edit_avatar' src={avatar.preview} alt={id} />)
+                                    :
+                                    (<img className='edit_avatar' src={avatar} />)}
                             </div>
                             <div className='userShowInforTitle'>
                                 <h3 className='edit_name'>{fullname}</h3>
@@ -187,8 +155,8 @@ function Information() {
                         </div>
                     </div>
                     <div className='left_btn'>
-                        <button className='btn_information' value={information} onClick={hanldeClickInformation} >Information</button>
-                        <button className='btn_overview' value={!information} onClick={hanldeClickOverview}>Overview</button>
+                        <button className='btn_information' value={!information} onClick={hanldeClickOverview}>Overview</button>
+                        <button className='btn_overview' value={information} onClick={hanldeClickInformation} >Information</button>
                         <button className='btn_setting'>Settings</button>
                     </div>
                     {information ? (
@@ -267,31 +235,22 @@ function Information() {
                                                             (<img className=' avatar' src={avatar} />)}
                                                         <FcUpload className='userUpdateIcon' />
                                                     </label>
-                                                    <input type='file' id='file' style={{ display: 'none' }} />
+                                                    <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeAvatar} />
                                                 </div>
                                             </div>
 
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
                         </div>) : (
                         <div className="right_edituser">
                             <div className='right_'>
                                 <div className='edit_left'>
-                                    chưa nghĩ ra
+                                    No thoungth out
                                 </div>
                                 <div className='edit_right'>
-                                  {findEditUser ? ( 
-                                       <div style={{ height: 340, width: '100%' }}>
-                                        <DataGrid
-                                            rows={rows}
-                                            columns={columns}
-                                            pageSize={5}
-                                            checkboxSelection
-                                        />
-                                    </div>):(null)}
+
                                 </div>
                             </div>
                         </div>)}

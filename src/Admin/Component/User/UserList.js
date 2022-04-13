@@ -1,30 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AiOutlineUsergroupAdd } from 'react-icons/ai';
-import { FcUpload } from 'react-icons/fc';
 import { GrUpdate } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { delete_user, update_user } from '../../Redux/Action';
+import { delete_user } from '../../Redux/Action';
 import '../Style/UserList.css';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { DataGrid } from '@mui/x-data-grid';
 
 
 
 
 function UserList() {
-
-  const [information, setInformation] = useState(false);
-
-  const [avatar, setAvatar] = useState('');
-  const [fullname, setFullname] = useState('');
-  const [userName, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [address, setAddress] = useState('');
   const [page, setPage] = useState(6);
   const userLists = useSelector(state => state.contactReducer);
   const dispatch = useDispatch();

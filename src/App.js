@@ -16,6 +16,8 @@ import DetailProduct from "./User/DetailProduct/DetailProduct";
 import Information from "./Admin/Component/User/Information";
 import Cart from "./User/pages/Cart";
 import UserProfile from "./User/pages/profile/UserProfile";
+import AddProduct from './Admin/Component/Product/AddProduct';
+import UpdateProduct from './Admin/Component/Product/UpdateProduct';
 const App = () => {
   return (
     <Routes>
@@ -35,6 +37,8 @@ const App = () => {
         <Route path="userlist/adduser" element={<AddUser />} />
         <Route path="userlist/information/:id" element={<Information />} />
         <Route path="productlist" element={<ProductList />} />
+        <Route path="productlist/addproduct" element={<AddProduct/>}/>
+        <Route path="productlist/updateproduct/:id" element={<UpdateProduct/>}/>
         <Route path="about" element={<About />} />
       </Route>
 
