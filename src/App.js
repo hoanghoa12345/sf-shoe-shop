@@ -12,17 +12,25 @@ import SignInUser from "./User/pages/SignInUser";
 import NotFound from "./User/pages/NotFound";
 import UserLayout from "./User/Layout/UserLayout";
 import Checkout from "./User/pages/checkout/Checkout";
+import DetailProduct from "./User/DetailProduct/DetailProduct";
 import Information from "./Admin/Component/User/Information";
+<<<<<<< HEAD
 import AddProduct from './Admin/Component/Product/AddProduct';
 import UpdateProduct from './Admin/Component/Product/UpdateProduct';
 
 
+=======
+import Cart from "./User/pages/Cart";
+import UserProfile from "./User/pages/profile/UserProfile";
+>>>>>>> e5851b505fc24bff4bb7fcdf8ee5fc2ad5abed94
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Route>
 
       <Route path="/signin" element={<SignInUser />} />
@@ -41,8 +49,8 @@ const App = () => {
       <Route path="/not-found" element={<Outlet />}>
         <Route index element={<NotFound />} />
       </Route>
-
-       <Route path="*" element={<Navigate to="/not-found" replace />} />
+      <Route path="/detailProduct" element={<DetailProduct />} />
+      <Route path="*" element={<Navigate to="/not-found" replace />} />
     </Routes>
   );
 };
