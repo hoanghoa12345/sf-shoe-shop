@@ -21,6 +21,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<UserLayout />}>
         <Route index element={<Home />} />
+        <Route path="/detailProduct" element={<DetailProduct />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<UserProfile />} />
@@ -40,7 +41,7 @@ const App = () => {
       <Route path="/not-found" element={<Outlet />}>
         <Route index element={<NotFound />} />
       </Route>
-      <Route path="/detailProduct" element={<DetailProduct />} />
+
       <Route path="*" element={<Navigate to="/not-found" replace />} />
     </Routes>
   );
