@@ -22,7 +22,7 @@ function Information() {
     const [address, setAddress] = useState('');
     const [gender, setGender] = useState('male');
 
-    const [information, setInformation] = useState(true);
+    const [information, setInformation] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -187,8 +187,8 @@ function Information() {
                         </div>
                     </div>
                     <div className='left_btn'>
-                        <button className='btn_information' value={information} onClick={hanldeClickInformation} >Information</button>
-                        <button className='btn_overview' value={!information} onClick={hanldeClickOverview}>Overview</button>
+                        <button className='btn_information' value={!information} onClick={hanldeClickOverview}>Overview</button>
+                        <button className='btn_overview' value={information} onClick={hanldeClickInformation} >Information</button>
                         <button className='btn_setting'>Settings</button>
                     </div>
                     {information ? (
@@ -280,7 +280,7 @@ function Information() {
                         <div className="right_edituser">
                             <div className='right_'>
                                 <div className='edit_left'>
-                                    chưa nghĩ ra
+                                    No thoungth out
                                 </div>
                                 <div className='edit_right'>
                                   {findEditUser ? ( 
