@@ -13,6 +13,8 @@ import NotFound from "./User/pages/NotFound";
 import UserLayout from "./User/Layout/UserLayout";
 import Checkout from "./User/pages/checkout/Checkout";
 import DetailProduct from "./User/DetailProduct/DetailProduct";
+import Information from "./Admin/Component/User/Information";
+
 const App = () => {
   return (
     <Routes>
@@ -26,17 +28,17 @@ const App = () => {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<HomeAdmin />} />
         <Route path="userlist" element={<UserList />} />
+        <Route path="userlist/adduser" element={<AddUser />} />
+        <Route path="userlist/information/:id" element={<Information />} />
         <Route path="productlist" element={<ProductList />} />
         <Route path="about" element={<About />} />
-        <Route path="userlist/*" element={<AddUser />} />
       </Route>
 
       <Route path="/not-found" element={<Outlet />}>
         <Route index element={<NotFound />} />
       </Route>
-
+      <Route path="/detailProduct" element={<DetailProduct />} />
       <Route path="*" element={<Navigate to="/not-found" replace />} />
-      <Route path="/detailProduct" element={<DetailProduct/>}/>
     </Routes>
   );
 };
