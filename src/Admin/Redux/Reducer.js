@@ -56,48 +56,47 @@ export const contactReducer = (state = initialStateUser, action) => {
 const initialStateProduct = [
     {
         id: 1, 
-        image:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/1/3117kzw-a0x-1.jpg',
+        urlLink:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/1/3117kzw-a0x-1.jpg',
         name:'Kappa giày thể thao nam 3117KZW A0X',
         price:599000,
         total:10,
         rest:9,
-        sold:9,
         detail:''
     },{
         id: 2, 
-        image:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/1/311685w-906_1_.jpg',
+        urlLink:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/1/311685w-906_1_.jpg',
         name:'Kappa Giày sneakers Nam 311685W 906',
         price:699000,
         total:20,
         rest:2,
-        sold:9,
+        
         detail:''
     },{
         id: 3, 
-        image:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/7/37152nw-a04-1.jpg',
+        urlLink:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/7/37152nw-a04-1.jpg',
         name:'Kappa giày sneakers nam 37152NW A04',
         price:799000,
         total:15,
         rest:15,
-        sold:9,
+       
         detail:''
     },{
         id: 4, 
-        image:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/7/37152nw-a04-1.jpg',
+        urlLink:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/7/37152nw-a04-1.jpg',
         name:'Kappa giày sneakers nam 37152NW A04',
         price:799000,
         total:15,
         rest:15,
-        sold:9,
+        
         detail:''
     },{
         id: 5, 
-        image:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/7/37152nw-a04-1.jpg',
+        urlLink:'https://cdn.hoang-phuc.com/media/catalog/product/cache/911a4dad289f521f5a511212882e4276/3/7/37152nw-a04-1.jpg',
         name:'Kappa giày sneakers nam 37152NW A04',
         price:799000,
         total:15,
         rest:15,
-        sold:9,
+       
         detail:''
     }
 ]

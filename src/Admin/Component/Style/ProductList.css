@@ -1,8 +1,74 @@
-.add{
+.add {
     margin-bottom: 15px;
 }
-.pagination_{
-    display: block;
-    float:left;
+
+.product_delete {
+   margin-left: 220px;
+    width: 700px;
+    height: 350px;
+    z-index: 1;
+    padding: 50px 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+.body_delete {
+    background-color:rgb(170, 212, 255);
+    border-radius: 5px;
+    width: 500px;
+    height: 200px;
+  
+}
+
+.title_deltete {
     
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding-top: 35px;
+    padding-bottom: 40px;
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+.deletes {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.deleteYes {
+    padding: 10px 25px 10px 25px;
+    background-color: rgb(106, 104, 104);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 5px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+.deleteYes:hover{
+    background-color: rgb(215, 0, 0);color:#fff;
+}   
+
+.deleteNo {
+    margin-left: 20px;
+    padding: 10px 25px 10px 25px;
+    border-radius: 5px;
+    background-color: rgb(106, 104, 104);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+.deleteNo:hover{
+    background-color: rgb(215, 0, 0);color:#fff;
 }

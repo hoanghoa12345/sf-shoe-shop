@@ -14,15 +14,10 @@ import UserLayout from "./User/Layout/UserLayout";
 import Checkout from "./User/pages/checkout/Checkout";
 import DetailProduct from "./User/DetailProduct/DetailProduct";
 import Information from "./Admin/Component/User/Information";
-<<<<<<< HEAD
-import AddProduct from './Admin/Component/Product/AddProduct';
-import UpdateProduct from './Admin/Component/Product/UpdateProduct';
-
-
-=======
 import Cart from "./User/pages/Cart";
 import UserProfile from "./User/pages/profile/UserProfile";
->>>>>>> e5851b505fc24bff4bb7fcdf8ee5fc2ad5abed94
+import AddProduct from './Admin/Component/Product/AddProduct';
+import UpdateProduct from './Admin/Component/Product/UpdateProduct';
 const App = () => {
   return (
     <Routes>
