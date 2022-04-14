@@ -8,6 +8,7 @@ import ProductList from './Admin/Component/Product/ProductList'
 import About from './Admin/Component/About'
 import UserList from './Admin/Component/User/UserList'
 import AddUser from './Admin/Component/User/AddUser'
+import OrderManager from './Admin/Component/OderManager/OrderManager'
 
 import Home from './User/pages/Home'
 import SignInUser from './User/pages/SignInUser'
@@ -31,6 +32,8 @@ const App = () => {
                 <Route path="productlist" element={<ProductList />} />
                 <Route path="about" element={<About />} />
                 <Route path="userlist/*" element={<AddUser />} />
+
+                <Route path="order-manager" element={<OrderManager />} />
             </Route>
 
             <Route path="/not-found" element={<Outlet />}>
