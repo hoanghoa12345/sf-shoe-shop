@@ -14,20 +14,20 @@ function Dashboard() {
       <div className="Dashboard_Wapper">
         <div className="Dashboard_Menu">
           <ul className="Dashboard_List">
-            <li className="Dashboard_Li">
-              <div className="Dashboard_wrap">
-                <NavLink
-                  to="/admin"
-                  style={{ textDecoration: "none" }}
-                  className={({ isActive }) =>
-                    isActive ? "Dashboard_active" : ""
-                  }
-                  end
-                >
+            <div className="Dashboard_wrap">
+              <NavLink
+                to="/admin"
+                style={{ textDecoration: "none" }}
+                className={({ isActive }) =>
+                  isActive ? "Dashboard_active" : ""
+                }
+                end
+              >
+                <li className="Dashboard_Li">
                   <AiOutlineHome className="Dashboard_Icon " /> Dashboard
-                </NavLink>
-              </div>
-            </li>
+                </li>
+              </NavLink>
+            </div>
             <li className="Dashboard_Li">
               <div className="Dashboard_wrap">
                 <NavLink
@@ -41,39 +41,39 @@ function Dashboard() {
                 </NavLink>
               </div>
             </li>
-            <li className="Dashboard_Li">
-              <NavLink
-                to="userlist"
-                style={{ textDecoration: "none" }}
-                className={({ isActive }) =>
-                  isActive ? "Dashboard_active" : ""
-                }
-              >
+            <NavLink
+              to="userlist"
+              style={{ textDecoration: "none" }}
+              className={({ isActive }) =>
+                isActive ? "Dashboard_active" : ""
+              }
+            >
+              <li className="Dashboard_Li">
                 <FaUserSecret className="Dashboard_Icon" /> Người dùng
-              </NavLink>
-            </li>
-            <li className="Dashboard_Li">
-              <NavLink
-                to="productlist"
-                style={{ textDecoration: "none" }}
-                className={({ isActive }) =>
-                  isActive ? "Dashboard_active" : ""
-                }
-              >
+              </li>
+            </NavLink>
+
+            <NavLink
+              to="productlist"
+              style={{ textDecoration: "none" }}
+              className={({ isActive }) =>
+                isActive ? "Dashboard_active" : ""
+              }
+            >    <li className="Dashboard_Li">
                 <AiOutlineShoppingCart className="Dashboard_Icon" /> Sản phẩm
-              </NavLink>
-            </li>
-            <li className="Dashboard_Li">
-              <NavLink
-                to="about"
-                style={{ textDecoration: "none" }}
-                className={({ isActive }) =>
-                  isActive ? "Dashboard_active" : ""
-                }
-              >
+              </li>
+            </NavLink>
+            <NavLink
+              to="about"
+              style={{ textDecoration: "none" }}
+              className={({ isActive }) =>
+                isActive ? "Dashboard_active" : ""
+              }
+            >
+              <li className="Dashboard_Li">
                 <FcAbout className="Dashboard_Icon" /> Hổ trợ
-              </NavLink>
-            </li>
+              </li>
+            </NavLink>
           </ul>
         </div>
       </div>

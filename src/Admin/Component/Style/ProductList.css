@@ -1,9 +1,5 @@
-.add {
-    margin-bottom: 15px;
-}
-
 .product_delete {
-   margin-left: 220px;
+    margin-left: 220px;
     width: 700px;
     height: 350px;
     z-index: 1;
@@ -19,15 +15,34 @@
 }
 
 .body_delete {
-    background-color:rgb(170, 212, 255);
-    border-radius: 5px;
-    width: 500px;
+    background-color: #8fb996   ;
+    border-radius: 10px;
+    width: 450px;
     height: 200px;
-  
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.lengthProduct{
+    margin-left:20px;
+ 
+    
+}
+.iconNewProduct {
+    position: absolute;
+    font-size: 22px;
+    margin-left: -28px;
+    margin-top: -2px;
+}
+
+.add {
+    margin-bottom: 15px;
 }
 
 .title_deltete {
-    
+
     color: rgb(0, 0, 0);
     text-align: center;
     padding-top: 35px;
@@ -56,9 +71,11 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
-.deleteYes:hover{
-    background-color: rgb(215, 0, 0);color:#fff;
-}   
+
+.deleteYes:hover {
+    background-color: rgb(215, 0, 0);
+    color: #fff;
+}
 
 .deleteNo {
     margin-left: 20px;
@@ -69,6 +86,140 @@
     font-weight: 600;
     cursor: pointer;
 }
-.deleteNo:hover{
-    background-color: rgb(215, 0, 0);color:#fff;
+
+.deleteNo:hover {
+    background-color: rgb(215, 0, 0);
+    color: #fff;
+}
+
+/* cart */
+.productContainer {
+    min-width:280px;
+    height:320px;
+}
+
+.productContainer .productCard {
+    width: 280px;
+    height: 320px;
+    background: #1b4332;
+    border-radius: 20px;
+    overflow: hidden; 
+     margin-right: 10px;
+     margin-top: 10px;
+}
+
+.productImgBx {
+    width: 150px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.productImg {
+    margin-left: 120px;
+}
+
+.contentBx {
+    display: flex;
+    color: #fefefe;
+}
+
+.productTitle {
+    font-weight: 600;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+}
+
+.productPrice {
+    color: #fefefe;
+    text-align: center;
+    font-weight: 800;
+}
+
+.productTotal {
+    font-weight: 600;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+.productList{
+    position: relative;
+}
+.productRest {
+    margin-top: 15px;
+    font-size: 25px;
+    margin-left: 130px;
+    color: #fff;
+}
+.productIcon{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    opacity: 0;
+    position: absolute;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    top: 0;
+    left: 0;
+    margin-top: 10px;
+    width: 97%;
+    height: 98%;
+}
+.productIcon:hover{
+    opacity: 1;
+    border: solid 2px rgba(255, 253, 253, 0.5);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.productBody{
+    display: flex;
+    flex-wrap: wrap;
+}
+.productEdit{
+    font-size: 35px;
+    margin-right: 10px;
+}
+.productEdit:hover{
+    width: 45px;
+    height: 45px;   
+    background-color: rgba(72, 72, 72, 0.5);
+    color: #fff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.productDelete{
+    font-size: 35px;
+    margin-left:10px;
+
+}
+.productDelete:hover{
+    width: 40px;
+    height: 40px;   
+    background-color: rgba(72, 72, 72, 0.5);
+    color: #fff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.iconProductBack{
+    position: absolute;
+    font-size: 35px;
+    color: blue;
+ 
+}
+.iconProductNext{
+    right:0;
+    margin-right: 20px;
+    font-size: 35px;
+    
+    position: absolute;
 }

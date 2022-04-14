@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { delete_user } from '../../Redux/Action';
 import '../Style/UserList.css';
+import avatarDefault from '../../image/avatart.jpg'
 
 
 
@@ -24,7 +25,7 @@ function UserList() {
 
 
   //phân trang
-  // let page = 6;
+  //  let page = 6;
 
   let currentPage = 1;
   let start = 0;
@@ -74,7 +75,7 @@ function UserList() {
                 {id >= start && id < end ? (
                   <tr>
                     <td>{id}</td>
-                    <td ><img className='avatar_user ' src={avatar.preview || avatar} alt={id} /><span className='spantitle'>{userName}</span></td>
+                    <td ><img className='avatar_user ' src={avatar.preview || avatar || avatarDefault} alt={id} /><span className='spantitle'>{userName}</span></td>
                     <td >{fullname}</td>
                     <td>{gender}</td>
                     <td>{age}</td>
@@ -88,24 +89,26 @@ function UserList() {
                     </td>
                   </tr>) : (null)
                 }
-              
+
               </React.Fragment>
 
             )
           })}
         </tbody>
       </table>
-      {userLists.length > 5 ? (<div className="center">
-        <div className="pagination">
-          <a onClick={handleClickPrev}>&laquo;</a>
-          <a href="#" className="active">1</a>
-          <a href="#" >2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a onClick={handleClickNext}>&raquo;</a>
-        </div>
-      </div>) : (null)} 
+      {userLists.length > 5 ? (
+        <div className="center">
+          <div className="pagination">
+            <a onClick={handleClickPrev}>&laquo;</a>
+            <a href="#" className="active">1</a>
+            <a href="#" >2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a onClick={handleClickNext}>&raquo;</a>
+            <a> {userLists.length}</a>
+          </div>
+        </div>) : (<div className="pagination"><a> {userLists.length}</a></div>)}
     </div>
   )
 }

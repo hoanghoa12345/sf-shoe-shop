@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { add_user } from '../../Redux/Action';
 import { toast } from 'react-toastify';
+import avatarDefault from '../../image/avatart.jpg'
 
 
 
@@ -77,7 +78,7 @@ function AddUser() {
                 <div className='userUpdateUpload'>
                   <label htmlFor='file' className='upAvatarIcon' >
                     <FcUpload className='iconAddUser' />
-                    {avatar ? (<img className='userUpdateImg' src={avatar.preview} alt='' />) : (<img className='userUpdateImg' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGjCy-bIjoj2TKuAddWLbl_gAQoykjidUqqKIIhsFYeEEnzt3kxi3jzVvfVkt0Wl7TTRw&usqp=CAU' />)}
+                    {avatar ? (<img className='userUpdateImg' src={avatar.preview} alt='' />) : (<img className='userUpdateImg' src={avatarDefault} />)}
                   </label>
                   <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeChangeImg} />
                 </div>

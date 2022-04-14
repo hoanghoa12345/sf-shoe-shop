@@ -22,7 +22,7 @@ function Information() {
     const [address, setAddress] = useState('');
     const [gender, setGender] = useState('male');
 
-    const [information, setInformation] = useState(false);
+    const [information, setInformation] = useState(true);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -56,7 +56,7 @@ function Information() {
     }
     const hanldeClickInformation = () => {
         setInformation(true);
-        console.log(information);
+       
 
     }
     const hanldeClickOverview = () => {
@@ -132,7 +132,6 @@ function Information() {
     return (
         <>
             <div className="container_edit"   >
-
                 <div className="edit_user">
                     <div className="left_edituser">
                         <div className='userShowLeft'>
