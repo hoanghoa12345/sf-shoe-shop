@@ -10,7 +10,9 @@ export const add_user = (addUser) =>{
     return{
         type: ADD_USER,
         payload: addUser
+      
     }
+
 }
 export const update_user = (updateUser) =>{
     return{
@@ -39,7 +41,7 @@ export const update_product = (updateProduct) =>{
 }
 export const delete_product = (deleteProduct) =>{
     return{
-        type: UPDATE_PRODUCT,
+        type: DELETE_PRODUCT,
         payload: deleteProduct
     }
 }

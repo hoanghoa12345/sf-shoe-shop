@@ -1,13 +1,29 @@
-.edit_user{
-    display:flex;
-}
-.left_edituser{
-    flex: 1;
-    background-color:red;
+
+
+
+
+
+
+.title_edit {
+    margin-top: 20px;
+    font-weight: bold;
+    color: rgb(46, 46, 46);
+    font-size: 14px;
+    margin-bottom: 15px;
 
 }
-.right_edituser{
-    flex: 4;
-    background-color:black;
 
+
+
+
+.userShowInfor {
+    display: flex;
+    align-items: center;
+    margin: 20px 0px;
+    color: rgb(95, 93, 93);
 }
+
+
+
+
+
