@@ -1,8 +1,138 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
+import './ListProduct.css';
 function ListProduct() {
+  const categories = [
+    {
+      id: 1,
+      name: 'Giày Tây'
+     
+    },
+    {
+      id: 2,
+      name: 'Giày Bốt Nam'
+    },
+    {
+      id: 3,
+      name: 'Giày lười nam'
+    },
+    {
+      id: 4,
+      name: 'Giày Vans'
+    },
+  ]
+
+  const products = [
+    {
+      id: 1,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/1.png"
+    
+    }, {
+      id: 2,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/2.png"
+    }, {
+      id: 3,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/3.png"
+    }, {
+      id: 4,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/4.png"
+    }, {
+      id: 5,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/5.png"
+    }, {
+      id: 6,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/6.png"
+    }
+    , {
+      id: 7,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/7.png"
+    }
+    , {
+      id: 8,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/8.png"
+    }
+    , {
+      id: 9,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/9.png"
+    }
+    , {
+      id: 10,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/10.png"
+    }
+    , {
+      id: 11,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/11.png"
+    }
+    , {
+      id: 12,
+      title: " Nike air jordan 1",
+      price: "$100",
+      image: "../image/12.png"
+    }
+  ]
+
   return (
-    <div>ListProduct</div>
+
+    <div className='category container'>
+      <div className='category__left'>
+        <h4 className='category__heading'>KHÁM PHÁ DANH MỤC</h4>
+        <ul className="category__menu">
+          {
+            categories.map(item => (
+              <li className="category__item">
+                <Link to={`/category/${item.id}`}>{item.name}</Link>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div className='category__right'>
+        <div className="category__list">
+          {
+            products.map(item => (
+              <div className="category__product">
+                <div className="category__image">
+                  <img src={item.image} alt="" />
+                </div>
+                <div className="category__name">
+                  {item.title}
+                </div>
+                <div className="category__price">
+                  {item.price}
+                </div>
+                <div className="category__action">
+                  <button>Mua Ngay</button>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
   )
 }
 

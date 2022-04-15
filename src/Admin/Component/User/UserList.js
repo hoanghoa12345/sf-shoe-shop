@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { delete_user, update_user } from '../../Redux/Action';
 import '../Style/UserList.css';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { DataGrid } from '@mui/x-data-grid';
+
 
 
 
