@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Checkout.scss";
 const Checkout = () => {
+  const [provinces, setProvinces] = useState({});
+  const [districts, setDistricts] = useState([]);
+  const [formData, setFormData] = useState({
+    address: "",
+    district: "",
+    email: "",
+    fullname: "",
+    phone_number: "",
+    province: "",
+    ward: "",
+  });
+  useEffect(() => {
+    const fetchProvinces = async () => {
+      const data = await (
+        await fetch(
+          "https://gist.githubusercontent.com/cuduy197/11c93e2ab10eeff1d4cd9185ec29fc0a/raw/22b2d484f7a06d59aea63b08d7fe4cf042668a66/districts_vn.json"
+        )
+      ).json();
+      setProvinces(data);
+    };
+    fetchProvinces();
+  }, []);
+  const handleCityChange = (e) => {
+    let provinceName = e.target.value;
+    setFormData({ ...formData, province: provinceName });
+    let districtsObj = Object.values(provinces).filter(
+      (item) => item.name === provinceName
+    )[0].districts;
+    setDistricts(Object.values(districtsObj));
+  };
   return (
     <div className="content">
       <div className="page-head">
@@ -14,7 +44,7 @@ const Checkout = () => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-md-12 mt-60 mb-60">
+          <div className="column mt-60 mb-60">
             <div>
               <div className="notices-wrapper">
                 <div className="message">
@@ -26,22 +56,29 @@ const Checkout = () => {
                 <div className="coupon_label">
                   Vui lòng nhập mã giảm giá của bạn vào ô bên dưới.
                 </div>
-                <div className="form-row form-row-first">
-                  <input
-                    type="text"
-                    name="coupon_code"
-                    className="input-text"
-                    placeholder="Mã giảm giá của bạn"
-                  />
-                </div>
-                <div className="form-row form-row-last">
-                  <button type="submit" className="button" name="apply_coupon">
-                    Áp dụng
-                  </button>
+                <div className="row">
+                  <div className="column form-row">
+                    <input
+                      type="text"
+                      name="coupon_code"
+                      className="input-text"
+                      placeholder="Mã giảm giá của bạn"
+                    />
+                  </div>
+                  <div className="column">
+                    <button
+                      type="submit"
+                      className="button"
+                      name="apply_coupon"
+                      style={{ width: "80px" }}
+                    >
+                      Áp dụng
+                    </button>
+                  </div>
                 </div>
               </form>
-              <form className="checkout mt-60 mb-60">
-                <div className="col-md-6">
+              <form className="checkout row mt-60 mb-60">
+                <div className="column">
                   <div className="customer_details">
                     <h3>Thông tin giao hàng</h3>
                     <div className="field-wrapper">
@@ -51,6 +88,12 @@ const Checkout = () => {
                           type="text"
                           className="input-text"
                           name="billing_fullname"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              fullname: e.target.value,
+                            })
+                          }
                         />
                       </div>
                       <div className="form-row">
@@ -59,6 +102,12 @@ const Checkout = () => {
                           type="tel"
                           className="input-text"
                           name="billing_phonenumber"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              phone_number: e.target.value,
+                            })
+                          }
                         />
                       </div>
                       <div className="form-row">
@@ -67,30 +116,54 @@ const Checkout = () => {
                           type="email"
                           className="input-text"
                           name="billing_email"
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
                         />
                       </div>
                       <div className="form-row">
-                        <label htmlFor="state">Tỉnh/Thành phố</label>
-                        <input
+                        <label htmlFor="city">Tỉnh/Thành phố</label>
+                        <select
                           type="text"
                           className="input-text"
-                          name="billing_state"
-                        />
-                      </div>
-                      <div className="form-row">
-                        <label htmlFor="city">Quận/Huyện</label>
-                        <input
-                          type="text"
-                          className="input-text"
+                          id="city"
                           name="billing_city"
-                        />
+                          onChange={handleCityChange}
+                        >
+                          {Object.values(provinces).map((item, i) => (
+                            <option key={i}>{item.name}</option>
+                          ))}
+                        </select>
                       </div>
                       <div className="form-row">
-                        <label htmlFor="address2">Xã/Phường/thị trấn</label>
+                        <label htmlFor="district">Quận/Huyện</label>
+                        <select
+                          type="text"
+                          id="district"
+                          className="input-text"
+                          name="billing_district"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              district: e.target.value,
+                            })
+                          }
+                        >
+                          {districts.map((item) => (
+                            <option>{item}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="form-row">
+                        <label htmlFor="ward">Xã/Phường/thị trấn</label>
                         <input
                           type="text"
+                          id="ward"
                           className="input-text"
-                          name="billing_address2"
+                          name="billing_ward"
+                          onChange={(e) =>
+                            setFormData({ ...formData, ward: e.target.value })
+                          }
                         />
                       </div>
                       <div className="form-row">
@@ -100,6 +173,12 @@ const Checkout = () => {
                           className="input-text"
                           name="billing_address"
                           placeholder="Địa chỉ"
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              address: e.target.value,
+                            })
+                          }
                         />
                       </div>
                     </div>
@@ -126,10 +205,7 @@ const Checkout = () => {
                     </p>
                   </div>
                 </div>
-                <div
-                  className="col-md-6"
-                  style={{ marginLeft: "20px", width: "500px" }}
-                >
+                <div className="column">
                   <h3>Chi tiết đơn hàng</h3>
                   <table className="shop_table">
                     <thead>
@@ -140,7 +216,7 @@ const Checkout = () => {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Giày nam</td>
+                        <td>Giày nam (1)</td>
                         <td>500.000₫</td>
                       </tr>
                     </tbody>
@@ -169,20 +245,28 @@ const Checkout = () => {
                   <div className="checkout-payment">
                     <ul className="payment_method">
                       <li>
-                        Thanh toán sau khi nhận hàng (COD){" "}
-                        <img
-                          src="https://www.viettelidc.com.vn/Themes/itmetech/img/cash@2x.png"
-                          alt="cash"
-                          height="32"
-                        />
+                        <span>Thanh toán sau khi nhận hàng (COD)</span>
+
+                        <div>
+                          <img
+                            src="https://www.viettelidc.com.vn/Themes/itmetech/img/cash@2x.png"
+                            alt="cash"
+                            height="32"
+                            width="64"
+                          />
+                        </div>
                       </li>
                       <li>
-                        Thanh toán bằng ví điện tử{" "}
-                        <img
-                          src="https://www.viettelidc.com.vn/Themes/itmetech/img/group-3@2x.png"
-                          height="32"
-                          alt="vnpay"
-                        />
+                        <span>Thanh toán bằng ví điện tử</span>
+
+                        <div>
+                          <img
+                            src="https://www.viettelidc.com.vn/Themes/itmetech/img/group-3@2x.png"
+                            height="32"
+                            width="64"
+                            alt="vnpay"
+                          />
+                        </div>
                       </li>
                     </ul>
                     <div className="payment_box">
@@ -194,7 +278,13 @@ const Checkout = () => {
                         chi phí nào.
                       </p>
                     </div>
-                    <button className="place-order button">Đặt hàng</button>
+                    <button
+                      type="button"
+                      onClick={() => console.log(formData)}
+                      className="place-order button"
+                    >
+                      Đặt hàng
+                    </button>
                   </div>
                 </div>
               </form>

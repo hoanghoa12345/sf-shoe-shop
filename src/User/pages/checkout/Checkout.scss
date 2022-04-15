@@ -32,36 +32,32 @@
     }
   }
 }
+.mt-60 {
+  margin-top: 60px;
+}
 
-.container {
-  .row {
+.mb-60 {
+  margin-bottom: 60px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .column {
     display: flex;
-    flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-right: -1rem;
-    margin-left: -1rem;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
 
-    .col-md-12 {
-      flex-basis: 100%;
-      max-width: 100%;
-    }
-
-    .col-md-6 {
-      flex-basis: 50%;
-      max-width: 50%;
-      flex: 0 0 auto;
-    }
-
-    .mt-60 {
-      margin-top: 60px;
-    }
-
-    .mb-60 {
-      margin-bottom: 60px;
-    }
+  .column > * {
+    margin: 0 12px;
   }
 }
+
 .container {
   .button {
     padding: 0 5px;
@@ -102,18 +98,6 @@
     display: block;
     margin-bottom: 5px;
   }
-  .form-row {
-    width: 49%;
-  }
-  .form-row-first {
-    float: left;
-  }
-  .form-row-last {
-    float: right;
-  }
-  .button {
-    padding: 0 34px;
-  }
 }
 .form-row {
   label {
@@ -142,7 +126,6 @@
 }
 
 .checkout {
-  display: flex;
   .message_box {
     border: 1px solid transparent;
     display: block;
@@ -167,20 +150,14 @@
     margin: 0 0 10px;
   }
   .shop_table {
-    position: static;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-width: 1px 0 0 1px;
-    margin: 1.5em 0 1.75em;
-    width: 100%;
-    border: 1px solid #ddd;
-    vertical-align: middle;
+    margin: 12px;
+    border-collapse: collapse;
+    border-color: #ddd;
+    border-style: solid;
+    border-width: 0 2px 0 2px;
     th,
     td {
-      border-collapse: separate;
-      border-width: 0 0 1px 0;
       padding: 15px;
-      border: 1px solid #ddd;
     }
   }
   &-payment {
