@@ -13,16 +13,14 @@ import avatarDefault from '../../image/avatart.jpg'
 
 function UserList() {
   const [page, setPage] = useState(6);
-  const userLists = useSelector(state => state.contactReducer);
+  const userLists = useSelector((state) => state.contactReducer);
   const dispatch = useDispatch();
-
 
   //delete uer
   const handleDeleteItem = (id) => {
-    dispatch(delete_user(id))
-    toast.success("Xóa người dùng thành công !!")
-  }
-
+    dispatch(delete_user(id));
+    toast.success("Xóa người dùng thành công !!");
+  };
 
   //phân trang
   //  let page = 6;
@@ -31,33 +29,34 @@ function UserList() {
   let start = 0;
   let end = page;
 
-
   const handleClickNext = () => {
     currentPage++;
-    start = setPage(parseInt((currentPage - 1) + page))
-    end = setPage(parseInt(currentPage * page))
+    start = setPage(parseInt(currentPage - 1 + page));
+    end = setPage(parseInt(currentPage * page));
     console.log(start, end);
-  }
+  };
   const handleClickPrev = () => {
-
     currentPage--;
-    start = parseInt((currentPage - 1)) - parseInt(page);
+    start = parseInt(currentPage - 1) - parseInt(page);
     end = currentPage * page;
-
-  }
-
-
+  };
 
   return (
     <div>
       <div className="listUsercontainer">
         <div className="listUser">
-          <Link to='adduser'> <button className="btn_create" ><AiOutlineUsergroupAdd className="iconBack" />Thêm Người Dùng</button></Link>
+          <Link to="adduser">
+            {" "}
+            <button className="btn_create">
+              <AiOutlineUsergroupAdd className="iconBack" />
+              Thêm Người Dùng
+            </button>
+          </Link>
         </div>
       </div>
       <table>
         <tbody>
-          <tr >
+          <tr>
             <th>Số thứ tự</th>
             <th>Hình đại diện</th>
             <th>Họ tên</th>
@@ -66,7 +65,9 @@ function UserList() {
             <th>Email</th>
             <th>Phone</th>
             <th>Quê quán</th>
-            <th><GrUpdate className='iconBack' /></th>
+            <th>
+              <GrUpdate className="iconBack" />
+            </th>
           </tr>
           {userLists.length !== 0 ? ( userLists.map((userList) => {
             const { id, avatar,  fullname,userName, age, email, phone, gender, address } = userList;
@@ -109,7 +110,7 @@ function UserList() {
           </div>
         </div>) : (<div className="pagination"><a> {userLists.length}</a></div>)}
     </div>
-  )
+  );
 }
 
-export default UserList
+export default UserList;

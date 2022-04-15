@@ -117,7 +117,7 @@ function HomeAdmin() {
                         <div className='productTop'>
                             <h2 className='headerTop'>Top Products</h2>
                             {dataProducts.length !== 0 ? dataProducts.map((dataProduct) => {
-                                const { id,UrlLink, nameProduct, price, total, rest } = dataProduct;
+                                const { id, UrlLink, nameProduct, price, total, rest } = dataProduct;
                                 return (
                                     <div className='topRight' key={id}>
                                         <img className='imgeRight' src={UrlLink || imageDefault} />
@@ -129,13 +129,14 @@ function HomeAdmin() {
                                         <p className='topRest'>{rest}</p>
                                     </div>
                                 )
-                            }):(<h2 className='headerTop'>No data</h2>)}
+                            }) : (<h2 className='headerTop'>No data</h2>)}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     )
 }
 
-export default HomeAdmin
+export default HomeAdmin;
