@@ -3,13 +3,13 @@
     height: 60px;
     z-index: 1;
     background: linear-gradient(to right, #0033cc 0%, #66ccff 100%);
-    position:fixed;
+    position: fixed;
 
 
 }
 
 .topbarwapper {
- 
+
     justify-content: space-between;
     height: 100%;
     padding: 0 20px;
@@ -17,28 +17,28 @@
     align-items: center;
 
 }
-.logo_nav{
-    cursor: pointer;
-   flex:1;
-    margin-bottom:5px;
-    width: 75px;
+
+.logo_nav {
+
+    flex: 1;
+    margin-top: 7px;
+    width: 120px;
     height: 75px;
-    border-radius:50%;
-    -webkit-border-radius:50%;
-    -moz-border-radius:50%;
-    -ms-border-radius:50%;
-    -o-border-radius:50%;
+
 }
-.topleft{
-    display:flex;
+
+.topleft {
+    display: flex;
 }
-.header_nav{
+
+.header_nav {
     color: #fff;
     font-size: 25px;
     font-weight: 700;
-    flex:2;
+    flex: 2;
     margin-top: 20px;
 }
+
 .topright {
     display: flex;
 
@@ -46,41 +46,26 @@
 }
 
 
-.topIconContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 34px;
-    margin-right: 16px;
-    background-color: #777772;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-
-}
 
 .IconContainer {
     cursor: pointer;
-    margin-top: 8px;
-    margin-right: 10px;
+    margin-top: 7px;
+ 
     color: #fff;
     font-size: 22px;
 }
 
 .iconBell {
-    margin-bottom: 3px;
-    margin-left: 15px;
-    font-size: 20px;
+    margin-right: 20px;
+    font-size: 22px;
 }
 
 .topIconBadge {
-    margin-top: -15px;
+    position:absolute;
+    margin-top: -10px;
     width: 15px;
     height: 15px;
-    margin-left: 25px;
+    margin-left: 12px;
     background-color: red;
     color: #fff;
     display: flex;

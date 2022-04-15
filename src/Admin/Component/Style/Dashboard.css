@@ -12,15 +12,18 @@
 .Dashboard_List {
   margin-top: 40px;
 }
+
 .Dashboard_main {
   margin-left: 10px;
   font-size: 12px;
   font-weight: 700;
   color: rgb(118, 118, 118);
 }
+
 .active li {
   background-color: #000000;
 }
+
 .Dashboard_active {
   color: #00b4d8;
 }
@@ -44,4 +47,10 @@
   border-color: #00b4d8;
   list-style: none;
   background-color: #ffffe8;
+}
+
+.Dashboard_Li:active,
+.active {
+  background-color: rgb(223, 223, 223);
+  
 }

@@ -21,7 +21,7 @@ function UpdateProduct() {
   const editProducts = useSelector(state => state.contactProducts);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const findEditProduct = editProducts.find(editProduct => editProduct.id === parseInt(id));
+  const findEditProduct = editProducts.find(editProduct => parseInt(editProduct.id) === parseInt(id));
 
   const hanldeClickInformation = () => {
     setIsForm(true);
@@ -30,17 +30,17 @@ function UpdateProduct() {
   const hanldeClickInDecripstion = () => {
     setIsForm(false);
   }
-  const hanldeImageProduct = (e) => {
-    const imageproduct = e.target.files[0];
-    imageproduct.preview = URL.createObjectURL(imageproduct)
-    setImgproduct(imageproduct)
+  // const hanldeImageProduct = (e) => {
+  //   const imageproduct = e.target.files[0];
+  //   imageproduct.preview = URL.createObjectURL(imageproduct)
+  //   setImgproduct(imageproduct)
 
-  }
-  useEffect(() => {
-    return () => {
-      imageproduct && URL.revokeObjectURL(imageproduct.preview)
-    }
-  }, [imageproduct])
+  // }
+  // useEffect(() => {
+  //   return () => {
+  //     imageproduct && URL.revokeObjectURL(imageproduct.preview)
+  //   }
+  // }, [imageproduct])
 
   const data = {
     id: parseInt(id),

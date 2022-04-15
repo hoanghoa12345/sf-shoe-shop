@@ -14,25 +14,32 @@ function AddUser() {
 
   const [avatar, setAvatar] = useState('');
   const [fullname, setFullname] = useState('');
-  const [username, setUsername] = useState('');
+  const [userName, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [gender, setGender] = useState('male');
   const [age, setAge] = useState('');
-
-  const addUser = useSelector(state => state.contactReducer);
+  const navigater = useNavigate();
   const dispatch =useDispatch();
-  console.log(addUser);
-  const navigater = useNavigate()
+  const addUser = useSelector(state => state.contactReducer);
+
   const hanldeClickAdminHome = () => {
     navigater(-1)
+  }
+  
+  const hanldeCreate = (e) => {
+    e.preventDefault();
+    dispatch(add_user(data));
+    toast.success('Thêm người dùng mới thành công !!');
+    navigater(-1);
+    
   }
   const data = {
     id: addUser.length + 1,
     avatar,
-    username,
+    userName,
     fullname,
     email,
     password,
@@ -40,13 +47,6 @@ function AddUser() {
     address,
     gender,
     age,
-  }
-  const hanldeCreate = (e) => {
-    e.preventDefault();
-    dispatch(add_user(data));
-    toast.success('Thêm người dùng mới thành công !!');
-    navigater(-1);
-
   }
 
 
@@ -63,10 +63,10 @@ function AddUser() {
     }
   },[avatar])
 
-    //localStorage update
+   /*  //localStorage update
     useEffect(()=>{
       localStorage.getItem('username',JSON.stringify(username))
-    },[username])
+    },[username]) */
   return (
     <div>
       <div>
@@ -88,7 +88,7 @@ function AddUser() {
             <form className='newUserForm' >
               <div className='newUserItem'>
                 <label>UserName</label>
-                <input type='text' placeholder='Enter your username' value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input type='text' placeholder='Enter your username' value={userName} onChange={(e) => setUsername(e.target.value)} />
               </div>
               <div className='newUserItem'>
                 <label>Full Name</label>

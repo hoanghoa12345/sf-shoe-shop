@@ -4,7 +4,7 @@ import { BsBellFill } from 'react-icons/bs';
 import { VscSearch } from 'react-icons/vsc';
 import { NavLink } from "react-router-dom";
 import '../Style/NavBar.css';
-import logo from'../../image/mau-logo-dong-vat-dep-01-removebg-preview.png'
+import logo from'../../image/logo-shop-giay-dep (1)-gigapixel-scale-2_00x copy-gigapixel-scale-2_00x copy.png'
 
 function Navbar() {
  
@@ -12,24 +12,20 @@ function Navbar() {
         <div className='topbar'>
             <div className='topbarwapper'>
                 <div className='topleft' >
-                  <NavLink to=''> <img  className='logo_nav' src={logo} alt='logo'/> </NavLink> 
-                    <span className='header_nav'>Monster</span>
+                  <img  className='logo_nav' src={logo} alt='logo'/> 
+                    
                 </div>       
-                <div className='topright'>
-                    <div className="topIconContainer">
+                <div className='topright'>   
                         <div className='IconContainer' >
                             <span className='topIconBadge'>2</span>
                             <BsBellFill className='iconBell' />
-                        </div>
-                    </div>
-                    <div className="topIconContainer">
+                        </div>       
                         <div className='IconContainer' >
                             <span className='topIconBadge'>2</span>
                             <FaGlobeEurope className='iconBell' />
 
                         </div>
-                    </div >
-                    <img src='https://pdp.edu.vn/wp-content/uploads/2021/06/hinh-anh-suy-tu-1.jpg' className='topAvatar' />
+                    <img src={logo} className='topAvatar' />
                     <span className="AvatarTop">Zock Foster</span>
                     <h6 className="AvatarTopM">Manager</h6>
 

@@ -56,7 +56,7 @@ function Information() {
     }
     const hanldeClickInformation = () => {
         setInformation(true);
-       
+
 
     }
     const hanldeClickOverview = () => {

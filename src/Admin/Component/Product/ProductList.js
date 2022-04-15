@@ -8,8 +8,9 @@ import { delete_product } from '../../Redux/Action';
 import { AiFillPlusSquare } from 'react-icons/ai'
 import { BiEditAlt } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
- import { IoIosArrowBack } from 'react-icons/io';
- import { FcNext } from 'react-icons/fc';
+import { IoIosArrowBack } from 'react-icons/io';
+import { FcNext } from 'react-icons/fc';
+import { toast } from 'react-toastify';
 
 function ProductList() {
 
@@ -30,7 +31,8 @@ function ProductList() {
   const hanldeYes = () => {
     let id = deleteId;
     dispatch(delete_product(id));
-    setDeletes(false)
+    setDeletes(false);
+    toast.success('Xóa thành công')
   }
 
   const handleNo = () => {
@@ -59,7 +61,7 @@ function ProductList() {
         ) : (null)}
       </div>
       <Link to='addproduct'><button className='btn_create add'> <AiFillPlusSquare className='iconNewProduct' />New Product</button></Link>
-   <span className='lengthProduct'>  {productLists.length}</span>
+      <span className='lengthProduct'>  {productLists.length}</span>
       {/*    <table>
         <tbody>
           <tr >
@@ -96,37 +98,38 @@ function ProductList() {
         </tbody></table> */}
       <div className="productContainer" >
         <div className="productBody">
-          {productLists.map((productList) => {
-            const { id, name, urlLink, price, total, rest } = productList;
+          {productLists.length !== 0 ? (productLists.map((productList) => {
+            const { id, nameProduct, urlLink, price, total, rest } = productList;
             return (
-              <div className="productList" key={id}>
-                <div className="productCard">
-                  <div className="productImgBx">
-                    <img className="productImg" src={urlLink.preview || urlLink || imageDefault} alt='{productList.id}' />
+            
+                  <div className="productList" key={id}>
+                    <div className="productCard">
+                      <div className="productImgBx">
+                        <img className="productImg" src={urlLink.preview || urlLink || imageDefault} alt='{productList.id}' />
+                      </div>
+                      <h2 className="productTitle">{nameProduct}</h2>
+                      <h3 className='productPrice'>{price} đ</h3>
+                      <div className="contentBx ">
+                        <div className="productTotal"> Total: {total}  </div>
+                        <div className="productTotal"> Rest: {rest}</div>
+                      </div>
+                      <div className="productRest">
+                        {total - rest}
+                      </div>
+                    </div>
+                    <div className="productIcon">
+                      <div><Link to={`updateproduct/${id}`}><BiEditAlt className='productEdit' onClick={handleClickEdit} /></Link></div>
+                      <div><MdDelete className='productDelete' value={deletes} onClick={() => handleDeleteProduct(id)} /></div>
+                    </div>
                   </div>
-                  <h2 className="productTitle">{name}</h2>
-                  <h3 className='productPrice'>{price} đ</h3>
-                  <div className="contentBx ">
-                    <div className="productTotal"> Total: {total}  </div>
-                    <div className="productTotal"> Rest: {rest}</div>
-                  </div>
-                  <div className="productRest">
-                    {total - rest}
-                  </div>
-                </div>
-                <div className="productIcon">
-                  <div><Link to={`updateproduct/${id}`}><BiEditAlt className='productEdit' onClick={handleClickEdit} /></Link></div>
-                  <div><MdDelete className='productDelete' value={deletes} onClick={() => handleDeleteProduct(id)} /></div>
-                </div>
-              </div>
             )
-          })}
+          })):(<div className="productList">No data.</div>)}
         </div>
       </div>
-      {productLists.length > 8 ?(<div>
-        <IoIosArrowBack className='iconProductBack'/>
-        <FcNext className='iconProductNext'/>
-      </div>):(null)}
+      {productLists.length > 8 ? (<div>
+        <IoIosArrowBack className='iconProductBack' />
+        <FcNext className='iconProductNext' />
+      </div>) : (null)}
     </div>)
 }
 

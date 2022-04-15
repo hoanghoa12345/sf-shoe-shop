@@ -68,8 +68,8 @@ function UserList() {
             <th>Quê quán</th>
             <th><GrUpdate className='iconBack' /></th>
           </tr>
-          {userLists.map((userList) => {
-            const { id, avatar, userName, fullname, age, email, phone, gender, address } = userList;
+          {userLists.length !== 0 ? ( userLists.map((userList) => {
+            const { id, avatar,  fullname,userName, age, email, phone, gender, address } = userList;
             return (
               <React.Fragment key={id}>
                 {id >= start && id < end ? (
@@ -84,7 +84,6 @@ function UserList() {
                     <td>{address}</td>
                     <td>
                       <Link to={`information/${id}`}> <button className="btn_edit"  >Edit</button></Link>
-
                       <button className="btn_delete" onClick={() => handleDeleteItem(id)} >Delete</button>
                     </td>
                   </tr>) : (null)
@@ -93,7 +92,7 @@ function UserList() {
               </React.Fragment>
 
             )
-          })}
+          })):(<>No Data</>)}
         </tbody>
       </table>
       {userLists.length > 5 ? (
