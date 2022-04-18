@@ -9,6 +9,11 @@ import hinh1 from './shoes_images/jordan-1-high-black-white-1.jpg';
 import hinh2 from './shoes_images/jordan-2.jpg';
 import hinh3 from './shoes_images/jordan-3.jpg';
 import hinh4 from './shoes_images/jordan-4.jpg';
+import { FaFacebookF } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
+import { FaFacebookMessenger } from 'react-icons/fa';
+import { FaSkype } from 'react-icons/fa';
+import { FaYoutube } from 'react-icons/fa';
 
 function DetailProduct() {
     return (
@@ -102,19 +107,19 @@ function DetailProduct() {
                             <div class="social-links">
                                 <p>Share At: </p>
                                 <a href="#">
-                                    <i class="fab fa-facebook-f"></i>
+                                    <FaFacebookF height={32}/>
                                 </a>
                                 <a href="#">
-                                    <i class="fab fa-twitter"></i>
+                                    <FaInstagram />
                                 </a>
                                 <a href="#">
-                                    <i class="fab fa-instagram"></i>
+                                    <FaFacebookMessenger/>
                                 </a>
                                 <a href="#">
-                                    <i class="fab fa-whatsapp"></i>
+                                    <FaSkype/>
                                 </a>
                                 <a href="#">
-                                    <i class="fab fa-pinterest"></i>
+                                    <FaYoutube/>
                                 </a>
                             </div>
                         </div>
