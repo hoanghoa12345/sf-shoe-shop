@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Pagination } from "swiper";
 import "./ListProduct.css";
 function ListProduct() {
   const navigate = useNavigate();
-
   const categories = [
     {
       id: 1,
@@ -102,14 +102,21 @@ function ListProduct() {
       image: "../image/12.png",
     },
   ];
-
+  // const[pagination,setPagination] = useState({
+  //   _page: 1,
+  //   _limit: 10,
+  //   _totalRows: 11,
+  // });
+  // function handlePageChange(newPage){
+  //   console.log("new page:", newPage);
+  // }
   const hanldeClick = (catItem) => {
-    const result = products.filter((curData)=>{
-      return curData.categori===catItem;
+    const result = products.filter((curData) => {
+      return curData.categori === catItem;
     });
     setProduct(result)
   }
- 
+
   const [product, setProduct] = useState(products)
 
   return (
@@ -117,13 +124,16 @@ function ListProduct() {
       <div className="category__left">
         <h4 className="category__heading">KHÁM PHÁ DANH MỤC</h4>
         <ul className="category__menu">
+          <li className="category__item"  >
+            <span to={`/category`} onClick={() =>setProduct(products)}>ALL</span>
+          </li>
           {categories.map((item) => {
             const { id } = item
             return (
               <li className="category__item" key={item.id} >
-                {/* <Link to={`/category/${item.id}`} onClick={() => hanldeClick('GiàyTây')}>{item.name}</Link> */}
                 <span to={`/category/${item.id}`} onClick={() => hanldeClick(item.id)}>{item.name}</span>
               </li>
+
 
             )
           }
@@ -148,6 +158,12 @@ function ListProduct() {
           ))}
         </div>
       </div>
+            
+            {/* <Pagination 
+                pagination={pagination}
+                onPageChange={handlePageChange}
+              /> */}
+            
     </div>
   );
 }
