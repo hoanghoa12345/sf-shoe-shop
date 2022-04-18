@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../Style/EditProduct.css';
 import { useDispatch, useSelector } from 'react-redux';
+import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png'
 import { Link, useParams } from 'react-router-dom';
 import { MdCloudUpload } from 'react-icons/md'
 import { update_product } from '../../Redux/Action';
@@ -9,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import posterDefault from '../../image/poster.png'
 
 function UpdateProduct() {
-  const [name, setName] = useState('');
+  const [nameProduct, setNameProduct] = useState('');
   const [price, setPrice] = useState('');
   const [total, setTotal] = useState('');
   const [rest, setRest] = useState('');
@@ -46,7 +47,7 @@ function UpdateProduct() {
     id: parseInt(id),
     urlLink,
     imageproduct,
-    name,
+    nameProduct,
     price,
     total,
     rest,
@@ -61,7 +62,7 @@ function UpdateProduct() {
   useEffect(() => {
     if (findEditProduct) {
       setUrlLink(findEditProduct.urlLink)
-      setName(findEditProduct.name)
+      setNameProduct(findEditProduct.nameProduct)
       setPrice(findEditProduct.price)
       setTotal(findEditProduct.total)
       setRest(findEditProduct.rest)
@@ -74,9 +75,9 @@ function UpdateProduct() {
       <div className="editProduct">
         <div className="topProduct ">
           <div className='userShowLeft'>
-            <img className="edit_avatar" src={findEditProduct.urlLink} />
+          {urlLink ? (<img className=' avatar' src={urlLink  } alt={id} />) : (<img className=' avatar' src={findEditProduct.urlLink || imageDefault} alt='b' />)}
             <div className='userShowInforTitle'>
-              <h3 className='edit_name'>{findEditProduct.name}</h3>
+              <h3 className='edit_name'>{findEditProduct.nameProduct}</h3>
               <h6 className='edit_fullname price'>{findEditProduct.price} đ</h6>
             </div>
           </div>
@@ -94,9 +95,9 @@ function UpdateProduct() {
                 <lable className='lable_'>Name:</lable>
                 <input className='input_'
                   type='text'
-                  placeholder={findEditProduct.name}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  placeholder={findEditProduct.nameProduct}
+                  value={nameProduct}
+                  onChange={(e) => setNameProduct(e.target.value)}
                 />
               </div>
               <div className='left-input_'>
@@ -138,7 +139,7 @@ function UpdateProduct() {
                   />
                 </div>
                 <div className='uploadImageProduct'>
-                  {urlLink ? (<img className=' avatar' src={urlLink} alt={id} />) : (<img className=' avatar' src={findEditProduct.urlLink} alt='b' />)}
+                  {urlLink ? (<img className=' avatar' src={urlLink  } alt={id} />) : (<img className=' avatar' src={findEditProduct.urlLink || imageDefault} alt='b' />)}
                   {/*  <label htmlFor='file'>
                     <MdCloudUpload className='iconUpload' />
                     {imageproduct.preview || urlLink ? (<img className=' avatar' src={imageproduct.preview || urlLink} alt={id} />)

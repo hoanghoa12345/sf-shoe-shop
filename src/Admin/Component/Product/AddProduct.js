@@ -30,14 +30,14 @@ function AddProduct() {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
   const hanldeCreate = () =>{
-    dispatch(add_product(data));
-
-     if (!nameProduct || !price || !rest || !total || !rest) {
+    
+  /*   if (!nameProduct || !price || !rest || !total || !rest) {
       return (toast.warning(`Please enter full information !!!`))
-    }
+    } */
+    dispatch(add_product(data));
     toast.success("Thêm sản phẩm mới thành công.")
     navigate(-1);
-
+    
   }
   const hndaleSubmitForm = (e) =>{
     e.preventDefault();

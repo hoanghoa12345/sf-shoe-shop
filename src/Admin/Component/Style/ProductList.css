@@ -112,6 +112,7 @@
 
 .productImgBx {
     width: 150px;
+    height: 150px;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -127,9 +128,12 @@
 }
 
 .productTitle {
+    width: 100%;
+    height:auto;
     font-weight: 600;
-    color: #fff;
+    color: #9ef01a;
     font-size: 15px;
+    margin-top: 25px;
     text-align: center;
 }
 
@@ -143,6 +147,7 @@
     font-weight: 600;
     margin-left: 50px;
     margin-top: 10px;
+    margin-right: 15px;
 }
 
 .productList {
@@ -150,8 +155,8 @@
 }
 
 .productRest {
-    margin-top: 15px;
-    font-size: 25px;
+    margin-top: 20px;
+    font-size: 20px;
     margin-left: 130px;
     color: #fff;
 }

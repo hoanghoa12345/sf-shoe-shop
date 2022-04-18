@@ -14,7 +14,7 @@ function AddUser() {
 
   const [avatar, setAvatar] = useState('');
   const [fullname, setFullname] = useState('');
-  const [username, setUsername] = useState('');
+  const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
@@ -32,7 +32,7 @@ function AddUser() {
 
   const hanldeCreate = (e) => {
 
-  /*   if (!fullname || !username || !gender || !age || !email || !password || !phone || !address) {
+   /*   if (!fullname || !userName || !gender || !age || !email || !password || !phone || !address) {
       return (toast.warning(`Please enter full information !!!`))
     }
     if (!regex.test(email)) {
@@ -42,7 +42,7 @@ function AddUser() {
     if (phone.length !== 10) {
       return (toast.warning(`Please enter the correct phone number format (10 numbers) !!!`))
 
-    } */
+    }  */
     e.preventDefault();
     dispatch(add_user(data));
     toast.success('Thêm người dùng mới thành công !!');
@@ -52,7 +52,7 @@ function AddUser() {
   const data = {
     id: addUser.length + 1,
     avatar,
-    username,
+    userName,
     fullname,
     email,
     password,
@@ -101,7 +101,7 @@ function AddUser() {
             <form className='newUserForm' >
               <div className='newUserItem'>
                 <label>UserName</label>
-                <input type='text' placeholder='Enter your username' value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input type='text' placeholder='Enter your username' value={userName} onChange={(e) => setUserName(e.target.value)} />
               </div>
               <div className='newUserItem'>
                 <label>Full Name</label>

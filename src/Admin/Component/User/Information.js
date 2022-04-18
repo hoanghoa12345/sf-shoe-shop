@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { update_user } from "../../Redux/Action";
 import { toast } from "react-toastify";
+import avatarDefaul from '../../image/avatart.jpg'
+
 
 function Information() {
   const [avatar, setAvatar] = useState("");
@@ -119,9 +121,6 @@ function Information() {
         },
       ];
 
-
-
-
       return (
         <>
           <div className="container_edit"   >
@@ -131,7 +130,7 @@ function Information() {
                   <div >
                     {avatar.preview ? (<img className='edit_avatar' src={avatar.preview} alt={id} />)
                       :
-                      (<img className='edit_avatar' src={avatar} alt=''/>)}
+                      (<img className='edit_avatar' src={ avatar|| avatarDefaul} alt=''/>)}
                   </div>
                   <div className='userShowInforTitle'>
                     <h3 className='edit_name'>{fullname}</h3>
@@ -222,9 +221,7 @@ function Information() {
                           <div className='userUpdateRight'>
                             <div className='userUpdateUpload'>
                               <label htmlFor='file'>
-                                {avatar.preview ? (<img className=' avatar' src={avatar.preview} alt={id} />)
-                                  :
-                                  (<img className=' avatar' src={avatar} alt='' />)}
+                                <img className=' avatar' src={avatar.preview ||avatar||  avatarDefaul } alt={id} />
                                 <FcUpload className='userUpdateIcon' />
                               </label>
                               <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeAvatar} />

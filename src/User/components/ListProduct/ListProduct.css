@@ -28,7 +28,8 @@
   gap: 10px 0;
 }
 
-.category__item a {
+.category__item span {
+  cursor: pointer;
   border-left: 4px solid #000;
   padding-left: 10px; 
   position: relative;

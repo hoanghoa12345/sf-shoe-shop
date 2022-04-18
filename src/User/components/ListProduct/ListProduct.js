@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { Pagination } from "swiper";
 import "./ListProduct.css";
 function ListProduct() {
   const navigate = useNavigate();
@@ -20,33 +20,38 @@ function ListProduct() {
     {
       id: 4,
       name: "Giày Vans",
+
     },
   ];
 
-  const products = [
+  let products = [
     {
       id: 1,
       title: " Nike air jordan 1",
       price: "$100",
       image: "../image/1.png",
+      categori: 4,
     },
     {
       id: 2,
       title: " Nike air jordan 1",
       price: "$100",
       image: "../image/2.png",
+      categori: 2,
     },
     {
       id: 3,
       title: " Nike air jordan 1",
       price: "$100",
       image: "../image/3.png",
+      categori: 1,
     },
     {
       id: 4,
       title: " Nike air jordan 1",
       price: "$100",
       image: "../image/4.png",
+      categori: 3,
     },
     {
       id: 5,
@@ -97,23 +102,48 @@ function ListProduct() {
       image: "../image/12.png",
     },
   ];
+  // const[pagination,setPagination] = useState({
+  //   _page: 1,
+  //   _limit: 10,
+  //   _totalRows: 11,
+  // });
+  // function handlePageChange(newPage){
+  //   console.log("new page:", newPage);
+  // }
+  const hanldeClick = (catItem) => {
+    const result = products.filter((curData) => {
+      return curData.categori === catItem;
+    });
+    setProduct(result)
+  }
+
+  const [product, setProduct] = useState(products)
 
   return (
     <div className="category container">
       <div className="category__left">
         <h4 className="category__heading">KHÁM PHÁ DANH MỤC</h4>
         <ul className="category__menu">
-          {categories.map((item) => (
-            <li className="category__item">
-              <Link to={`/category/${item.id}`}>{item.name}</Link>
-            </li>
-          ))}
+          <li className="category__item"  >
+            <span to={`/category`} onClick={() =>setProduct(products)}>ALL</span>
+          </li>
+          {categories.map((item) => {
+            const { id } = item
+            return (
+              <li className="category__item" key={item.id} >
+                <span to={`/category/${item.id}`} onClick={() => hanldeClick(item.id)}>{item.name}</span>
+              </li>
+
+
+            )
+          }
+          )}
         </ul>
       </div>
       <div className="category__right">
         <div className="category__list">
-          {products.map((item) => (
-            <div className="category__product">
+          {product.map((item) => (
+            <div className="category__product" key={item.id}>
               <div className="category__image">
                 <img src={item.image} alt="" />
               </div>
@@ -128,6 +158,12 @@ function ListProduct() {
           ))}
         </div>
       </div>
+            
+            {/* <Pagination 
+                pagination={pagination}
+                onPageChange={handlePageChange}
+              /> */}
+            
     </div>
   );
 }

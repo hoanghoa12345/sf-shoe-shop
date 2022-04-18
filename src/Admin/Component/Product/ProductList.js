@@ -25,20 +25,7 @@ function ProductList() {
   const dispatch = useDispatch();
 
   //Sort
-  const sortTypes = {
-    Ascending: {
-      className: '',
-      fn: (a, b) => a.price - b.price
-    },
-    Decrease: {
-      className: '',
-      fn: (a, b) => b.price - a.price
-    },
-    default: {
-      className: '',
-      fn: (a, b) => a
-    }
-  }
+
 
 
   const handleDeleteProduct = (id) => {
@@ -61,6 +48,9 @@ function ProductList() {
   const handleClickEdit = () => {
 
   }
+
+  //Sort products
+  const option = ['Sắp xếp Theo Giá ','Tăng Dần', 'Giảm Dần']
   let currentPage = 1;
   let start = 0;
   let end = page;
@@ -88,9 +78,9 @@ function ProductList() {
           <input className='inputSearchProduct' placeholder='Search...' onChange={(e) => setSearch(e.target.value)} disabled={productLists.length === 0} />
         </div>
         <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} >
-          <option value='default'>Sort Price Product </option>
-          <option value='Ascending'>Ascending</option>
-          <option value='Decrease'>Decrease </option>
+         {option.map((item, index)=>{
+          return ( <option key={index} value={item}>{item}</option>)
+         })}
         </select>
       </div>
       {/*    <table>
@@ -140,12 +130,12 @@ function ProductList() {
               const { id, nameProduct, urlLink, price, total, rest } = productList;
               return (
                 <React.Fragment key={id}>
-                  {id >= start && id < end ?( <div className="productList" >
+                  {id >= start && id < end ? (<div className="productList" >
                     <div className="productCard">
                       <div className="productImgBx">
-                        <img className="productImg" src={urlLink.preview || urlLink || imageDefault} alt='{productList.id}' />
+                        <img className="productImg" src={urlLink.preview || urlLink || imageDefault} alt={productList.id} />
                       </div>
-                      <h2 className="productTitle">{nameProduct}</h2>
+
                       <h3 className='productPrice'>{price} đ</h3>
                       <div className="contentBx ">
                         <div className="productTotal"> Total: {total}  </div>
@@ -154,13 +144,14 @@ function ProductList() {
                       <div className="productRest">
                         {total - rest}
                       </div>
+                        <h2 className="productTitle">{nameProduct}</h2>
                     </div>
                     <div className="productIcon">
                       <div><Link to={`updateproduct/${id}`}><BiEditAlt className='productEdit' onClick={handleClickEdit} /></Link></div>
                       <div><MdDelete className='productDelete' value={deletes} onClick={() => handleDeleteProduct(id)} /></div>
                     </div>
-                  </div>):(null)}
-                 
+                  </div>) : (null)}
+
                 </React.Fragment>
 
               )
