@@ -4,7 +4,7 @@ import { BsBellFill } from 'react-icons/bs';
 import { VscSearch } from 'react-icons/vsc';
 import { NavLink } from "react-router-dom";
 import '../Style/NavBar.css';
-import logo from'../../image/logo-shop-giay-dep (1)-gigapixel-scale-2_00x copy-gigapixel-scale-2_00x copy.png'
+import logo from'../../image/39b63840e895877b3c2a514a4397c1a1-gigapixel-scale-2_00x copy.png'
 
 function Navbar() {
  

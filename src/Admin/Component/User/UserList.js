@@ -12,6 +12,8 @@ import avatarDefault from '../../image/avatart.jpg'
 
 
 function UserList() {
+  const [searchUser, setSearchUser] = useState('');
+  const [sortValue, setSortValue] = useState('');
   const [page, setPage] = useState(6);
   const userLists = useSelector((state) => state.contactReducer);
   const dispatch = useDispatch();
@@ -21,6 +23,11 @@ function UserList() {
     dispatch(delete_user(id));
     toast.success("Xóa người dùng thành công !!");
   };
+  //sort user list
+  const option = ['username', 'age', 'gender', 'address'];
+  const handleSort = (e) => {
+    setSortValue(e.target.value)
+   }
 
   //phân trang
   //  let page = 6;
@@ -40,18 +47,32 @@ function UserList() {
     start = parseInt(currentPage - 1) - parseInt(page);
     end = currentPage * page;
   };
-
   return (
     <div>
       <div className="listUsercontainer">
         <div className="listUser">
           <Link to="adduser">
-            {" "}
             <button className="btn_create">
               <AiOutlineUsergroupAdd className="iconBack" />
               Thêm Người Dùng
             </button>
           </Link>
+          <input placeholder="Search User"
+            onChange={(e) => setSearchUser(e.target.value)}
+            className="Serach"
+            disabled={userLists.length === 0}
+          /> 
+
+          <select className='sortUser'
+            value={sortValue}
+            onChange={handleSort}  >
+            {option.map((item, index) => {
+              { console.log(item) }
+              return (
+                <option key={index} value={item} >{item}</option>
+              )
+            })}
+          </select>
         </div>
       </div>
       <table>
@@ -69,31 +90,39 @@ function UserList() {
               <GrUpdate className="iconBack" />
             </th>
           </tr>
-          {userLists.length !== 0 ? ( userLists.map((userList) => {
-            const { id, avatar,  fullname,userName, age, email, phone, gender, address } = userList;
-            return (
-              <React.Fragment key={id}>
-                {id >= start && id < end ? (
-                  <tr>
-                    <td>{id}</td>
-                    <td ><img className='avatar_user ' src={avatar.preview || avatar || avatarDefault} alt={id} /><span className='spantitle'>{userName}</span></td>
-                    <td >{fullname}</td>
-                    <td>{gender}</td>
-                    <td>{age}</td>
-                    <td>{email}</td>
-                    <td>{phone}</td>
-                    <td>{address}</td>
-                    <td>
-                      <Link to={`information/${id}`}> <button className="btn_edit"  >Edit</button></Link>
-                      <button className="btn_delete" onClick={() => handleDeleteItem(id)} >Delete</button>
-                    </td>
-                  </tr>) : (null)
-                }
+          {userLists.length !== 0 ? (userLists.filter((data) => {
+            if (searchUser == '') {
+              return data
+            } else if (data.fullname.toLowerCase().includes(searchUser.toLowerCase()) || data.username.toLowerCase().includes(searchUser.toLocaleLowerCase())) {
+              return data
+            }
+          })
 
-              </React.Fragment>
+            .map((userList) => {
+              const { id, avatar, fullname, username, age, email, phone, gender, address } = userList;
+              return (
+                <React.Fragment key={id}>
+                  {id >= start && id < end ? (
+                    <tr>
+                      <td>{id}</td>
+                      <td ><img className='avatar_user ' src={avatar.preview || avatar || avatarDefault} alt={id} /><span className='spantitle'>{username}</span></td>
+                      <td >{fullname}</td>
+                      <td>{gender}</td>
+                      <td>{age}</td>
+                      <td>{email}</td>
+                      <td>{phone}</td>
+                      <td>{address}</td>
+                      <td>
+                        <Link to={`information/${id}`}> <button className="btn_edit"  >Edit</button></Link>
+                        <button className="btn_delete" onClick={() => handleDeleteItem(id)} >Delete</button>
+                      </td>
+                    </tr>) : (null)
+                  }
 
-            )
-          })):(<>No Data</>)}
+                </React.Fragment>
+
+              )
+            })) : (<>No Data</>)}
         </tbody>
       </table>
       {userLists.length > 5 ? (

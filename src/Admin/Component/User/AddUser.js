@@ -3,7 +3,7 @@ import '../Style/AddUser.css';
 import { BiArrowBack } from 'react-icons/bi';
 import { FcUpload } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { add_user } from '../../Redux/Action';
 import { toast } from 'react-toastify';
 import avatarDefault from '../../image/avatart.jpg'
@@ -14,7 +14,7 @@ function AddUser() {
 
   const [avatar, setAvatar] = useState('');
   const [fullname, setFullname] = useState('');
-  const [userName, setUsername] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
@@ -22,24 +22,37 @@ function AddUser() {
   const [gender, setGender] = useState('male');
   const [age, setAge] = useState('');
   const navigater = useNavigate();
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
   const addUser = useSelector(state => state.contactReducer);
 
   const hanldeClickAdminHome = () => {
     navigater(-1)
   }
-  
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
   const hanldeCreate = (e) => {
+
+  /*   if (!fullname || !username || !gender || !age || !email || !password || !phone || !address) {
+      return (toast.warning(`Please enter full information !!!`))
+    }
+    if (!regex.test(email)) {
+      return (toast.warning(`Please enter correct email format (...@gmail.com) !!!`))
+
+    }
+    if (phone.length !== 10) {
+      return (toast.warning(`Please enter the correct phone number format (10 numbers) !!!`))
+
+    } */
     e.preventDefault();
     dispatch(add_user(data));
     toast.success('Thêm người dùng mới thành công !!');
     navigater(-1);
-    
+
   }
   const data = {
     id: addUser.length + 1,
     avatar,
-    userName,
+    username,
     fullname,
     email,
     password,
@@ -51,27 +64,27 @@ function AddUser() {
 
 
   const hanldeChangeImg = (e) => {
-    const file =e.target.files[0];
-    file.preview=URL.createObjectURL(file)
+    const file = e.target.files[0];
+    file.preview = URL.createObjectURL(file)
     setAvatar(file);
 
   }
-  useEffect(() =>{
+  useEffect(() => {
     //clean
-    return () =>{
+    return () => {
       avatar && URL.revokeObjectURL(avatar.preview)
     }
-  },[avatar])
+  }, [avatar])
 
-   /*  //localStorage update
-    useEffect(()=>{
-      localStorage.getItem('username',JSON.stringify(username))
-    },[username]) */
+  /*  //localStorage update
+   useEffect(()=>{
+     localStorage.getItem('username',JSON.stringify(username))
+   },[username]) */
   return (
     <div>
       <div>
         <div className='newUserHome'>
-        <div className='newUser'>
+          <div className='newUser'>
             <div className='newUserItem'>
               <label >Avatar</label>
               <div className='userUpdateRight'>
@@ -88,7 +101,7 @@ function AddUser() {
             <form className='newUserForm' >
               <div className='newUserItem'>
                 <label>UserName</label>
-                <input type='text' placeholder='Enter your username' value={userName} onChange={(e) => setUsername(e.target.value)} />
+                <input type='text' placeholder='Enter your username' value={username} onChange={(e) => setUsername(e.target.value)} />
               </div>
               <div className='newUserItem'>
                 <label>Full Name</label>

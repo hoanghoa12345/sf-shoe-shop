@@ -6,7 +6,7 @@ const initialStateUser = [
     {
         id: 1,
         avatar: 'https://pdp.edu.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg',
-        username: 'abc',
+        username: 'xyz',
         fullname: "Tran Quang Vinh",
         gender: 'Nam',
         email: 'abcd@gmail.com',
@@ -17,7 +17,7 @@ const initialStateUser = [
         id: 2,
         avatar: 'https://pdp.edu.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong.jpg',
         username: 'abc',
-        fullname: " Quang Vinh",
+        fullname: " Quang tuan",
         gender: 'Nam',
         email: 'abcd@gmail.com',
         phone: '012365479',
@@ -26,7 +26,7 @@ const initialStateUser = [
     }, {
         id: 3,
         avatar: 'https://hinhanhdephd.com/wp-content/uploads/2015/12/hinh-anh-dep-girl-xinh-hinh-nen-dep-gai-xinh.jpg',
-        username: 'abc',
+        username: 'mng',
         fullname: "Tran Quang ",
         gender: 'Nam',
         email: 'abcd@gmail.com',

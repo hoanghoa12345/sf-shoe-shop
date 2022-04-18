@@ -4,6 +4,7 @@
     height: 350px;
     z-index: 1;
     padding: 50px 0;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -15,7 +16,7 @@
 }
 
 .body_delete {
-    background-color: #8fb996   ;
+    background-color: #8fb996;
     border-radius: 10px;
     width: 450px;
     height: 200px;
@@ -25,11 +26,12 @@
     -o-border-radius: 10px;
 }
 
-.lengthProduct{
-    margin-left:20px;
- 
-    
+.lengthProduct {
+    margin-left: 20px;
+
+
 }
+
 .iconNewProduct {
     position: absolute;
     font-size: 22px;
@@ -38,7 +40,7 @@
 }
 
 .add {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .title_deltete {
@@ -94,8 +96,8 @@
 
 /* cart */
 .productContainer {
-    min-width:280px;
-    height:320px;
+    min-width: 280px;
+    height: 320px;
 }
 
 .productContainer .productCard {
@@ -103,9 +105,9 @@
     height: 320px;
     background: #1b4332;
     border-radius: 20px;
-    overflow: hidden; 
-     margin-right: 10px;
-     margin-top: 10px;
+    overflow: hidden;
+    margin-right: 10px;
+    margin-top: 10px;
 }
 
 .productImgBx {
@@ -142,21 +144,24 @@
     margin-left: 50px;
     margin-top: 10px;
 }
-.productList{
+
+.productList {
     position: relative;
 }
+
 .productRest {
     margin-top: 15px;
     font-size: 25px;
     margin-left: 130px;
     color: #fff;
 }
-.productIcon{
+
+.productIcon {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     opacity: 0;
     position: absolute;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -166,7 +171,8 @@
     width: 97%;
     height: 98%;
 }
-.productIcon:hover{
+
+.productIcon:hover {
     opacity: 1;
     border: solid 2px rgba(255, 253, 253, 0.5);
     border-radius: 20px;
@@ -175,17 +181,20 @@
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
 }
-.productBody{
+
+.productBody {
     display: flex;
     flex-wrap: wrap;
 }
-.productEdit{
+
+.productEdit {
     font-size: 35px;
     margin-right: 10px;
 }
-.productEdit:hover{
+
+.productEdit:hover {
     width: 45px;
-    height: 45px;   
+    height: 45px;
     background-color: rgba(72, 72, 72, 0.5);
     color: #fff;
     border-radius: 50%;
@@ -194,14 +203,16 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
-.productDelete{
+
+.productDelete {
     font-size: 35px;
-    margin-left:10px;
+    margin-left: 10px;
 
 }
-.productDelete:hover{
+
+.productDelete:hover {
     width: 40px;
-    height: 40px;   
+    height: 40px;
     background-color: rgba(72, 72, 72, 0.5);
     color: #fff;
     border-radius: 50%;
@@ -210,16 +221,68 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
-.iconProductBack{
+
+.iconProductBack {
     position: absolute;
     font-size: 35px;
     color: blue;
- 
+    cursor: pointer;
+
 }
-.iconProductNext{
-    right:0;
+
+.iconProductNext {
+    right: 0;
     margin-right: 20px;
     font-size: 35px;
-    
+    cursor: pointer;
+
     position: absolute;
+}
+
+.headerProductList {
+
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.headerLeft {
+    flex: 2;
+    margin-top: 10px;
+    margin-left: 5px;
+
+}
+
+
+.headerRight {
+    flex: 3;
+    margin-top: 20px;
+}
+
+.inputSearchProduct {
+
+    border: solid 2px rgba(106, 103, 103, 0.5);
+    width: 50%;
+    height: 60%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.sortProduct{
+    border-radius: 5px;
+    margin-top:15px;
+    margin-right: 50px;
+    width: 100;
+    height:30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }

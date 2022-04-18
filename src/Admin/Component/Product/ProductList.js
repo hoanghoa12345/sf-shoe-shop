@@ -9,17 +9,36 @@ import { AiFillPlusSquare } from 'react-icons/ai'
 import { BiEditAlt } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
 import { IoIosArrowBack } from 'react-icons/io';
+import { BsSortNumericDown } from 'react-icons/bs';
+import { BsSortNumericDownAlt } from 'react-icons/bs';
 import { FcNext } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 
-function ProductList() {
 
+function ProductList() {
+  const [currentSort, setCurrentSort] = useState('default')
   const [deletes, setDeletes] = useState(false)
   const [deleteId, setDeleteId] = useState(0);
-  const [page, setPage] = useState(5);
+  const [search, setSearch] = useState('')
+  const [page, setPage] = useState(9);
   const productLists = useSelector(state => state.contactProducts);
   const dispatch = useDispatch();
 
+  //Sort
+  const sortTypes = {
+    Ascending: {
+      className: '',
+      fn: (a, b) => a.price - b.price
+    },
+    Decrease: {
+      className: '',
+      fn: (a, b) => b.price - a.price
+    },
+    default: {
+      className: '',
+      fn: (a, b) => a
+    }
+  }
 
 
   const handleDeleteProduct = (id) => {
@@ -60,8 +79,20 @@ function ProductList() {
           </form>
         ) : (null)}
       </div>
-      <Link to='addproduct'><button className='btn_create add'> <AiFillPlusSquare className='iconNewProduct' />New Product</button></Link>
-      <span className='lengthProduct'>  {productLists.length}</span>
+      <div className='headerProductList'>
+        <div className='headerLeft'>
+          <Link to='addproduct'><button className='btn_create add'> <AiFillPlusSquare className='iconNewProduct' />New Product</button></Link>
+          <span className='lengthProduct'>  {productLists.length}</span>
+        </div>
+        <div className='headerRight'>
+          <input className='inputSearchProduct' placeholder='Search...' onChange={(e) => setSearch(e.target.value)} disabled={productLists.length === 0} />
+        </div>
+        <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} >
+          <option value='default'>Sort Price Product </option>
+          <option value='Ascending'>Ascending</option>
+          <option value='Decrease'>Decrease </option>
+        </select>
+      </div>
       {/*    <table>
         <tbody>
           <tr >
@@ -98,11 +129,18 @@ function ProductList() {
         </tbody></table> */}
       <div className="productContainer" >
         <div className="productBody">
-          {productLists.length !== 0 ? (productLists.map((productList) => {
-            const { id, nameProduct, urlLink, price, total, rest } = productList;
-            return (
-            
-                  <div className="productList" key={id}>
+          {productLists.length !== 0 ? (productLists.filter((data) => {
+            if (search == '') {
+              return data
+            } else if (data.nameProduct.toLowerCase().includes(search.toLowerCase())) {
+              return data
+            }
+          })
+            .map((productList) => {
+              const { id, nameProduct, urlLink, price, total, rest } = productList;
+              return (
+                <React.Fragment key={id}>
+                  {id >= start && id < end ?( <div className="productList" >
                     <div className="productCard">
                       <div className="productImgBx">
                         <img className="productImg" src={urlLink.preview || urlLink || imageDefault} alt='{productList.id}' />
@@ -121,9 +159,12 @@ function ProductList() {
                       <div><Link to={`updateproduct/${id}`}><BiEditAlt className='productEdit' onClick={handleClickEdit} /></Link></div>
                       <div><MdDelete className='productDelete' value={deletes} onClick={() => handleDeleteProduct(id)} /></div>
                     </div>
-                  </div>
-            )
-          })):(<div className="productList">No data.</div>)}
+                  </div>):(null)}
+                 
+                </React.Fragment>
+
+              )
+            })) : (<div className="productList">No data.</div>)}
         </div>
       </div>
       {productLists.length > 8 ? (<div>
