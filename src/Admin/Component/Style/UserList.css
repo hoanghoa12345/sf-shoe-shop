@@ -62,7 +62,6 @@ th {
 
 .userShowLeft {
     display: flex;
-    
     margin-left:20px;
 }
 .recharts{
@@ -113,10 +112,11 @@ th {
   
 }
 
-.Serach:hover{
+.serach:hover{
     background-color: #eee;
 }
 .left_edituser {
+    width: 97%;
     color: #fff;
     height: 200px;
     margin-left: 10px;
@@ -222,6 +222,9 @@ th {
 
   }
   .edit_name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
       margin-top:20px;
   }
   .edit_fullname{
@@ -230,11 +233,13 @@ th {
 
   }
   .userShowInforTitle {
+      width: 80%;
     padding-top: 20px;
     margin-left: 10px;
     font-weight: 600;
     color:rgb(220, 218, 218);
     font-size: 25px;
+
     
    
 }
@@ -323,12 +328,21 @@ th {
     flex:4; 
     height:340px;
 }
-.Serach{
+.serach{
     border-radius: 5px;
+    padding-left:20px;
     border: solid 1px #ccc;
-    width: 30%;
+    width: 28%;
     height: 30px;
     margin-left: 20px;
+}
+.iconSerach{
+    position:absolute;
+    margin-left:25px;
+    margin-top:17px;
+    color:rgb(111, 110, 110);
+    font-size: 15px;
+   
 }
 .sortUser{
  margin-left: 20px;

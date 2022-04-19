@@ -99,42 +99,54 @@
     min-width: 280px;
     height: 320px;
 }
-
+.productCard{
+    margin: 9px;
+}
 .productContainer .productCard {
     width: 280px;
     height: 320px;
     background: #1b4332;
     border-radius: 20px;
     overflow: hidden;
-    margin-right: 10px;
-    margin-top: 10px;
+   
+
 }
 
 .productImgBx {
-    width: 150px;
-    height: 150px;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 130px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .productImg {
-    margin-left: 120px;
+    width: 50%;
 }
 
 .contentBx {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     color: #fefefe;
 }
+.title__{
 
+    margin: 0 15px 10px 15px ;
+}
 .productTitle {
     width: 100%;
     height:auto;
-    font-weight: 600;
+    font-size: 14px;
     color: #9ef01a;
-    font-size: 15px;
-    margin-top: 25px;
-    text-align: center;
+    margin-top: 13px;
+    
+   text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .productPrice {
@@ -145,8 +157,8 @@
 
 .productTotal {
     font-weight: 600;
-    margin-left: 50px;
-    margin-top: 10px;
+    font-size: 15px;
+    margin-top: 30px; 
     margin-right: 15px;
 }
 
@@ -157,7 +169,7 @@
 .productRest {
     margin-top: 20px;
     font-size: 20px;
-    margin-left: 130px;
+    text-align: center;
     color: #fff;
 }
 
@@ -173,13 +185,14 @@
     top: 0;
     left: 0;
     margin-top: 10px;
-    width: 97%;
-    height: 98%;
+    margin-left:10px;
+    width: 94%;
+    height: 94%;
 }
 
 .productIcon:hover {
     opacity: 1;
-    border: solid 2px rgba(255, 253, 253, 0.5);
+  
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -247,16 +260,10 @@
 .headerProductList {
 
     display: flex;
-    justify-content: space-between;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
 }
 
 .headerLeft {
-    flex: 2;
+  
     margin-top: 10px;
     margin-left: 5px;
 
@@ -264,28 +271,37 @@
 
 
 .headerRight {
-    flex: 3;
+    flex:2;
+    font-weight: 600;
     margin-top: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
-
+.iconSearch{
+    position: absolute;
+    margin-top:8px;
+    margin-left: 25px;
+    color:rgb(111, 110, 110);
+    font-size: 15px;
+    
+}
 .inputSearchProduct {
-
-    border: solid 2px rgba(106, 103, 103, 0.5);
-    width: 50%;
-    height: 60%;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+   
+    border-radius: 5px;
+    padding-left:20px;
+    border: solid 1px #ccc;
+    width: 40%;
+    height: 30px;
+    margin-left: 20px;  
 }
 
 .sortProduct{
-    border-radius: 5px;
     margin-top:15px;
-    margin-right: 50px;
-    width: 100;
+    width: 150px;
     height:30px;
+    border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;

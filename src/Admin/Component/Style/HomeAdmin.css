@@ -16,7 +16,9 @@
     margin-top: 50px;
 }
 
-
+.headerh3 {
+    font-weight: 700;
+}
 
 .admin_top {
     display: flex;
@@ -184,7 +186,7 @@
 }
 
 .admin_bottom {
-    margin-top: 45px;
+    margin-top: 25px;
 }
 
 .btn_bottom {
@@ -254,6 +256,7 @@
 .productTop {
     flex: 1;
     background-color: rgba(200, 200, 200, 0.5);
+
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -262,12 +265,28 @@
 }
 
 .headerTop {
+
     font-weight: 600;
     color: rgb(63, 61, 61);
     margin: 10px 0 30px 30px;
 }
 
+.boder__ {
+    height: 450px;
+    overflow-y: auto;
+    scroll-snap-type: y;
+    scroll-snap-align: end;
+
+
+}
+
+.boder__::webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
 .topRight {
+
     display: flex;
     background-color: rgba(0, 0, 0, 0.5);
     width: 90%;
@@ -277,6 +296,7 @@
     text-align: center;
     justify-content: space-between;
     margin: 20px 0 20px 30px;
+
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -297,8 +317,9 @@
 }
 
 .topRight:hover {
-    background-color: rgba(78, 76, 76, 0.5);
+
     border: solid 1px rgb(81, 77, 77);
+    background-color: transparent;
 }
 
 
@@ -343,3 +364,4 @@
     font-size: 30px;
     font-weight: 600;
 }
+

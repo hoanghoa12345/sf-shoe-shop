@@ -128,9 +128,9 @@ function Information() {
               <div className="left_edituser">
                 <div className='userShowLeft'>
                   <div >
-                    {avatar.preview ? (<img className='edit_avatar' src={avatar.preview} alt={id} />)
+                    {avatar.preview ? (<img className='edit_avatar' src={avatar.preview } alt={id} />)
                       :
-                      (<img className='edit_avatar' src={ avatar|| avatarDefaul} alt=''/>)}
+                      (<img className='edit_avatar' src={ avatar|| avatarDefaul} alt='imgDefault'/>)}
                   </div>
                   <div className='userShowInforTitle'>
                     <h3 className='edit_name'>{fullname}</h3>

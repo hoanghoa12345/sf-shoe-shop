@@ -87,7 +87,8 @@
 }
 
 .uploadImageProduct {
-    display: flex;
+  
+    margin-left: 50px;
 }
 
 .iconUpload {
@@ -101,7 +102,7 @@
     -o-border-radius: 10px;
 }
 
-.uploadImageProduct {}
+
 
 .imageProduct {
     position: absolute;
@@ -123,4 +124,9 @@
 .ProductUpdatedetail{
     margin-right: 20px;
     outline: none;
+}
+.input_{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

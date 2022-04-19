@@ -14,8 +14,8 @@ function UpdateProduct() {
   const [price, setPrice] = useState('');
   const [total, setTotal] = useState('');
   const [rest, setRest] = useState('');
-  const [urlLink, setUrlLink] = useState('');
-  const [imageproduct, setImgproduct] = useState('');
+  // const [urlLink, setUrlLink] = useState('');
+  const [imgProduct, setImgProduct] = useState('');
   const [detail, setDetail] = useState('');
   const [isForm, setIsForm] = useState(true);
   const navigate = useNavigate();
@@ -31,22 +31,11 @@ function UpdateProduct() {
   const hanldeClickInDecripstion = () => {
     setIsForm(false);
   }
-  // const hanldeImageProduct = (e) => {
-  //   const imageproduct = e.target.files[0];
-  //   imageproduct.preview = URL.createObjectURL(imageproduct)
-  //   setImgproduct(imageproduct)
 
-  // }
-  // useEffect(() => {
-  //   return () => {
-  //     imageproduct && URL.revokeObjectURL(imageproduct.preview)
-  //   }
-  // }, [imageproduct])
 
   const data = {
     id: parseInt(id),
-    urlLink,
-    imageproduct,
+    imgProduct,
     nameProduct,
     price,
     total,
@@ -61,7 +50,7 @@ function UpdateProduct() {
   }
   useEffect(() => {
     if (findEditProduct) {
-      setUrlLink(findEditProduct.urlLink)
+      setImgProduct(findEditProduct.imgProduct)
       setNameProduct(findEditProduct.nameProduct)
       setPrice(findEditProduct.price)
       setTotal(findEditProduct.total)
@@ -70,12 +59,24 @@ function UpdateProduct() {
 
     }
   }, [findEditProduct])
+
+  //set update image product
+  const hanldeImageProduct = (e) =>{
+    const imgProduct = e.target.files[0];
+    imgProduct.preview=URL.createObjectURL(imgProduct)
+    setImgProduct(imgProduct)
+  }
+  useEffect(() => {
+    return () =>{
+      imgProduct && URL.revokeObjectURL(imgProduct.preview)
+    }
+  },[imgProduct])
   return (
     <div className='container_edit'>
       <div className="editProduct">
         <div className="topProduct ">
           <div className='userShowLeft'>
-          {urlLink ? (<img className=' avatar' src={urlLink  } alt={id} />) : (<img className=' avatar' src={findEditProduct.urlLink || imageDefault} alt='b' />)}
+            {imgProduct.preview ? (<img className=' avatar' src={imgProduct.preview } alt={id} />) :(<img className=' avatar' src={imgProduct || imageDefault} alt='b' />)}
             <div className='userShowInforTitle'>
               <h3 className='edit_name'>{findEditProduct.nameProduct}</h3>
               <h6 className='edit_fullname price'>{findEditProduct.price} đ</h6>
@@ -130,22 +131,21 @@ function UpdateProduct() {
             </div>
             <div className='right_bottom'>
               <div className='right_body'>
-                <div className='right-input_'>
+                {/* <div className='right-input_'>
                   <lable className='lable_'>Product Images</lable>
                   <input className='input_'
                     placeholder='Link...'
                     value={urlLink}
                     onChange={(e) => setUrlLink(e.target.value)}
                   />
-                </div>
+                </div> */}
+                 {/*  {urlLink ? (<img className=' avatar' src={urlLink  } alt={id} />) : (<img className=' avatar' src={findEditProduct.urlLink || imageDefault} alt='b' />)} */}
                 <div className='uploadImageProduct'>
-                  {urlLink ? (<img className=' avatar' src={urlLink  } alt={id} />) : (<img className=' avatar' src={findEditProduct.urlLink || imageDefault} alt='b' />)}
-                  {/*  <label htmlFor='file'>
-                    <MdCloudUpload className='iconUpload' />
-                    {imageproduct.preview || urlLink ? (<img className=' avatar' src={imageproduct.preview || urlLink} alt={id} />)
-                    (<img className=' avatar' src={findEditProduct.urlLink} />)}
+                  <label htmlFor='file'>
+                    {imgProduct.preview ? (<img className=' avatar' src={imgProduct.preview } alt={id} />):
+                    (<img className=' avatar' src={imgProduct || imageDefault} alt={id} />)}
                   </label>
-                  <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeImageProduct} /> */}
+                  <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeImageProduct}  /> 
                 </div>
               </div>
             </div>

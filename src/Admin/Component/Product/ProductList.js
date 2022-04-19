@@ -1,18 +1,15 @@
-import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { GrUpdate } from 'react-icons/gr';
-import '../Style/ProductList.css';
-import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png'
-import { delete_product } from '../../Redux/Action';
-import { AiFillPlusSquare } from 'react-icons/ai'
+import React, { useEffect, useState } from 'react';
+import { AiFillPlusSquare } from 'react-icons/ai';
+import { FaSearch } from 'react-icons/fa';
 import { BiEditAlt } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
-import { IoIosArrowBack } from 'react-icons/io';
-import { BsSortNumericDown } from 'react-icons/bs';
-import { BsSortNumericDownAlt } from 'react-icons/bs';
-import { FcNext } from 'react-icons/fc';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png';
+import { delete_product } from '../../Redux/Action';
+import Pagination from '../Pagination';
+import '../Style/ProductList.css';
 
 
 function ProductList() {
@@ -20,40 +17,55 @@ function ProductList() {
   const [deletes, setDeletes] = useState(false)
   const [deleteId, setDeleteId] = useState(0);
   const [search, setSearch] = useState('')
-  const [page, setPage] = useState(9);
   const productLists = useSelector(state => state.contactProducts);
   const dispatch = useDispatch();
-
-  //Sort
-
+  //sort
 
 
+  //phan trang
+  const [posts, setPosts] = useState(productLists);
+  const [asc, setAsc] = useState('');
+  const [des, setDes] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerpage] = useState(8);
+
+  const indexLastPost = currentPage * postPerPage;
+  const indexFirstPost = indexLastPost - postPerPage;
+  const currentPost = posts.slice(indexFirstPost, indexLastPost);
+
+  const paginate = pageNumbers => setCurrentPage(pageNumbers);
+
+
+  //xu ly yes/ no
   const handleDeleteProduct = (id) => {
     setDeleteId(id)
     setDeletes(true)
 
   }
-
   const hanldeYes = () => {
     let id = deleteId;
     dispatch(delete_product(id));
+
     setDeletes(false);
     toast.success('Xóa thành công')
   }
-
   const handleNo = () => {
     setDeletes(false)
   }
-  //edit 
-  const handleClickEdit = () => {
 
-  }
 
   //Sort products
-  const option = ['Sắp xếp Theo Giá ','Tăng Dần', 'Giảm Dần']
-  let currentPage = 1;
-  let start = 0;
-  let end = page;
+  const option = ['Sắp xếp Theo Giá ', 'Tăng Dần', 'Giảm Dần'];
+  const hanldeAsc = () => {
+    productLists.sort((a, b) => { return (a.price - b.price) })
+  }
+
+  const hanldeDes = () => {
+    productLists.sort((a, b) => { return (b.price - a.price) })
+  }
+  useEffect(() => {
+    setPosts(productLists)
+  }, [productLists])
   return (
     <div>
       <div>
@@ -74,94 +86,58 @@ function ProductList() {
           <Link to='addproduct'><button className='btn_create add'> <AiFillPlusSquare className='iconNewProduct' />New Product</button></Link>
           <span className='lengthProduct'>  {productLists.length}</span>
         </div>
-        <div className='headerRight'>
+        <div className='headerRight'><FaSearch className='iconSearch' />
           <input className='inputSearchProduct' placeholder='Search...' onChange={(e) => setSearch(e.target.value)} disabled={productLists.length === 0} />
         </div>
-        <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} >
-         {option.map((item, index)=>{
-          return ( <option key={index} value={item}>{item}</option>)
-         })}
+        <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} disabled={productLists.length === 0}>
+          <option>Sắp Xếp theo Giá: </option>
+          <option value={posts} onClick={hanldeAsc}>Tăng Dần</option>
+          <option value={posts} onClick={hanldeDes}>Giảm Dần</option>
         </select>
       </div>
-      {/*    <table>
-        <tbody>
-          <tr >
-            <th>ID</th>
-            <th>Image</th>
-            <th>NameProduct</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th>Rest</th>
-            <th>Sold</th>
-            <th><GrUpdate className='iconBack' /></th>
-          </tr>
-          {productLists.map((productList) => {
-            const { id, name, urlLink, price, total, rest } = productList;
-            return (
-              <React.Fragment key={id}>
-                {id >= start && id <= end ? (
-                  <tr key={id}>
-                    <td>{id}</td>
-                    <td ><img className='avatar_user ' src={urlLink.preview || urlLink || imageDefault} alt={id} /></td>
-                    <td >{name}</td>
-                    <td>{price}</td>
-                    <td>{total}</td>
-                    <td>{rest}</td>
-                    <td>{total - rest}</td>
-                    <td>
-                      <Link to={`updateproduct/${id}`}> <button className="btn_edit" onClick={handleClickEdit} >Edit</button></Link>
-                      <button className="btn_delete" value={deletes} onClick={() => handleDeleteProduct(id)}  >Delete</button>
-                    </td>
-                  </tr>
-                ) : (null)}
-              </React.Fragment>)
-          })}
-        </tbody></table> */}
+      <Pagination
+        postPerPage={postPerPage}
+        totalPosts={posts.length}
+        paginate={paginate}
+      />
       <div className="productContainer" >
         <div className="productBody">
-          {productLists.length !== 0 ? (productLists.filter((data) => {
+          {productLists.length !== 0 ? (currentPost.filter((data) => {
             if (search == '') {
               return data
-            } else if (data.nameProduct.toLowerCase().includes(search.toLowerCase())) {
+            } else if (data.nameProduct.toLowerCase().includes(search.toLowerCase()) || data.price.includes(search)) {
               return data
             }
           })
-            .map((productList) => {
-              const { id, nameProduct, urlLink, price, total, rest } = productList;
+            .map((productList, index) => {
+              const { id, imgProduct, nameProduct, price, total, rest } = productList;
               return (
-                <React.Fragment key={id}>
-                  {id >= start && id < end ? (<div className="productList" >
-                    <div className="productCard">
-                      <div className="productImgBx">
-                        <img className="productImg" src={urlLink.preview || urlLink || imageDefault} alt={productList.id} />
-                      </div>
-
-                      <h3 className='productPrice'>{price} đ</h3>
-                      <div className="contentBx ">
-                        <div className="productTotal"> Total: {total}  </div>
-                        <div className="productTotal"> Rest: {rest}</div>
-                      </div>
-                      <div className="productRest">
-                        {total - rest}
-                      </div>
-                        <h2 className="productTitle">{nameProduct}</h2>
+                <div className="productList" key={index}>
+                  <div className="productCard">
+                    <div className="productImgBx">
+                      <img className="productImg" src={imgProduct.preview || imageDefault} alt={index} />
                     </div>
-                    <div className="productIcon">
-                      <div><Link to={`updateproduct/${id}`}><BiEditAlt className='productEdit' onClick={handleClickEdit} /></Link></div>
-                      <div><MdDelete className='productDelete' value={deletes} onClick={() => handleDeleteProduct(id)} /></div>
+
+                    <div className="contentBx ">
+                      <div className="productTotal"> Total: {total}  </div>
+                      <div className="productTotal"> Rest: {rest}</div>
                     </div>
-                  </div>) : (null)}
-
-                </React.Fragment>
-
+                    <div className="productRest">
+                      {total - rest}
+                    </div>
+                    <div className="title__">  <h2 className="productTitle">{nameProduct}</h2></div>
+                    <h3 className='productPrice'>{price} đ</h3>
+                  </div>
+                  <div className="productIcon">
+                    <div><Link to={`updateproduct/${id}`}><BiEditAlt className='productEdit' /></Link></div>
+                    <div><MdDelete className='productDelete' value={deletes} onClick={() => handleDeleteProduct(id)} /></div>
+                  </div>
+                </div>
               )
             })) : (<div className="productList">No data.</div>)}
         </div>
       </div>
-      {productLists.length > 8 ? (<div>
-        <IoIosArrowBack className='iconProductBack' />
-        <FcNext className='iconProductNext' />
-      </div>) : (null)}
+
     </div>)
 }
 

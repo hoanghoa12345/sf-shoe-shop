@@ -4,13 +4,20 @@ import { FaMoneyBillAlt } from 'react-icons/fa';
 import { ImCancelCircle } from 'react-icons/im';
 import { MdAutorenew } from 'react-icons/md';
 import { VscDebugRestart } from 'react-icons/vsc';
+import { TiArrowUpThick } from 'react-icons/ti';
 import './Style/HomeAdmin.css';
 import imageDefault from '../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png';
-import { ResponsiveContainer, ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
+import { ResponsiveContainer, ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
 import { useSelector } from 'react-redux';
 
 function HomeAdmin() {
     const dataProducts = useSelector(state => state.contactProducts);
+    const checkPrice = dataProducts.sort((a, b) => { return (b.price - a.price) })
+    if (checkPrice) {
+        dataProducts.sort((a, b) => {
+            return (b.rest - a.rest)
+        })
+    }
 
     const data = [
         {
@@ -79,7 +86,7 @@ function HomeAdmin() {
                 </div>
                 <div className="admin_bottom">
                     <h2 className="admin_bottom_title">Recent Orders
-                        <button className='btn_bottom'>View All</button>
+
                     </h2>
 
                     <div className='productOrder'>
@@ -116,20 +123,22 @@ function HomeAdmin() {
                         </div>
                         <div className='productTop'>
                             <h2 className='headerTop'>Top Products</h2>
-                            {dataProducts.length !== 0 ? dataProducts.map((dataProduct) => {
-                                const { id, UrlLink, nameProduct, price, total, rest } = dataProduct;
-                                return (
-                                    <div className='topRight' key={id}>
-                                        <img className='imgeRight' src={UrlLink || imageDefault} />
-                                        <div className='topHeader'>
-                                            <h4 className='headerRight'>{nameProduct}</h4>
-                                            <h4 className='headerh3'>{price} đ</h4>
+                            <div className='boder__'>
+                                {dataProducts.length !== 0 ? dataProducts.map((dataProduct) => {
+                                    const { id, UrlLink, nameProduct, price, total, rest } = dataProduct;
+                                    return (
+                                        <div className='topRight' key={id}>
+                                            <img className='imgeRight' src={UrlLink || imageDefault} />
+                                            <div className='topHeader'>
+                                                <h4 className='headerRight'>{nameProduct}</h4>
+                                                <h4 className='headerh3'>{price} đ</h4>
+                                            </div>
+                                            <h3>{total}</h3>
+                                            <p className='topRest'><TiArrowUpThick />{rest}</p>
                                         </div>
-                                        <h3>{total}</h3>
-                                        <p className='topRest'>{rest}</p>
-                                    </div>
-                                )
-                            }) : (<h2 className='headerTop'>No data</h2>)}
+                                    )
+                                }) : (<h2 className='headerTop'>No data</h2>)}
+                            </div>
                         </div>
                     </div>
                 </div>

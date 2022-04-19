@@ -1,21 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { RiRefreshLine } from "react-icons/ri";
+import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { delete_user } from "../../Redux/Action";
 import avatarDefaul from '../../image/avatart.jpg'
 import "../Style/UserList.css";
+import Pagination from "../Pagination";
+
 
 function UserList() {
 
   const [searchUser, setSearchUser] = useState('');
   const [sortValue, setSortValue] = useState('');
-  const [page, setPage] = useState(6);
+
   const userLists = useSelector((state) => state.contactReducer);
+  const [posts, setPosts] = useState(userLists);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(5);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    setPosts(userLists)
+  }, [userLists])
   //delete uer
   const handleDeleteItem = (id) => {
     dispatch(delete_user(id));
@@ -25,25 +34,17 @@ function UserList() {
   const option = ['Tên Người Dùng', 'Tuổi', 'Giới Tính', 'Địa chỉ'];
   const handleSort = (e) => {
     setSortValue(e.target.value)
-   }
+  }
 
   //phân trang
 
-  let currentPage = 1;
-  let start = 0;
-  let end = page;
+  const indexLastPost = currentPage * postPerPage;//10
+  const indexFirstPost = indexLastPost - postPerPage;//0
+  const currentPost = posts.slice(indexFirstPost, indexLastPost);
 
-  const handleClickNext = () => {
-    currentPage++;
-    start = setPage(parseInt(currentPage - 1 + page));
-    end = setPage(parseInt(currentPage * page));
-    console.log(start, end);
-  };
-  const handleClickPrev = () => {
-    currentPage--;
-    start = parseInt(currentPage - 1) - parseInt(page);
-    end = currentPage * page;
-  };
+  //change page 
+  const paginate = pageNumbers => setCurrentPage(pageNumbers)
+
   return (
     <div>
       <div className="listUsercontainer">
@@ -54,20 +55,17 @@ function UserList() {
               Thêm Người Dùng
             </button>
           </Link>
-          <input placeholder="Search User"
+          <FaSearch className="iconSerach "/>
+          <input placeholder="Search...."
             onChange={(e) => setSearchUser(e.target.value)}
-            className="Serach"
+            className="serach"
             disabled={userLists.length === 0}
-          /> 
-
+          />
           <select className='sortUser'
             value={sortValue}
             onChange={handleSort}  >
             {option.map((item, index) => {
-             
-              return (
-                <option key={index} value={item} >{item}</option>
-              )
+              return (<option key={index} value={item} >{item}</option>)
             })}
           </select>
         </div>
@@ -84,18 +82,17 @@ function UserList() {
             <th>Email</th>
             <th>Phone</th>
             <th>Quê quán</th>
-
             <th>
               <RiRefreshLine className="iconBack" />
             </th>
           </tr>
-          {userLists.filter((data)=>{
-            if(searchUser == ''){
+          {currentPost.filter((data) => {
+            if (searchUser === '') {
               return data
-            }else if(data.fullname.toLowerCase().includes(searchUser.toLowerCase()) || data.userName.toLowerCase().includes(searchUser.toLowerCase())){
+            } else if (data.fullname.toLowerCase().includes(searchUser.toLowerCase()) || data.userName.toLowerCase().includes(searchUser.toLowerCase())) {
               return data;
             }
-          }).map((userList) => {
+          }).map((userList,index) => {
             const {
               id,
               avatar,
@@ -108,57 +105,42 @@ function UserList() {
               address,
             } = userList;
             return (
-              <React.Fragment key={id}>
-                {id >= start && id < end ? (
-                  <tr>
-                    <td>{id}</td>
-                    <td>
-                      <img
-                        className="avatar_user "
-                        src={avatar.preview || avatar || avatarDefaul }
-                        alt={id}
-                      />
-                    </td>
-                    <td>{userName}</td>
-                    <td>{fullname}</td>
-                    <td>{gender}</td>
-                    <td>{age}</td>
-                    <td>{email}</td>
-                    <td>{phone}</td>
-                    <td className='addressUser'>{address}</td>
-                    <td>
-                      <Link to={`information/${id}`}>
-                        <button className="btn_edit">Edit</button>
-                      </Link>
-                      <button
-                        className="btn_delete"
-                        onClick={() => handleDeleteItem(id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ) : null}
-              </React.Fragment>
+              <tr key={index}>
+                <td>{index}</td>
+                <td>
+                  <img
+                    className="avatar_user "
+                    src={avatar.preview || avatar || avatarDefaul}
+                    alt={id}
+                  />
+                </td>
+                <td>{userName}</td>
+                <td>{fullname}</td>
+                <td>{gender}</td>
+                <td>{age}</td>
+                <td>{email}</td>
+                <td>{phone}</td>
+                <td className='addressUser'>{address}</td>
+                <td>
+                  <Link to={`information/${id}`}>
+                    <button className="btn_edit">Edit</button>
+                  </Link>
+                  <button
+                    className="btn_delete"
+                    onClick={() => handleDeleteItem(id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
             );
           })}
         </tbody>
       </table>
-      {userLists.length > 5 ? (
-        <div className="center">
-          <div className="pagination">
-            <a onClick={handleClickPrev}>&laquo;</a>
-            <a href="#" className="active">
-              1
-            </a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a onClick={handleClickNext}>&raquo;</a>
-          </div>
-        </div>
-      ) : null}
+      <Pagination
+        postPerPage={postPerPage}
+        totalPosts={posts.length}
+        paginate={paginate} />
     </div>
   );
 }
