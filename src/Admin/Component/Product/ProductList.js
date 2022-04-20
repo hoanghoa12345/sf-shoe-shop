@@ -7,20 +7,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png';
-import { delete_product } from '../../Redux/Action';
+import { delete_product, set_product } from '../../Redux/Action';
 import Pagination from '../Pagination';
 import '../Style/ProductList.css';
-
+import axios from 'axios';
+import ReactLoading from 'react-loading';
 
 function ProductList() {
-  const [currentSort, setCurrentSort] = useState('default')
+  const [loading, setLoading] = useState(false);
+  const [currentSort, setCurrentSort] = useState('default');
   const [deletes, setDeletes] = useState(false)
   const [deleteId, setDeleteId] = useState(0);
   const [search, setSearch] = useState('')
-  const productLists = useSelector(state => state.contactProducts);
-  const dispatch = useDispatch();
-  //sort
+  const productLists = useSelector(state => state.contactProducts.products);
 
+  const dispatch = useDispatch();
+  //API
+  const fetchProducts = async () => {
+
+    const response = await axios.get("https://sf-shoe-shop-be.herokuapp.com/api/products/").catch((err) => {
+      console.log('err', err);
+      setLoading(true);
+    })
+    dispatch(set_product(response.data))
+  }
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+  console.log(productLists.data);
 
   //phan trang
   const [posts, setPosts] = useState(productLists);
@@ -28,17 +42,17 @@ function ProductList() {
   const [des, setDes] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerpage] = useState(8);
-
   const indexLastPost = currentPage * postPerPage;
   const indexFirstPost = indexLastPost - postPerPage;
   const currentPost = posts.slice(indexFirstPost, indexLastPost);
+
 
   const paginate = pageNumbers => setCurrentPage(pageNumbers);
 
 
   //xu ly yes/ no
-  const handleDeleteProduct = (id) => {
-    setDeleteId(id)
+  const handleDeleteProduct = (_id) => {
+    setDeleteId(_id)
     setDeletes(true)
 
   }
@@ -66,6 +80,9 @@ function ProductList() {
   useEffect(() => {
     setPosts(productLists)
   }, [productLists])
+
+  //loading
+
   return (
     <div>
       <div>
@@ -82,6 +99,7 @@ function ProductList() {
         ) : (null)}
       </div>
       <div className='headerProductList'>
+
         <div className='headerLeft'>
           <Link to='addproduct'><button className='btn_create add'> <AiFillPlusSquare className='iconNewProduct' />New Product</button></Link>
           <span className='lengthProduct'>  {productLists.length}</span>
@@ -102,7 +120,7 @@ function ProductList() {
       />
       <div className="productContainer" >
         <div className="productBody">
-          {productLists.length !== 0 ? (currentPost.filter((data) => {
+          {productLists.length !== 0 || loading ? (currentPost.filter((data) => {
             if (search == '') {
               return data
             } else if (data.nameProduct.toLowerCase().includes(search.toLowerCase()) || data.price.includes(search)) {
@@ -110,31 +128,36 @@ function ProductList() {
             }
           })
             .map((productList, index) => {
-              const { id, imgProduct, nameProduct, price, total, rest } = productList;
+              const { _id, image,countInStock, rating, name, price, total, rest } = productList;
               return (
                 <div className="productList" key={index}>
                   <div className="productCard">
                     <div className="productImgBx">
-                      <img className="productImg" src={imgProduct.preview || imageDefault} alt={index} />
+                      <img className="productImg" src={/* imgProduct.preview || */image || imageDefault} alt={index} />
                     </div>
 
                     <div className="contentBx ">
-                      <div className="productTotal"> Total: {total}  </div>
-                      <div className="productTotal"> Rest: {rest}</div>
+                       <div className="productTotal"> Total: {countInStock}  </div>
+                      <div className="productTotal"> Rest: {rating}</div> 
                     </div>
                     <div className="productRest">
-                      {total - rest}
+                      {/*  {total - rest} */}
                     </div>
-                    <div className="title__">  <h2 className="productTitle">{nameProduct}</h2></div>
+                    <div className="title__">  <h2 className="productTitle">{name}</h2></div>
                     <h3 className='productPrice'>{price} đ</h3>
                   </div>
                   <div className="productIcon">
-                    <div><Link to={`updateproduct/${id}`}><BiEditAlt className='productEdit' /></Link></div>
-                    <div><MdDelete className='productDelete' value={deletes} onClick={() => handleDeleteProduct(id)} /></div>
+                    <div><Link to={`updateproduct/${_id}`}><BiEditAlt className='productEdit' /></Link></div>
+                    <div><MdDelete className='productDelete' value={deletes} onClick={() => handleDeleteProduct(_id)} /></div>
                   </div>
                 </div>
               )
-            })) : (<div className="productList">No data.</div>)}
+            })) : (<div className="loading">
+              <div className="loader">
+                <div className="inner one"></div>
+                <div className="inner two"></div>
+                <div className="inner three"></div>
+              </div></div>)}
         </div>
       </div>
 

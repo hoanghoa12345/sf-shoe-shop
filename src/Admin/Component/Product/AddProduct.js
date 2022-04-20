@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -7,26 +8,35 @@ import { add_product } from '../../Redux/Action';
 
 
 function AddProduct() {
-  const [imgProduct, setImgProduct] = useState('');
-  const [nameProduct, setNameProduct] = useState('');
+
+  const [image, setImage] = useState('');
+  const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [total, setTotal] = useState('');
-  const [rest, setRest] = useState('');
-  const [detail, setDetail] = useState('');
+  const [brand, setBrand] = useState('');
+  const [category, setCategory] = useState('');
+  const [decription, setDecription] = useState('');
+  const [countInStock, setCountInStock] = useState('');
   const navigate = useNavigate();
-  const addProducts = useSelector(state => state.contactProducts)
-  const dispatch = useDispatch();
+  const addProducts = useSelector(state => state.contactProducts.products)
 
-  const data = {
-    id: addProducts.length + 1,
-    imgProduct,
-    nameProduct,
-    price,
-    total,
-    rest,
-    detail
-
+  const fetchAddProducts= async ()=>{
+    const response = await  axios.post("https://sf-shoe-shop-be.herokuapp.com/api/products/").catch(err => 
+    console.log('err',err))
+    dispatch(add_product(response.data))
   }
+  const dispatch = useDispatch();
+ 
+  const data = {
+   
+    image,
+    name,
+    price,
+    brand,
+    category,
+    decription
+
+  }  
+
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
   const hanldeCreate = () => {
@@ -46,15 +56,16 @@ function AddProduct() {
     navigate(-1);
   }
   const hanldeImageProduct = (e) =>{
-    const imgProduct= e.target.files[0];
-    imgProduct.preview = URL.createObjectURL(imgProduct)
-    setImgProduct(imgProduct);
+    const image= e.target.files[0];
+    image.preview = URL.createObjectURL(image)
+    setImage(image);
   }
   useEffect(() => {
     return()=>{
-      imgProduct && URL.revokeObjectURL(imgProduct.preview)
+      image && URL.revokeObjectURL(image.preview)
     }
-  },[imgProduct])
+  },[image  ])
+
   return (
     <div>
       <div className='newUserHome'>
@@ -65,7 +76,7 @@ function AddProduct() {
           </div> */}
           <div className='uploadImageProduct'>
             <label htmlFor='file'>
-              {imgProduct.preview ? (<img className=' avatar' src={imgProduct.preview} alt='img' />) :
+              {image.preview ? (<img className=' avatar' src={image.preview} alt='img' />) :
                 (<img className=' avatar' src={imageDefault} />)}
             </label>
             <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeImageProduct} />
@@ -73,24 +84,24 @@ function AddProduct() {
           <form className='newUserForm' onSubmit={hndaleSubmitForm}  >
             <div className='newUserItem'>
               <label>Name Product</label>
-              <input type='text' placeholder='Enter your Name Product' value={nameProduct} onChange={(e) => setNameProduct(e.target.value)} />
+              <input type='text' placeholder='Enter your Name Product' value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className='newUserItem'>
               <label>Price</label>
-              <input type='number' placeholder='00.00' value={price} onChange={(e) => setPrice(e.target.value)} />
+              <input type='number' placeholder='Price' value={price} onChange={(e) => setPrice(e.target.value)} />
             </div>
             <div className='newUserItem'>
-              <label>Total</label>
-              <input type='number' placeholder='00.00' value={total} onChange={(e) => setTotal(e.target.value)} />
+              <label>Brand</label>
+              <input type='text' placeholder='Brand' value={brand} onChange={(e) => setBrand(e.target.value)} />
             </div>
 
             <div className='newUserItem'>
-              <label>Rest</label>
-              <input type='number' placeholder='00.00' value={rest} onChange={(e) => setRest(e.target.value)} />
+              <label>Category</label>
+              <input type='text' placeholder='Category' value={category} onChange={(e) => setCategory(e.target.value)} />
             </div>
             <div className='newUserItem'>
-              <label>Detail</label>
-              <textarea className='detail_Texttarea' rows='10' placeholder='Description...' value={detail} onChange={(e) => setDetail(e.target.value)} />
+              <label>Decription</label>
+              <textarea className='detail_Texttarea' rows='10' placeholder='Description...' value={decription} onChange={(e) => setDecription(e.target.value)} />
             </div>
           </form>
           <button className='listUser_btn btn create' onClick={hanldeCreate} >Create</button>

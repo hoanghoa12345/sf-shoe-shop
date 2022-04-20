@@ -11,7 +11,7 @@ import { ResponsiveContainer, ComposedChart, Line, Bar, XAxis, YAxis, CartesianG
 import { useSelector } from 'react-redux';
 
 function HomeAdmin() {
-    const dataProducts = useSelector(state => state.contactProducts);
+    const dataProducts = useSelector(state => state.contactProducts.products);
     const checkPrice = dataProducts.sort((a, b) => { return (b.price - a.price) })
     if (checkPrice) {
         dataProducts.sort((a, b) => {
