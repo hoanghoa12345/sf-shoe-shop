@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { createCheckout } from "../../actions/checkoutActions";
 import "./Checkout.scss";
+import cashIcon from "../../assets/icons/payment_cash.png";
+import ewalletIcon from "../../assets/icons/payment_ewallet.png";
 const Checkout = () => {
+  const shoppingCart = [
+    {
+      name: "Giày 1",
+      quantity: 1,
+      price: 500000,
+    },
+    {
+      name: "Giày 2",
+      quantity: 2,
+      price: 200000,
+    },
+  ];
+  const dispatch = useDispatch();
+  var formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
   const [provinces, setProvinces] = useState({});
   const [districts, setDistricts] = useState([]);
   const [formData, setFormData] = useState({
@@ -11,6 +32,7 @@ const Checkout = () => {
     phone_number: "",
     province: "",
     ward: "",
+    payment_method: "",
   });
   useEffect(() => {
     const fetchProvinces = async () => {
@@ -30,6 +52,11 @@ const Checkout = () => {
       (item) => item.name === provinceName
     )[0].districts;
     setDistricts(Object.values(districtsObj));
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    dispatch(createCheckout({ ...formData, cartItems: shoppingCart }));
   };
   return (
     <div className="content">
@@ -77,7 +104,10 @@ const Checkout = () => {
                   </div>
                 </div>
               </form>
-              <form className="checkout row mt-60 mb-60">
+              <form
+                onSubmit={submitHandler}
+                className="checkout row mt-60 mb-60"
+              >
                 <div className="column">
                   <div className="customer_details">
                     <h3>Thông tin giao hàng</h3>
@@ -149,8 +179,8 @@ const Checkout = () => {
                             })
                           }
                         >
-                          {districts.map((item) => (
-                            <option>{item}</option>
+                          {districts.map((item, i) => (
+                            <option key={i}>{item}</option>
                           ))}
                         </select>
                       </div>
@@ -195,14 +225,14 @@ const Checkout = () => {
                         giờ làm việc (không kể Chủ nhật và Ngày lễ).
                       </li>
                     </ol>
-                    <p>
+                    <div>
                       <ul>
                         <li>
                           Điện thoại đặt hàng nhanh: 1800.6879 (miễn cước)
                         </li>
                         <li>Email: cskh@shoeshop.com.vn</li>
                       </ul>
-                    </p>
+                    </div>
                   </div>
                 </div>
                 <div className="column">
@@ -215,17 +245,28 @@ const Checkout = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Giày nam (1)</td>
-                        <td>500.000₫</td>
-                      </tr>
+                      {shoppingCart.map(({ name, quantity, price }, i) => (
+                        <tr key={i}>
+                          <td>
+                            {name} ({quantity})
+                          </td>
+                          <td>{formatter.format(price * quantity)}</td>
+                        </tr>
+                      ))}
                     </tbody>
                     <tfoot>
                       <tr>
                         <td>
                           <b>Tạm tính</b>
                         </td>
-                        <td>500.000₫</td>
+                        <td>
+                          {formatter.format(
+                            shoppingCart.reduce(
+                              (a, c) => a + c.price * c.quantity,
+                              0
+                            )
+                          )}
+                        </td>
                       </tr>
                       <tr>
                         <td>
@@ -237,7 +278,14 @@ const Checkout = () => {
                         <td>
                           <b>Tổng</b>
                         </td>
-                        <td>500.000₫</td>
+                        <td>
+                          {formatter.format(
+                            shoppingCart.reduce(
+                              (a, c) => a + c.price * c.quantity,
+                              0
+                            )
+                          )}
+                        </td>
                       </tr>
                     </tfoot>
                   </table>
@@ -245,11 +293,27 @@ const Checkout = () => {
                   <div className="checkout-payment">
                     <ul className="payment_method">
                       <li>
-                        <span>Thanh toán sau khi nhận hàng (COD)</span>
+                        <div>
+                          <input
+                            type="radio"
+                            name="payment_method"
+                            id="payment_cod"
+                            value="COD"
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                payment_method: e.target.value,
+                              })
+                            }
+                          />
+                          <label htmlFor="payment_cod">
+                            Thanh toán sau khi nhận hàng (COD)
+                          </label>
+                        </div>
 
                         <div>
                           <img
-                            src="https://www.viettelidc.com.vn/Themes/itmetech/img/cash@2x.png"
+                            src={cashIcon}
                             alt="cash"
                             height="32"
                             width="64"
@@ -257,11 +321,27 @@ const Checkout = () => {
                         </div>
                       </li>
                       <li>
-                        <span>Thanh toán bằng ví điện tử</span>
+                        <div>
+                          <input
+                            type="radio"
+                            name="payment_method"
+                            id="payment_ewallet"
+                            value="eWallet"
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                payment_method: e.target.value,
+                              })
+                            }
+                          />
+                          <label htmlFor="payment_ewallet">
+                            Thanh toán bằng ví điện tử
+                          </label>
+                        </div>
 
                         <div>
                           <img
-                            src="https://www.viettelidc.com.vn/Themes/itmetech/img/group-3@2x.png"
+                            src={ewalletIcon}
                             height="32"
                             width="64"
                             alt="vnpay"
@@ -278,11 +358,7 @@ const Checkout = () => {
                         chi phí nào.
                       </p>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => console.log(formData)}
-                      className="place-order button"
-                    >
+                    <button type="submit" className="place-order button">
                       Đặt hàng
                     </button>
                   </div>
