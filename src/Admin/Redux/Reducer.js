@@ -64,15 +64,15 @@ export const contactReducer = (state = initialStateUser, action) => {
 
 }
 const initialStateProduct = {
-     products:[] 
+    products: []
 }
 export const contactProducts = (state = initialStateProduct, action) => {
     switch (action.type) {
         case SET_PRODUCT:
-            return {...state,products:action.payload}
+            return { ...state, products: action.payload }
         case ADD_PRODUCT:
-            const state =state.products.concat(action.payload);
-            return {...state,state}
+            const statePro = state.products.concat(action.payload);
+            return { ...state, statePro }
         case UPDATE_PRODUCT:
             return state.map((contact) => contact.id === action.payload.id ? action.payload : contact);
         case DELETE_PRODUCT:

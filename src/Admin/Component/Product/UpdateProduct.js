@@ -26,20 +26,20 @@ function UpdateProduct() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  /*   const findEditProduct = editProducts.find(editProduct => editProduct.id === id);
-    console.log('findEditProduct',findEditProduct); */
-  const fetchProductId = async () => {
+      const findEditProduct = editProducts.find(editProduct => editProduct._id === id);
+    console.log('findEditProduct',findEditProduct); 
+/*   const fetchProductId = async () => {
     const response = await axios.get(`https://sf-shoe-shop-be.herokuapp.com/api/products/${id}`).catch((err) => {
       console.log('err', err);
     })
     dispatch(select_product(response.data))
-  }
-  useEffect(() => {
+  } */
+/*   useEffect(() => {
     if (id && id !== '') fetchProductId()
     return (
       dispatch(remove_product())
     )
-  }, [id])
+  }, [id]) */
   const hanldeClickInformation = () => {
     setIsForm(true);
 
@@ -103,8 +103,8 @@ function UpdateProduct() {
             <div className='userShowLeft'>
               {imgProduct.preview ? (<img className=' avatar' src={imgProduct.preview} alt={id} />) : (<img className=' avatar' src={imgProduct || imageDefault} alt='b' />)}
               <div className='userShowInforTitle'>
-                <h3 className='edit_name'>{editProducts.name}</h3>
-                <h6 className='edit_fullname price'>{editProducts.price} đ</h6>
+                <h3 className='edit_name'>{findEditProduct.name}</h3>
+                <h6 className='edit_fullname price'>{findEditProduct.price} đ</h6>
               </div>
             </div>
             <div className='left_btn topbtn'>
@@ -121,7 +121,7 @@ function UpdateProduct() {
                   <lable className='lable_'>Name:</lable>
                   <input className='input_'
                     type='text'
-                    placeholder={editProducts.title}
+                    placeholder={findEditProduct.name}
                     value={nameProduct}
                     onChange={(e) => setNameProduct(e.target.value)}
                   />
@@ -130,7 +130,7 @@ function UpdateProduct() {
                   <lable className='lable_'>Price:</lable>
                   <input className='input_'
                     type='number'
-                    placeholder={editProducts.price}
+                    placeholder={findEditProduct.price}
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                   />
@@ -139,7 +139,7 @@ function UpdateProduct() {
                   <lable className='lable_'>Total</lable>
                   <input className='input_'
                     type='number'
-                    placeholder={editProducts.total}
+                    placeholder={findEditProduct.total}
                     value={total}
                     onChange={(e) => setTotal(e.target.value)}
                   />
@@ -148,7 +148,7 @@ function UpdateProduct() {
                   <lable className='lable_'>Rest</lable>
                   <input className='input_'
                     type='number'
-                    placeholder={editProducts.rest}
+                    placeholder={findEditProduct  .rest}
                     value={rest}
                     onChange={(e) => setRest(e.target.value)}
                   />

@@ -26,6 +26,9 @@ function AddProduct() {
   }
   const dispatch = useDispatch();
  
+  useEffect(() => {
+    fetchAddProducts()
+  },[])
   const data = {
    
     image,
