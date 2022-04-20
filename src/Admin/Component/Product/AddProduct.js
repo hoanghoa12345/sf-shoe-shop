@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import { getProducts, saveProduct } from '../../../api/httpRequest';
 import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png'
 import { add_product } from '../../Redux/Action';
 
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDQ0MDg3MSwiZXhwIjoxNjUwNjEzNjcxfQ.-DIqLP6fPqYW4afVyUbVvRmsAdUL8yGsbaA9S7QR9T0"
 
 function AddProduct() {
 
@@ -14,60 +16,62 @@ function AddProduct() {
   const [price, setPrice] = useState('');
   const [brand, setBrand] = useState('');
   const [category, setCategory] = useState('');
-  const [decription, setDecription] = useState('');
+  const [description, setDescription] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const navigate = useNavigate();
-  const addProducts = useSelector(state => state.contactProducts.products)
-
-  const fetchAddProducts= async ()=>{
-    const response = await  axios.post("https://sf-shoe-shop-be.herokuapp.com/api/products/").catch(err => 
-    console.log('err',err))
-    dispatch(add_product(response.data))
-  }
   const dispatch = useDispatch();
- 
+
+  const fetchAddProducts = async () => {
+    try {
+      const response = await getProducts()
+      dispatch(add_product(response.data))
+    } catch (error) {
+      console.log('error', error);
+    }
+
+  }
+
   useEffect(() => {
     fetchAddProducts()
-  },[])
+  }, [])
   const data = {
-   
     image,
     name,
     price,
     brand,
     category,
-    decription
-
-  }  
-
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-  const hanldeCreate = () => {
-
-    /*   if (!nameProduct || !price || !rest || !total || !rest) {
-        return (toast.warning(`Please enter full information !!!`))
-      } */
-    dispatch(add_product(data));
-    toast.success("Thêm sản phẩm mới thành công.")
-    navigate(-1);
-
+    description,
+    countInStock
   }
-  const hndaleSubmitForm = (e) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
+  const hanldeCreate = async () => {
+    try {
+      const response = await saveProduct(data, token)
+      dispatch(add_product(response.data))
+      toast.success("Thêm sản phẩm mới thành công.")
+      console.log(toast.success);
+      navigate(-1);
+    } catch (error) {
+
+    }
+  }
+ /*  😊😊😊😊 */
+  const handleSubmitForm = (e) => {
     e.preventDefault();
   }
   const hanldeClickAdminHome = () => {
     navigate(-1);
   }
-  const hanldeImageProduct = (e) =>{
-    const image= e.target.files[0];
+  const hanldeImageProduct = (e) => {
+    const image = e.target.files[0];
     image.preview = URL.createObjectURL(image)
     setImage(image);
   }
   useEffect(() => {
-    return()=>{
+    return () => {
       image && URL.revokeObjectURL(image.preview)
     }
-  },[image  ])
+  }, [image])
 
   return (
     <div>
@@ -79,12 +83,17 @@ function AddProduct() {
           </div> */}
           <div className='uploadImageProduct'>
             <label htmlFor='file'>
-              {image.preview ? (<img className=' avatar' src={image.preview} alt='img' />) :
+              {image || image.preview ? (<img className=' avatar' src={image || image.preview} alt='img' />) :
                 (<img className=' avatar' src={imageDefault} />)}
             </label>
             <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeImageProduct} />
           </div>
-          <form className='newUserForm' onSubmit={hndaleSubmitForm}  >
+         
+          <form className='newUserForm' onSubmit={handleSubmitForm}  >
+            <div className='newUserItem'>
+              <label>Or Link image</label>
+              <input type='text' placeholder='image' value={image} onChange={(e) => setImage(e.target.value)} />
+            </div>
             <div className='newUserItem'>
               <label>Name Product</label>
               <input type='text' placeholder='Enter your Name Product' value={name} onChange={(e) => setName(e.target.value)} />
@@ -92,6 +101,10 @@ function AddProduct() {
             <div className='newUserItem'>
               <label>Price</label>
               <input type='number' placeholder='Price' value={price} onChange={(e) => setPrice(e.target.value)} />
+            </div>
+            <div className='newUserItem'>
+              <label>Count In Stock</label>
+              <input type='number' placeholder='Count In Stock' value={countInStock} onChange={(e) => setCountInStock(e.target.value)} />
             </div>
             <div className='newUserItem'>
               <label>Brand</label>
@@ -102,11 +115,11 @@ function AddProduct() {
               <label>Category</label>
               <input type='text' placeholder='Category' value={category} onChange={(e) => setCategory(e.target.value)} />
             </div>
+          </form>
             <div className='newUserItem'>
               <label>Decription</label>
-              <textarea className='detail_Texttarea' rows='10' placeholder='Description...' value={decription} onChange={(e) => setDecription(e.target.value)} />
+              <textarea className='detail_Texttarea' rows='10' placeholder='Description...' value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
-          </form>
           <button className='listUser_btn btn create' onClick={hanldeCreate} >Create</button>
           <button className='listUser_btn btn' onClick={hanldeClickAdminHome}  > Cancel </button>
         </div>

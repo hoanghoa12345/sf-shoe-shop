@@ -17,7 +17,6 @@ const getProducts = () => {
 const getProduct = (id) => {
   return axios.get(BASE_URL + "api/products/" + id);
 };
-
 const saveProduct = (productBody, token) => {
   return axios.post(BASE_URL + "api/products/", productBody, {
     headers: {

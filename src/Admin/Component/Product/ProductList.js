@@ -12,6 +12,7 @@ import Pagination from '../Pagination';
 import '../Style/ProductList.css';
 import axios from 'axios';
 import ReactLoading from 'react-loading';
+import { getProducts } from '../../../api/httpRequest';
 
 function ProductList() {
   const [loading, setLoading] = useState(false);
@@ -24,17 +25,16 @@ function ProductList() {
   const dispatch = useDispatch();
   //API
   const fetchProducts = async () => {
-
-    const response = await axios.get("https://sf-shoe-shop-be.herokuapp.com/api/products/").catch((err) => {
-      console.log('err', err);
-      setLoading(true);
-    })
-    dispatch(set_product(response.data))
+ try {
+  const response = await getProducts();
+  dispatch(set_product(response.data))
+  setLoading(true);
+ } catch (error) {}
   }
   useEffect(() => {
     fetchProducts()
   }, [])
-  console.log(productLists.data);
+
 
   //phan trang
   const [posts, setPosts] = useState(productLists);
@@ -123,25 +123,25 @@ function ProductList() {
           {productLists.length !== 0 || loading ? (currentPost.filter((data) => {
             if (search == '') {
               return data
-            } else if (data.nameProduct.toLowerCase().includes(search.toLowerCase()) || data.price.includes(search)) {
+            } else if (data.name.toLowerCase().includes(search.toLowerCase()) ) {
               return data
             }
           })
             .map((productList, index) => {
-              const { _id, image,countInStock, rating, name, price, total, rest } = productList;
+              const { _id, image,countInStock, rating, name, price,numReviews } = productList;
               return (
                 <div className="productList" key={index}>
                   <div className="productCard">
                     <div className="productImgBx">
-                      <img className="productImg" src={/* imgProduct.preview || */image || imageDefault} alt={index} />
+                      <img className="productImg" src={ image.preview ||  image || imageDefault} alt={index} />
                     </div>
 
                     <div className="contentBx ">
-                       <div className="productTotal"> Total: {countInStock}  </div>
-                      <div className="productTotal"> Rest: {rating}</div> 
+                       <div className="productTotal">   Reviews: {numReviews}  </div>
+                      <div className="productTotal"> Rating: {rating}</div> 
                     </div>
                     <div className="productRest">
-                      {/*  {total - rest} */}
+                 Count In Stock: {countInStock} 
                     </div>
                     <div className="title__">  <h2 className="productTitle">{name}</h2></div>
                     <h3 className='productPrice'>{price} đ</h3>

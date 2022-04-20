@@ -71,8 +71,8 @@ export const contactProducts = (state = initialStateProduct, action) => {
         case SET_PRODUCT:
             return { ...state, products: action.payload }
         case ADD_PRODUCT:
-            const statePro = state.products.concat(action.payload);
-            return { ...state, statePro }
+            const products = state.products.concat(action.payload);
+            return { ...state, products }
         case UPDATE_PRODUCT:
             return state.map((contact) => contact.id === action.payload.id ? action.payload : contact);
         case DELETE_PRODUCT:
