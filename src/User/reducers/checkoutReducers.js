@@ -1,21 +1,18 @@
 import { CHECKOUT_CREATE } from "../constants/checkoutConstants";
 
-const createCheckoutReducer = (
+const checkoutReducer = (
   state = {
-    checkoutItems: [],
+    checkoutList: [],
   },
   action
 ) => {
   switch (action.type) {
     case CHECKOUT_CREATE:
-      const item = action.payload;
-      return {
-        checkoutItems: [...state.checkoutItems, item],
-      };
+      return { checkoutList: [...state.checkoutList, action.payload] };
 
     default:
       return state;
   }
 };
 
-export { createCheckoutReducer };
+export { checkoutReducer };
