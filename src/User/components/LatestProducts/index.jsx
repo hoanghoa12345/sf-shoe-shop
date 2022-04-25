@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import './style.scss'
 import shoes_1 from '../../assets/images/slide_1.png'
 import shoes_3 from '../../assets/images/slide_3.png'
