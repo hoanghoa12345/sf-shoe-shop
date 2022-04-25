@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {BiChevronLeft} from "react-icons/bi";
+import {BiChevronRight} from "react-icons/bi";
 
 Pagination.propTypes = {
     pagination: PropTypes.object.isRequired,
@@ -25,14 +27,14 @@ function Pagination(props) {
                 disabled={_page <= 1}
                 onClick={()=> handlePageChange(_page - 1)}
             >
-                Prev
+                <BiChevronLeft />
             </button>
 
             <button
                 disabled={_page >= totalPages}
                 onClick={()=> handlePageChange(_page + 1)}
             >
-                Next
+                <BiChevronRight />
             </button>
         </div>
     );
