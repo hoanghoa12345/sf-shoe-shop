@@ -79,29 +79,29 @@ function DetailProduct() {
                             </div>
 
                             <div class="product-price">
-                                <p class="last-price">Old Price: <span>$257.00</span></p>
-                                <p class="new-price">New Price: <span>$249.00 (5%)</span></p>
+                                <p class="last-price">Giá cũ: <span>$257.00</span></p>
+                                <p class="new-price">Giá mới: <span>$249.00 (5%)</span></p>
                             </div>
 
                             <div class="product-detail">
-                                <h2>about this item: </h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+                                <h2>Jordan 1 đen trắng: </h2>
+                                <p>Với thiết kế thể thao, mạnh mẽ nhưng lại vô cùng hút mắt bởi mọi chi tiết trên đôi giày đều hòa hợp với nhau một cách hoàn hảo: dấu Swoosh đen nổi bật ở cả hai mặt của hông giày, logo Air Jordan ‘winged basketball’ màu trắng huyền thoại nơi cổ giày, lưỡi gà nilon trắng kèm tag có logo Nike Air.</p>
+                                <p>Với một đôi giày basic, từ thiết kế đến màu sắc đều khiến bạn có thể dễ dàng phối với mọi phong cách trang phục thì đây chính là đôi giày bạn phải có trong tủ đồ của mình..</p>
                                 <ul>
-                                    <li>Color: <span>Black</span></li>
-                                    <li>Available: <span>in stock</span></li>
-                                    <li>Category: <span>Shoes</span></li>
-                                    <li>Shipping Area: <span>All over the world</span></li>
-                                    <li>Shipping Fee: <span>Free</span></li>
+                                    <li>Màu: <span>Đen trắng</span></li>
+                                    <li>Mã: <span>NAJ120</span></li>
+                                    <li>Thương hiệu: <span>Jorrdan 1 High</span></li>
+                                    <li>Khu vực giao hàng: <span>Miễn phí giao hàng toàn quốc</span></li>
+                                    <li>Giao hàng: <span>Miễn phí</span></li>
                                 </ul>
                             </div>
 
                             <div class="purchase-info">
                                 <input type="number" min="0" value="1" />
                                 <button type="button" class="btn">
-                                    Add to Cart <i class="fas fa-shopping-cart"></i>
+                                    Mua ngay <i class="fas fa-shopping-cart"></i>
                                 </button>
-                                <button type="button" class="btn">Compare</button>
+                                <button type="button" class="btn">Liên hệ qua Skype </button>
                             </div>
 
                             <div class="social-links">
