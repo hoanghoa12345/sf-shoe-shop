@@ -2,36 +2,32 @@ import React from 'react';
 import { FaGlobeEurope } from 'react-icons/fa'
 import { BsBellFill } from 'react-icons/bs';
 import { VscSearch } from 'react-icons/vsc';
-import { Link } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import '../Style/NavBar.css';
-import logo from'../../image/mau-logo-dong-vat-dep-01-removebg-preview.png'
+import logo from'../../image/39b63840e895877b3c2a514a4397c1a1-gigapixel-scale-2_00x copy.png'
 
 function Navbar() {
+ 
     return (
         <div className='topbar'>
             <div className='topbarwapper'>
-                <div className='topleft'>
-                    <img className='logo_nav' src={logo} alt='logo'/> 
-                    <span className='header_nav'>Monster</span>
+                <div className='topleft' >
+                  <img  className='logo_nav' src={logo} alt='logo'/> 
+                    
                 </div>       
-                <div className='topright'>
-                    <div className="topIconContainer">
+                <div className='topright'>   
                         <div className='IconContainer' >
                             <span className='topIconBadge'>2</span>
                             <BsBellFill className='iconBell' />
-                        </div>
-                    </div>
-                    <div className="topIconContainer">
+                        </div>       
                         <div className='IconContainer' >
                             <span className='topIconBadge'>2</span>
                             <FaGlobeEurope className='iconBell' />
 
                         </div>
-                    </div >
-                    <img src='https://pdp.edu.vn/wp-content/uploads/2021/06/hinh-anh-suy-tu-1.jpg' className='topAvatar' />
+                    <img src={logo} className='topAvatar' />
                     <span className="AvatarTop">Admin</span>
                     <h6 className="AvatarTopM">Manager Page</h6>
-
 
 
                 </div>
