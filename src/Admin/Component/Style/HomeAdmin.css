@@ -280,10 +280,7 @@
 
 }
 
-.boder__::webkit-scrollbar {
-    width: 10px;
-    background-color: #F5F5F5;
-}
+
 
 .topRight {
 
@@ -291,7 +288,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     width: 90%;
     height: 90px;
-    justify-content: center;
+
     align-items: center;
     text-align: center;
     justify-content: space-between;
@@ -365,3 +362,10 @@
     font-weight: 600;
 }
 
+.tableTop {
+    color: #000;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: rgba(222, 219, 219, 0.5);
+
+}

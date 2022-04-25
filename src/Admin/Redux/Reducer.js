@@ -1,5 +1,5 @@
 import { ADD_USER, UPDATE_USER, DELETE_USER } from './Action';
-import { ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from './Action';
+import { SET_PRODUCT, SELECT_PRODUCT, REMOVE_PRODUCT, ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from './Action';
 
 
 const initialStateUser = [
@@ -33,7 +33,7 @@ const initialStateUser = [
         phone: '012365479',
         age: '20/10/1997',
         address: "Quy nhon"
-    },{
+    }, {
         id: 4,
         avatar: 'https://hinhanhdephd.com/wp-content/uploads/2015/12/hinh-anh-dep-girl-xinh-hinh-nen-dep-gai-xinh.jpg',
         userName: 'mng',
@@ -63,16 +63,31 @@ export const contactReducer = (state = initialStateUser, action) => {
 
 
 }
-const initialStateProduct = []
+const initialStateProduct = {
+    products: []
+}
 export const contactProducts = (state = initialStateProduct, action) => {
     switch (action.type) {
+        case SET_PRODUCT:
+            return { ...state, products: action.payload }
         case ADD_PRODUCT:
-            return [...state, action.payload];
+            const products = state.products.concat(action.payload);
+            return { ...state, products }
         case UPDATE_PRODUCT:
             return state.map((contact) => contact.id === action.payload.id ? action.payload : contact);
         case DELETE_PRODUCT:
             return state.filter((contact) => contact.id !== action.payload && contact)
-            default:
-                return state;
+        default:
+            return state;
+    }
+}
+export const selectProducts = (state = {}, { type, payload }) => {
+    switch (type) {
+        case SELECT_PRODUCT:
+            return { ...state, ...payload };
+        case REMOVE_PRODUCT:
+            return {}
+        default:
+            return state
     }
 }
