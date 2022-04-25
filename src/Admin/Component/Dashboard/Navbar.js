@@ -29,8 +29,9 @@ function Navbar() {
                         </div>
                     </div >
                     <img src='https://pdp.edu.vn/wp-content/uploads/2021/06/hinh-anh-suy-tu-1.jpg' className='topAvatar' />
-                    <span className="AvatarTop">Zock Foster</span>
-                    <h6 className="AvatarTopM">Manager</h6>
+                    <span className="AvatarTop">Admin</span>
+                    <h6 className="AvatarTopM">Manager Page</h6>
+
 
 
                 </div>
