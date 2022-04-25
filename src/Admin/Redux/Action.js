@@ -40,7 +40,6 @@ export const add_user = (addUser) =>{
     return{
         type: ADD_USER,
         payload: addUser
-
     }
 
 }
