@@ -12,7 +12,9 @@ import Pagination from '../Pagination';
 import '../Style/ProductList.css';
 import axios from 'axios';
 import ReactLoading from 'react-loading';
-import { getProducts } from '../../../api/httpRequest';
+import { deleteProduct, getProducts } from '../../../api/httpRequest';
+import Loading from '../../Loading';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
 
 function ProductList() {
   const [loading, setLoading] = useState(false);
@@ -23,16 +25,16 @@ function ProductList() {
   const productLists = useSelector(state => state.contactProducts.products);
 
   const dispatch = useDispatch();
-  //API
+  //products list
   const fetchProducts = async () => {
- try {
-  const response = await getProducts();
-  dispatch(set_product(response.data))
-  setLoading(true);
- } catch (error) {}
+    try {
+      const response = await getProducts();
+      dispatch(set_product(response.data))
+      setLoading(true);
+    } catch (error) { }
   }
   useEffect(() => {
-    fetchProducts()
+    fetchProducts();
   }, [])
 
 
@@ -46,28 +48,26 @@ function ProductList() {
   const indexFirstPost = indexLastPost - postPerPage;
   const currentPost = posts.slice(indexFirstPost, indexLastPost);
 
-
   const paginate = pageNumbers => setCurrentPage(pageNumbers);
-
 
   //xu ly yes/ no
   const handleDeleteProduct = (_id) => {
     setDeleteId(_id)
     setDeletes(true)
-
   }
-  const hanldeYes = () => {
-    let id = deleteId;
-    dispatch(delete_product(id));
-
-    setDeletes(false);
-    toast.success('Xóa thành công')
+  const hanldeYes = async() => {
+    let _id = deleteId;
+    try {
+      const response = await deleteProduct(_id, token)
+      setDeletes(false);
+      toast.success('Xóa thành công')
+      dispatch(delete_product(response.data))
+    } catch (error) {}
   }
+
   const handleNo = () => {
     setDeletes(false)
   }
-
-
   //Sort products
   const option = ['Sắp xếp Theo Giá ', 'Tăng Dần', 'Giảm Dần'];
   const hanldeAsc = () => {
@@ -79,7 +79,7 @@ function ProductList() {
   }
   useEffect(() => {
     setPosts(productLists)
-  }, [productLists])
+  }, [fetchProducts])
 
   //loading
 
@@ -107,11 +107,11 @@ function ProductList() {
         <div className='headerRight'><FaSearch className='iconSearch' />
           <input className='inputSearchProduct' placeholder='Search...' onChange={(e) => setSearch(e.target.value)} disabled={productLists.length === 0} />
         </div>
-        <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} disabled={productLists.length === 0}>
+       {/*  <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} disabled={productLists.length === 0}>
           <option>Sắp Xếp theo Giá: </option>
           <option value={posts} onClick={hanldeAsc}>Tăng Dần</option>
           <option value={posts} onClick={hanldeDes}>Giảm Dần</option>
-        </select>
+        </select> */}
       </div>
       <Pagination
         postPerPage={postPerPage}
@@ -120,28 +120,28 @@ function ProductList() {
       />
       <div className="productContainer" >
         <div className="productBody">
-          {productLists.length !== 0 || loading ? (currentPost.filter((data) => {
+          {productLists.length !== 0 ? (currentPost.filter((data) => {
             if (search == '') {
               return data
-            } else if (data.name.toLowerCase().includes(search.toLowerCase()) ) {
+            } else if (data.name.toLowerCase().includes(search.toLowerCase())) {
               return data
             }
           })
             .map((productList, index) => {
-              const { _id, image,countInStock, rating, name, price,numReviews } = productList;
+              const { _id, image, countInStock, rating, name, price, numReviews } = productList;
               return (
                 <div className="productList" key={index}>
                   <div className="productCard">
                     <div className="productImgBx">
-                      <img className="productImg" src={ image.preview ||  image || imageDefault} alt={index} />
+                      <img className="productImg" src={/* image.preview ||  */image || imageDefault} alt={index} />
                     </div>
 
                     <div className="contentBx ">
-                       <div className="productTotal">   Reviews: {numReviews}  </div>
-                      <div className="productTotal"> Rating: {rating}</div> 
+                      <div className="productTotal">   Reviews: {numReviews}  </div>
+                      <div className="productTotal"> Rating: {rating}</div>
                     </div>
                     <div className="productRest">
-                 Count In Stock: {countInStock} 
+                      Count In Stock: {countInStock}
                     </div>
                     <div className="title__">  <h2 className="productTitle">{name}</h2></div>
                     <h3 className='productPrice'>{price} đ</h3>
@@ -152,12 +152,7 @@ function ProductList() {
                   </div>
                 </div>
               )
-            })) : (<div className="loading">
-              <div className="loader">
-                <div className="inner one"></div>
-                <div className="inner two"></div>
-                <div className="inner three"></div>
-              </div></div>)}
+            })) : (<Loading/>)}
         </div>
       </div>
 

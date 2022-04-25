@@ -268,9 +268,7 @@ th {
 .listUser{
     margin-bottom: 10px;
 }
-.avatar_userlist{
-    margin-top:10px;
-}
+
 .btn_information:hover{
     color: rgb(60, 59, 59);
     background-color: #e2dfe1;

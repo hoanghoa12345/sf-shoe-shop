@@ -9,7 +9,42 @@ const postSignIn = (loginCredential) => {
 const postRegister = (userInfo) => {
   return axios.post(BASE_URL + "api/users/signin", userInfo);
 };
+//user 
 
+const getUser = (token) => {
+  return axios.get(BASE_URL + 'api/users/list/',{
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  })
+}
+
+const getUsers = (id) => {
+  return axios.get(BASE_URL + '/api/users/' + id)
+}
+const saveUser = (userBody, token) => {
+  return axios.post(BASE_URL + "api/users/register", userBody, {
+    headers: {
+      Authorization: "Bearer " + token,
+    }
+  })
+}
+const updateUser = ( id,userBody, token) => {
+  return axios.put(BASE_URL + "api/users/update-profile/" + id,userBody, {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  })
+}
+
+const deleteUser = (id, token) => {
+  return axios.post(BASE_URL + "api/users/" + id, {
+    header: {
+      Authorization: "Bearer " + token
+    }
+  })
+}
+//product
 const getProducts = () => {
   return axios.get(BASE_URL + "api/products/");
 };
@@ -44,6 +79,11 @@ const deleteProduct = (id, token) => {
 export {
   postSignIn,
   postRegister,
+  getUsers,
+  getUser,
+  saveUser,
+  updateUser,
+  deleteUser,
   getProducts,
   getProduct,
   saveProduct,
