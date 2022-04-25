@@ -69,7 +69,7 @@ function Header() {
                     <Link to="/cart" className="header__cart">
                         <FaShoppingCart />
                     </Link>
-                    <Link to="/signin" className="header__user">
+                    <Link to="/profile" className="header__user">
                         <FaUserAlt />
                     </Link>
                 </div>

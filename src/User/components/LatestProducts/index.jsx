@@ -13,56 +13,56 @@ function LatestProducts() {
             id: 1,
             name: 'Nike shoes',
             urlImage: shoes_3,
-            originPirce: 20,
+            originPrice: 20,
             salePrice: 15
         },
         {
             id: 2,
             name: 'Nike shoes',
             urlImage: shoes_4,
-            originPirce: 20,
+            originPrice: 20,
             salePrice: 15
         },
         {
             id: 3,
             name: 'Nike shoes',
             urlImage: shoes_1,
-            originPirce: 20,
+            originPrice: 20,
             salePrice: 15
         },
         {
             id: 4,
             name: 'Nike shoes',
             urlImage: shoes_4,
-            originPirce: 20,
+            originPrice: 20,
             salePrice: 15
         },
         {
             id: 5,
             name: 'Nike shoes',
             urlImage: shoes_3,
-            originPirce: 20,
+            originPrice: 20,
             salePrice: 15
         },
         {
             id: 6,
             name: 'Nike shoes',
             urlImage: shoes_4,
-            originPirce: 20,
+            originPrice: 20,
             salePrice: 15
         },
         {
             id: 7,
             name: 'Nike shoes',
             urlImage: shoes_1,
-            originPirce: 20,
+            originPrice: 20,
             salePrice: 15
         },
         {
             id: 8,
             name: 'Nike shoes',
             urlImage: shoes_4,
-            originPirce: 20,
+            originPrice: 20,
             salePrice: 15
         }
     ]
@@ -99,12 +99,12 @@ function LatestProducts() {
                                             ${item.salePrice}
                                         </span>
                                         <span className="latest__price-origin">
-                                            ${item.originPirce}
+                                            ${item.originPrice}
                                         </span>
                                     </>
                                 ) : (
                                     <div className="latest__price-present">
-                                        ${item.originPirce}
+                                        ${item.originPrice}
                                     </div>
                                 )}
                             </div>
