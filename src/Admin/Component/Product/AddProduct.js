@@ -7,7 +7,7 @@ import { getProducts, saveProduct } from '../../../api/httpRequest';
 import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png'
 import { add_product } from '../../Redux/Action';
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDQ0MDg3MSwiZXhwIjoxNjUwNjEzNjcxfQ.-DIqLP6fPqYW4afVyUbVvRmsAdUL8yGsbaA9S7QR9T0"
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
 
 function AddProduct() {
 
@@ -21,10 +21,11 @@ function AddProduct() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const fetchAddProducts = async () => {
+/*   const fetchAddProducts = async () => {
     try {
       const response = await getProducts()
       dispatch(add_product(response.data))
+     
     } catch (error) {
       console.log('error', error);
     }
@@ -33,7 +34,7 @@ function AddProduct() {
 
   useEffect(() => {
     fetchAddProducts()
-  }, [])
+  }, []) */
   const data = {
     image,
     name,
@@ -47,10 +48,9 @@ function AddProduct() {
   const hanldeCreate = async () => {
     try {
       const response = await saveProduct(data, token)
-      dispatch(add_product(response.data))
       toast.success("Thêm sản phẩm mới thành công.")
-      console.log(toast.success);
       navigate(-1);
+      dispatch(add_product(response.data))
     } catch (error) {
 
     }
@@ -92,7 +92,7 @@ function AddProduct() {
           <form className='newUserForm' onSubmit={handleSubmitForm}  >
             <div className='newUserItem'>
               <label>Or Link image</label>
-              <input type='text' placeholder='image' value={image} onChange={(e) => setImage(e.target.value)} />
+              <input type='text' placeholder='Url Link' value={image} onChange={(e) => setImage(e.target.value)} />
             </div>
             <div className='newUserItem'>
               <label>Name Product</label>

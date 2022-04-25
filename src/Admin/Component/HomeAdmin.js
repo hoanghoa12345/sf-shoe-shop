@@ -125,15 +125,15 @@ function HomeAdmin() {
                             <h2 className='headerTop'>Top Products</h2>
                             <div className='boder__'>
                                 {dataProducts.length !== 0 ? dataProducts.map((dataProduct) => {
-                                    const { id, UrlLink, nameProduct, price, total, rest } = dataProduct;
+                                    const { id, image, name, price, countInStock, rest } = dataProduct;
                                     return (
                                         <div className='topRight' key={id}>
-                                            <img className='imgeRight' src={UrlLink || imageDefault} />
+                                            <img className='imgeRight' src={image || imageDefault} />
                                             <div className='topHeader'>
-                                                <h4 className='headerRight'>{nameProduct}</h4>
+                                                <h4 className='headerRight'>{name}</h4>
                                                 <h4 className='headerh3'>{price} đ</h4>
                                             </div>
-                                            <h3>{total}</h3>
+                                            <h3>{countInStock}</h3>
                                             <p className='topRest'><TiArrowUpThick />{rest}</p>
                                         </div>
                                     )

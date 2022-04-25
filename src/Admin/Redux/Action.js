@@ -3,6 +3,8 @@ import axios from "axios";
 export const ADD_USER = 'ADD_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELETE_USER = 'DELETE_USER'
+export const SET_USER = 'SET_USER';
+export const SELECT_USER = 'SELECT_USER';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE';
@@ -53,6 +55,18 @@ export const delete_user = (deleteUser) =>{
     return{
         type: DELETE_USER,
         payload: deleteUser
+    }
+}
+export const set_User = (setUser) =>{
+    return{
+        type: SET_USER,
+        payload:setUser
+    }
+}
+export const select_User = (selectUser) =>{
+    return{
+        type: SELECT_USER,
+        payload:selectUser
     }
 }
 //Product-- set API

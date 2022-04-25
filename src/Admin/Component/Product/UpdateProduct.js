@@ -9,12 +9,13 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import posterDefault from '../../image/poster.png';
 import { getProduct, updateProduct } from '../../../api/httpRequest';
-import axios from 'axios';
+import Loading from '../../Loading';
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDQ0MDg3MSwiZXhwIjoxNjUwNjEzNjcxfQ.-DIqLP6fPqYW4afVyUbVvRmsAdUL8yGsbaA9S7QR9T0"
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
+
 
 function UpdateProduct() {
-  const [loading, setLoading] = useState(false);
+
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -27,20 +28,29 @@ function UpdateProduct() {
   const navigate = useNavigate();
   const editProducts = useSelector(state => state.contactProducts.products);
   const dispatch = useDispatch();
+  /*   const fetchProducts =async (_id) =>{
+      try {
+        const response= await getProduct(_id)
+        dispatch(update_product(response.data))
+
+      } catch (error) {
+        
+      }
+    } */
   const { id } = useParams();
-  console.log('id', id);
-
-
-  const fetchUpdateProduct = async () => {
-    try {
-      const response = await getProduct(id)
-      dispatch(update_product(response.data))
-    } catch (error) { console.log(error) }
-  }
-
+  const findIdProducts = editProducts.find(editProduct => editProduct._id === id);
   useEffect(() => {
-    fetchUpdateProduct()
-  }, [])
+    if (findIdProducts) {
+      setImage(findIdProducts.image)
+      setName(findIdProducts.name)
+      setPrice(findIdProducts.price)
+      setBrand(findIdProducts.brand)
+      setCategory(findIdProducts.category)
+      setDescription(findIdProducts.description)
+      setCountInStock(findIdProducts.countInStock)
+    }
+  }, [findIdProducts])
+
   const hanldeClickInformation = () => {
     setIsForm(true);
 
@@ -48,8 +58,6 @@ function UpdateProduct() {
   const hanldeClickInDecripstion = () => {
     setIsForm(false);
   }
-
-
   const data = {
     id,
     image,
@@ -64,11 +72,14 @@ function UpdateProduct() {
   const hanldeClickUpdateProduct = async () => {
     try {
       const response = await updateProduct(id, data, token)
-      dispatch(update_product(response.data))
+      navigate(-1); 
       toast.success('Cập nhật dữ liệu thành công.');
-      navigate(-1);
+      dispatch(update_product(response.data))
     } catch (error) { }
+ 
   }
+
+
   //set update image product
   const hanldeImageProduct = (e) => {
     const image = e.target.files[0];
@@ -82,22 +93,13 @@ function UpdateProduct() {
   }, [image])
   return (
     <div className='container_edit'>
-      {Object.keys(editProducts).length === 0 ? (
-        <div className="loading">
-          <div className="loader">
-            <div className="inner one"></div>
-            <div className="inner two"></div>
-            <div className="inner three"></div>
-          </div>
-        </div>
-      ) : ((
         <div className="editProduct">
           <div className="topProduct ">
             <div className='userShowLeft'>
-              {image ? (<img className=' avatar' src={image } alt={id} />) : (<img className=' avatar' src={imageDefault} alt='b' />)}
+              {image ? (<img className=' avatar' src={image} alt={id} />) : (<img className=' avatar' src={imageDefault} alt='imgaProduct' />)}
               <div className='userShowInforTitle'>
-                <h3 className='edit_name'>{editProducts.name}</h3>
-                <h6 className='edit_fullname price'>{editProducts.price} đ</h6>
+                <h3 className='edit_name'>{findIdProducts.name}</h3>
+                <h6 className='edit_fullname price'>{findIdProducts.price} đ</h6>
               </div>
             </div>
             <div className='left_btn topbtn'>
@@ -111,55 +113,55 @@ function UpdateProduct() {
             <div className='bottom_edit'>
               <div className='left_bottom'>
                 <div className='left-input'>
-                  <lable className='lable_'>Image:</lable>
+                  <span className='lable_'>Image:</span>
                   <input className='input_'
                     type='text'
-                    placeholder={editProducts.image}
+                    placeholder={findIdProducts.image}
                     value={image}
                     onChange={(e) => setImage(e.target.value)}
                   />
                   <div className='left-input_'>
-                    <lable className='lable_'>Name:</lable>
+                    <span className='lable_'>Name:</span>
                     <input className='input_'
                       type='text'
-                      placeholder={editProducts.name}
+                      placeholder={findIdProducts.name}
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className='left-input_'>
-                  <lable className='lable_'>Price:</lable>
+                  <span className='lable_'>Price:</span>
                   <input className='input_'
                     type='number'
-                    placeholder={editProducts.price}
+                    placeholder={findIdProducts.price}
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                   />
                 </div>
                 <div className='left-input_'>
-                  <lable className='lable_'>Count In Stock</lable>
+                  <span className='lable_'>Count In Stock</span>
                   <input className='input_'
                     type='number'
-                    placeholder={editProducts.countInStock}
+                    placeholder={findIdProducts.countInStock}
                     value={countInStock}
                     onChange={(e) => setCountInStock(e.target.value)}
                   />
                 </div>
                 <div className='left-input_'>
-                  <lable className='lable_'>brand</lable>
+                  <span className='lable_'>brand</span>
                   <input className='input_'
                     type='text'
-                    placeholder={editProducts.brand}
+                    placeholder={findIdProducts.brand}
                     value={brand}
                     onChange={(e) => setBrand(e.target.value)}
                   />
                 </div>
                 <div className='left-input_'>
-                  <lable className='lable_'>Category</lable>
+                  <span className='lable_'>Category</span>
                   <input className='input_'
-                    type='number'
-                    placeholder={editProducts.category}
+                    type='text'
+                    placeholder={findIdProducts.category}
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                   />
@@ -170,10 +172,10 @@ function UpdateProduct() {
 
                 <div className='right_body'>
                   <div className='uploadImageProduct'>
-                    <label htmlFor='file'>
+                    <span htmlFor='file'>
                       {image ? (<img className=' avatar' src={image} alt={id} />) :
                         (<img className=' avatar' src={imageDefault} alt={id} />)}
-                    </label>
+                    </span>
                     <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeImageProduct} />
                   </div>
                 </div>
@@ -185,16 +187,16 @@ function UpdateProduct() {
             </div>
             <div className='rightDecreption'>
               <div className='left-input_'>
-                <label className='lable_' >Decripstion:</label>
+                <span className='lable_' >Decripstion:</span>
                 <textarea cols='50' rows='20'
                   type='text'
                   className='ProductUpdatedetail'
-                  placeholder={editProducts.description}
+                  placeholder={findIdProducts.description}
                   value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
               </div>
             </div>
           </div>)}
-        </div>))}
+        </div>
 
     </div>
   )
