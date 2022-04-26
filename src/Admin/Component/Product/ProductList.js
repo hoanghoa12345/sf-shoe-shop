@@ -12,9 +12,9 @@ import Pagination from '../Pagination';
 import '../Style/ProductList.css';
 import axios from 'axios';
 import ReactLoading from 'react-loading';
-import { deleteProduct, getProducts } from '../../../api/httpRequest';
+import { deleteProduct, getProducts,TOKEN } from '../../../api/httpRequest';
 import Loading from '../../Loading';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2ExIiwiZW1haWwiOiJob2FuZ2hvYUBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NTA5NTc0NzksImV4cCI6MTY1MTEzMDI3OX0.qLkaitBYi3CPpidf2zSe5yx34K0-vtEj19nBEZRuBiE'
 
 function ProductList() {
   const [loading, setLoading] = useState(false);
@@ -58,11 +58,13 @@ function ProductList() {
   const hanldeYes = async() => {
     let _id = deleteId;
     try {
-      const response = await deleteProduct(_id, token)
+      const response = await deleteProduct(_id, TOKEN)
       setDeletes(false);
       toast.success('Xóa thành công')
       dispatch(delete_product(response.data))
     } catch (error) {}
+    fetchProducts()
+
   }
 
   const handleNo = () => {
@@ -139,6 +141,7 @@ function ProductList() {
                     <div className="contentBx ">
                       <div className="productTotal">   Reviews: {numReviews}  </div>
                       <div className="productTotal"> Rating: {rating}</div>
+                
                     </div>
                     <div className="productRest">
                       Count In Stock: {countInStock}

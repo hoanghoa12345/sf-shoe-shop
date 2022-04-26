@@ -2,86 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Pagination } from "swiper";
-import "./ListProduct.css";
 
-// let products = [
-  //   {
-  //     id: 1,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/1.png",
-  //     categori: 4,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/2.png",
-  //     categori: 2,
-  //   },
-  //   {
-  //     id: 3,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/3.png",
-  //     categori: 1,
-  //   },
-  //   {
-  //     id: 4,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/4.png",
-  //     categori: 3,
-  //   },
-  //   {
-  //     id: 5,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/5.png",
-  //   },
-  //   {
-  //     id: 6,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/6.png",
-  //   },
-  //   {
-  //     id: 7,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/7.png",
-  //   },
-  //   {
-  //     id: 8,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/8.png",
-  //   },
-  //   {
-  //     id: 9,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/9.png",
-  //   },
-  //   {
-  //     id: 10,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/10.png",
-  //   },
-  //   {
-  //     id: 11,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/11.png",
-  //   },
-  //   {
-  //     id: 12,
-  //     title: " Nike air jordan 1",
-  //     price: "$100",
-  //     image: "../image/12.png",
-  //   },
-  // ];
+import "./ListProduct.css";
+import Loading from './../Loading/index';
+
+
 function ListProduct() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -112,6 +37,7 @@ function ListProduct() {
     const getProduct = async () =>{
       const {data} = await getProductAPI();
       setProducts([...data]);
+      console.log(data);
     }    
     getProduct();
   }, [])
@@ -141,7 +67,7 @@ function ListProduct() {
           {categories.map((item) => {
             const { id } = item
             return (
-              <li className="category__item" key={item.id} >
+              <li className="category__item" key={id} >
                 <span to={`/category/${item.id}`} onClick={() => hanldeClick(item.id)}>{item.name}</span>
               </li>
             )
@@ -151,28 +77,22 @@ function ListProduct() {
       </div>
       <div className="category__right">
         <div className="category__list">
-          {console.log('product', products)}
-          {products.map((item) => (
+          { products.length !==0 ?( 
+            products.map((item) => (
             <div className="category__product" key={item.id}>
-              <div className="category__image">
-                <img src={item.image} alt="" />
-              </div>
+              <div ><img  className="category__img " src={item.image}/></div>
               <div className="category__name">{item.name}</div>
               <div className="category__price">{item.price}</div>
               <div className="category__action">
-                <button onClick={() => navigate("/detailProduct")}>
+                <button onClick={() => navigate(`/detailProduct/${item._id}`)}>
                   Mua Ngay
                 </button>
               </div>
             </div>
-          ))}
+          ))):(<Loading/>)}
         </div>
       </div>
             
-            {/* <Pagination 
-                pagination={pagination}
-                onPageChange={handlePageChange}
-              /> */}       
     </div>
   );
 }

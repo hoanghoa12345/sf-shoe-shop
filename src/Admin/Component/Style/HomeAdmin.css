@@ -5,7 +5,9 @@
     height: 120vh;
 
 }
-
+.loading__{
+    padding-left: 600px;
+}
 .Component_Other {
     padding: 30px 20px 30px 0px;
     margin-left: 300px;

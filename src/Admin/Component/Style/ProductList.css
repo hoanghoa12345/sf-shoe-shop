@@ -107,10 +107,11 @@
 .productContainer .productCard {
     width: 280px;
     height: 320px;
-    background: #1b4332;
+    background: #ffffff;
     border-radius: 20px;
     overflow: hidden;
-
+    border: 2px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 }
 
@@ -136,17 +137,16 @@
 }
 
 .title__ {
-
     margin: 0 15px 10px 15px;
 }
 
 .productTitle {
     width: 100%;
     height: auto;
-    font-size: 14px;
-    color: #9ef01a;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1d1e1d;
     margin-top: 13px;
-
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -154,7 +154,7 @@
 }
 
 .productPrice {
-    color: #fefefe;
+    color: #090808;
     text-align: center;
     font-weight: 800;
 }
@@ -164,6 +164,8 @@
     font-size: 15px;
     margin-top: 30px;
     margin-right: 15px;
+    color: #090808;
+
 }
 
 .productList {
@@ -174,12 +176,12 @@
     margin-top: 20px;
     font-size: 17px;
     text-align: center;
-    color: #fff;
+    color: rgb(81, 0, 0);
 }
 
 .productIcon {
     background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
+    color: rgb(11, 0, 0);
     opacity: 0;
     position: absolute;
     display: flex;
@@ -195,8 +197,7 @@
 }
 
 .productIcon:hover {
-    opacity: 1;
-
+    opacity: 0.7;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -217,8 +218,8 @@
 .productEdit:hover {
     width: 45px;
     height: 45px;
-    background-color: rgba(72, 72, 72, 0.5);
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgb(31, 0, 155);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -235,8 +236,8 @@
 .productDelete:hover {
     width: 40px;
     height: 40px;
-    background-color: rgba(72, 72, 72, 0.5);
-    color: #fff;
+    background-color: rgba(253, 253, 253, 0.5);
+    color: rgb(220, 0, 0);
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -314,7 +315,7 @@
     -o-border-radius: 5px;
 }
 
-/* loading */
+
 
 
 .loader {

@@ -8,9 +8,10 @@ import { useParams } from "react-router-dom";
 import { update_user } from "../../Redux/Action";
 import { toast } from "react-toastify";
 import avatarDefaul from '../../image/avatart.jpg'
-import { updateUser } from "../../../api/httpRequest";
+import { updateUser,TOKEN } from "../../../api/httpRequest";
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
+
 
 function Information() {
   const [isAdmin, setIsAdmin] = useState("");

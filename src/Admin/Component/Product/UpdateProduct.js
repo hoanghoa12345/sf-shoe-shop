@@ -8,11 +8,10 @@ import { remove_product, select_product, update_product } from '../../Redux/Acti
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import posterDefault from '../../image/poster.png';
-import { getProduct, updateProduct } from '../../../api/httpRequest';
+import { getProduct, updateProduct, TOKEN } from '../../../api/httpRequest';
 import Loading from '../../Loading';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
-
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2ExIiwiZW1haWwiOiJob2FuZ2hvYUBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NTA5NTc0NzksImV4cCI6MTY1MTEzMDI3OX0.qLkaitBYi3CPpidf2zSe5yx34K0-vtEj19nBEZRuBiE'
 
 function UpdateProduct() {
 
@@ -71,12 +70,12 @@ function UpdateProduct() {
   }
   const hanldeClickUpdateProduct = async () => {
     try {
-      const response = await updateProduct(id, data, token)
-      navigate(-1); 
+      const response = await updateProduct(id, data, TOKEN)
+      navigate(-1);
       toast.success('Cập nhật dữ liệu thành công.');
       dispatch(update_product(response.data))
     } catch (error) { }
- 
+
   }
 
 
@@ -91,112 +90,118 @@ function UpdateProduct() {
       image && URL.revokeObjectURL(image.preview)
     }
   }, [image])
+  const hanldeClickAdminHome = () => {
+    navigate(-1);
+  }
   return (
     <div className='container_edit'>
-        <div className="editProduct">
-          <div className="topProduct ">
-            <div className='userShowLeft'>
-              {image ? (<img className=' avatar' src={image} alt={id} />) : (<img className=' avatar' src={imageDefault} alt='imgaProduct' />)}
-              <div className='userShowInforTitle'>
-                <h3 className='edit_name'>{findIdProducts.name}</h3>
-                <h6 className='edit_fullname price'>{findIdProducts.price} đ</h6>
-              </div>
-            </div>
-            <div className='left_btn topbtn'>
-              <button className='btn_information' onClick={hanldeClickUpdateProduct}>Update</button>
-              <button className='btn_overview' value={isForm} onClick={hanldeClickInformation} >Information</button>
-              <button className='btn_setting' value={!isForm} onClick={hanldeClickInDecripstion}>Decripstion</button>
+      <div className="editProduct">
+        <div className="topProduct ">
+          <div className='userShowLeft'>
+            {image ? (<img className=' avatar' src={image} alt={id} />) : (<img className=' avatar' src={imageDefault} alt='imgaProduct' />)}
+            <div className='userShowInforTitle'>
+              <h3 className='edit_name'>{findIdProducts.name}</h3>
+              <h6 className='edit_fullname price'>{findIdProducts.price} đ</h6>
             </div>
           </div>
-          <div className="bottomProduct"></div>
-          {isForm ? (
-            <div className='bottom_edit'>
-              <div className='left_bottom'>
-                <div className='left-input'>
-                  <span className='lable_'>Image:</span>
-                  <input className='input_'
-                    type='text'
-                    placeholder={findIdProducts.image}
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                  />
-                  <div className='left-input_'>
-                    <span className='lable_'>Name:</span>
-                    <input className='input_'
-                      type='text'
-                      placeholder={findIdProducts.name}
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className='left-input_'>
-                  <span className='lable_'>Price:</span>
-                  <input className='input_'
-                    type='number'
-                    placeholder={findIdProducts.price}
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
-                </div>
-                <div className='left-input_'>
-                  <span className='lable_'>Count In Stock</span>
-                  <input className='input_'
-                    type='number'
-                    placeholder={findIdProducts.countInStock}
-                    value={countInStock}
-                    onChange={(e) => setCountInStock(e.target.value)}
-                  />
-                </div>
-                <div className='left-input_'>
-                  <span className='lable_'>brand</span>
-                  <input className='input_'
-                    type='text'
-                    placeholder={findIdProducts.brand}
-                    value={brand}
-                    onChange={(e) => setBrand(e.target.value)}
-                  />
-                </div>
-                <div className='left-input_'>
-                  <span className='lable_'>Category</span>
-                  <input className='input_'
-                    type='text'
-                    placeholder={findIdProducts.category}
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  />
-                </div>
-              </div>
+          <div className='left_btn topbtn'>
 
-              <div className='right_bottom'>
-
-                <div className='right_body'>
-                  <div className='uploadImageProduct'>
-                    <span htmlFor='file'>
-                      {image ? (<img className=' avatar' src={image} alt={id} />) :
-                        (<img className=' avatar' src={imageDefault} alt={id} />)}
-                    </span>
-                    <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeImageProduct} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (<div className='bottom_edit'>
-            <div className='leftDecreption'>
-              <img src={posterDefault} alt='poster' />
-            </div>
-            <div className='rightDecreption'>
-              <div className='left-input_'>
-                <span className='lable_' >Decripstion:</span>
-                <textarea cols='50' rows='20'
-                  type='text'
-                  className='ProductUpdatedetail'
-                  placeholder={findIdProducts.description}
-                  value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-              </div>
-            </div>
-          </div>)}
+            <button className='btn_information' value={isForm} onClick={hanldeClickInformation} >Information</button>
+            <button className='btn_setting' value={!isForm} onClick={hanldeClickInDecripstion}>Decripstion</button>
+          </div>
         </div>
+        <div className="bottomProduct"></div>
+        {isForm ? (
+          <div className='bottom_edit'>
+            <div className='left_bottom'>
+              <div className='left-input'>
+                <span className='lable_'>Image:</span>
+                <input className='input_'
+                  type='text'
+                  placeholder={findIdProducts.image}
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                />
+                <div className='left-input_'>
+                  <span className='lable_'>Name:</span>
+                  <input className='input_'
+                    type='text'
+                    placeholder={findIdProducts.name}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className='left-input_'>
+                <span className='lable_'>Price:</span>
+                <input className='input_'
+                  type='number'
+                  placeholder={findIdProducts.price}
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+              <div className='left-input_'>
+                <span className='lable_'>Count In Stock</span>
+                <input className='input_'
+                  type='number'
+                  placeholder={findIdProducts.countInStock}
+                  value={countInStock}
+                  onChange={(e) => setCountInStock(e.target.value)}
+                />
+              </div>
+              <div className='left-input_'>
+                <span className='lable_'>brand</span>
+                <input className='input_'
+                  type='text'
+                  placeholder={findIdProducts.brand}
+                  value={brand}
+                  onChange={(e) => setBrand(e.target.value)}
+                />
+              </div>
+              <div className='left-input_'>
+                <span className='lable_'>Category</span>
+                <input className='input_'
+                  type='text'
+                  placeholder={findIdProducts.category}
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className='right_bottom'>
+
+              <div className='right_body'>
+                <div className='uploadImageProduct'>
+                  <span htmlFor='file'>
+                    {image ? (<img className=' avatar' src={image} alt={id} />) :
+                      (<img className=' avatar' src={imageDefault} alt={id} />)}
+                  </span>
+                  <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeImageProduct} />
+                </div>
+
+              </div>
+            <button className='listUser_btn productBtn ' onClick={hanldeClickUpdateProduct}>Update</button>
+            <button className='listUser_btn btn' onClick={hanldeClickAdminHome} > Cancel </button>
+            </div>
+          </div>
+        ) : (<div className='bottom_edit'>
+          <div className='leftDecreption'>
+            <img src={posterDefault} alt='poster' />
+          </div>
+          <div className='rightDecreption'>
+            <div className='left-input_'>
+              <span className='lable_' >Decripstion:</span>
+              <textarea cols='50' rows='20'
+                type='text'
+                className='ProductUpdatedetail'
+                placeholder={findIdProducts.description}
+                value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            </div>
+          </div>
+        </div>)}
+      </div>
 
     </div>
   )

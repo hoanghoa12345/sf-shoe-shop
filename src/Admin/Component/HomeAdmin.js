@@ -10,6 +10,7 @@ import imageDefault from '../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhy
 import { ResponsiveContainer, ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, } from 'recharts';
 import { useSelector } from 'react-redux';
 
+
 function HomeAdmin() {
     const dataProducts = useSelector(state => state.contactProducts.products);
     const checkPrice = dataProducts.sort((a, b) => { return (b.price - a.price) })
@@ -137,7 +138,8 @@ function HomeAdmin() {
                                             <p className='topRest'><TiArrowUpThick />{rest}</p>
                                         </div>
                                     )
-                                }) : (<h2 className='headerTop'>No data</h2>)}
+                                }) : (
+                                   <>No Data</>)}
                             </div>
                         </div>
                     </div>

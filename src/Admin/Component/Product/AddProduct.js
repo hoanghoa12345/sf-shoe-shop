@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
-import { getProducts, saveProduct } from '../../../api/httpRequest';
+import { getProducts, saveProduct,TOKEN } from '../../../api/httpRequest';
 import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png'
 import { add_product } from '../../Redux/Action';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
 
 function AddProduct() {
 
@@ -47,7 +47,7 @@ function AddProduct() {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
   const hanldeCreate = async () => {
     try {
-      const response = await saveProduct(data, token)
+      const response = await saveProduct(data, TOKEN)
       toast.success("Thêm sản phẩm mới thành công.")
       navigate(-1);
       dispatch(add_product(response.data))
