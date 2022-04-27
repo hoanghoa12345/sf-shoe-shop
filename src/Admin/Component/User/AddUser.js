@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { add_user } from '../../Redux/Action';
 import { toast } from 'react-toastify';
 import avatarDefault from '../../image/avatart.jpg'
-import { saveUser } from '../../../api/httpRequest';
+import { saveUser ,TOKEN} from '../../../api/httpRequest';
 
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
@@ -41,7 +41,7 @@ function AddUser() {
        return (toast.warning(`Please enter correct email format (...@gmail.com) !!!`))
 
         }else {
-          const response = await saveUser(data, token)
+          const response = await saveUser(data, TOKEN)
           toast.success('Thêm người dùng mới thành công !!');
           navigater(-1);
           dispatch(add_user(response.data));
@@ -115,8 +115,8 @@ function AddUser() {
               <div className='newUserItem'>
                 <label>Active</label>
                 <select className='newUserSelect' name='Active' id='Active' value={active} onChange={(e) => setActive(e.target.value)} >
-                  <option value='True'>True</option>
-                  <option value='False'>False</option>
+                  <option value='true'>True</option>
+                  <option value='false'>False</option>
                 </select>
               </div>
 

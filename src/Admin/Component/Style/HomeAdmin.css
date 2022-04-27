@@ -5,7 +5,9 @@
     height: 120vh;
 
 }
-
+.loading__{
+    padding-left: 600px;
+}
 .Component_Other {
     padding: 30px 20px 30px 0px;
     margin-left: 300px;
@@ -358,8 +360,14 @@
 
 .custumerPrice {
     color: rgb(50, 49, 49);
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 600;
+}
+.headerRight{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 150px;
 }
 
 .tableTop {

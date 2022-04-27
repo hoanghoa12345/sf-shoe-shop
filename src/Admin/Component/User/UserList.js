@@ -9,10 +9,9 @@ import { delete_user, set_User } from "../../Redux/Action";
 import avatarDefaul from '../../image/avatart.jpg'
 import "../Style/UserList.css";
 import Pagination from "../Pagination";
-import { getUser } from "../../../api/httpRequest";
+import { deleteUser, getUser ,TOKEN} from "../../../api/httpRequest";
 import Loading from "../../Loading";
 
- const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
 function UserList() {
 
   const [searchUser, setSearchUser] = useState('');
@@ -25,9 +24,10 @@ function UserList() {
   const [postPerPage] = useState(5);
   const dispatch = useDispatch();
 
+       
    const fetchUser = async () =>{
      try {
-       const responseUser = await getUser(token)
+       const responseUser = await getUser(TOKEN)
        dispatch(set_User(responseUser.data))
        
      } catch (error) {
@@ -41,9 +41,14 @@ function UserList() {
     setPosts(userLists)
   }, [userLists])
   //delete uer
-  const handleDeleteItem = (id) => {
-    dispatch(delete_user(id));
-    toast.success("Xóa người dùng thành công !!");
+  const handleDeleteItem = async (_id) => {
+    try {
+      const response = await deleteUser(_id, TOKEN);
+      toast.success("Xóa người dùng thành công !!");
+      dispatch(delete_user(response.data))
+      
+    } catch (error) { }
+    fetchUser()
   };
   //sort user list
   const option = ['Tên Người Dùng', 'Tuổi', 'Giới Tính', 'Địa chỉ'];

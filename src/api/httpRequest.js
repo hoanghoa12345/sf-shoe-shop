@@ -15,10 +15,10 @@ const postRegister = userInfo => {
     return axios.post(BASE_URL + 'api/users/register', userInfo)
 }
 
-const getUser = token => {
+const getUser = (TOKEN) => {
     return axios.get(BASE_URL + 'api/users/list/', {
         headers: {
-            Authorization: 'Bearer ' + token
+            Authorization:`Bearer ${TOKEN}`
         }
     })
 }
@@ -26,25 +26,25 @@ const getUser = token => {
 const getUsers = id => {
     return axios.get(BASE_URL + '/api/users/' + id)
 }
-const saveUser = (userBody, token) => {
+const saveUser = (userBody, TOKEN) => {
     return axios.post(BASE_URL + 'api/users/register', userBody, {
         headers: {
-            Authorization: 'Bearer ' + token
+            Authorization: `Bearer ${TOKEN}`
         }
     })
 }
-const updateUser = (id, userBody, token) => {
+const updateUser = (id, userBody, TOKEN) => {
     return axios.put(BASE_URL + 'api/users/update-profile/' + id, userBody, {
         headers: {
-            Authorization: 'Bearer ' + token
+            Authorization: `Bearer ${TOKEN}`
         }
     })
 }
 
-const deleteUser = (id, token) => {
-    return axios.post(BASE_URL + 'api/users/' + id, {
-        header: {
-            Authorization: 'Bearer ' + token
+const deleteUser = (id, TOKEN) => {
+    return axios.delete(BASE_URL + 'api/users/' + id, {
+        headers: {
+            Authorization: `Bearer ${TOKEN}`
         }
     })
 }
@@ -59,7 +59,7 @@ const getProduct = id => {
 const saveProduct = (productBody, TOKEN) => {
     return axios.post(BASE_URL + 'api/products/', productBody, {
         headers: {
-            Authorization: `Bearer  + ${TOKEN}`
+            Authorization: `Bearer ${TOKEN}`
         }
     })
 }
@@ -67,7 +67,7 @@ const saveProduct = (productBody, TOKEN) => {
 const updateProduct = (id, productBody, TOKEN) => {
     return axios.put(BASE_URL + 'api/products/' + id, productBody, {
         headers: {
-            Authorization: `Bearer  + ${TOKEN}`
+            Authorization: `Bearer ${TOKEN}`
         }
     })
 }
@@ -75,12 +75,13 @@ const updateProduct = (id, productBody, TOKEN) => {
 const deleteProduct = (id, TOKEN) => {
     return axios.delete(BASE_URL + 'api/products/' + id, {
         headers: {
-            Authorization: `Bearer  + ${TOKEN}`
+            Authorization: `Bearer ${TOKEN}`
         }
     })
 }
 
 export {
+    TOKEN,
     postLogin,
     postRegister,
     getUsers,
