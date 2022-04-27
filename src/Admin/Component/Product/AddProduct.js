@@ -7,7 +7,7 @@ import { getProducts, saveProduct,TOKEN } from '../../../api/httpRequest';
 import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png'
 import { add_product } from '../../Redux/Action';
 
-// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
+
 
 function AddProduct() {
 
@@ -20,21 +20,6 @@ function AddProduct() {
   const [countInStock, setCountInStock] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-/*   const fetchAddProducts = async () => {
-    try {
-      const response = await getProducts()
-      dispatch(add_product(response.data))
-     
-    } catch (error) {
-      console.log('error', error);
-    }
-
-  }
-
-  useEffect(() => {
-    fetchAddProducts()
-  }, []) */
   const data = {
     image,
     name,
@@ -44,8 +29,11 @@ function AddProduct() {
     description,
     countInStock
   }
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
+
   const hanldeCreate = async () => {
+    if(!image || !name || !price || !category || !description || !countInStock || !brand){
+      toast.warning("Vui lòng điền đầy đủ thông tin sản phẩm.")
+    }
     try {
       const response = await saveProduct(data, TOKEN)
       toast.success("Thêm sản phẩm mới thành công.")

@@ -10,8 +10,6 @@ import { toast } from "react-toastify";
 import avatarDefaul from '../../image/avatart.jpg'
 import { updateUser,TOKEN } from "../../../api/httpRequest";
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
-
 
 function Information() {
   const [isAdmin, setIsAdmin] = useState("");
@@ -38,7 +36,7 @@ function Information() {
 
   const hanldeUpdate = async () => {
     try {
-      const response = await updateUser(id, data, token)
+      const response = await updateUser(id, data, TOKEN)
       navigate(-1);
       toast.success("Update successful !!");
       dispatch(update_user(response.data));
@@ -54,19 +52,6 @@ function Information() {
   const hanldeClickOverview = () => {
     setInformation(false);
   };
-  /*   const hanldeAvatar = (e) => {
-      const avatar = e.target.files[0];
-      avatar.preview = URL.createObjectURL(avatar);
-      setAvatar(avatar);
-    };
-    useEffect(() => {
-      return () => {
-        //clean
-  
-        avatar && URL.revokeObjectURL(avatar.preview);
-      };
-    }, [avatar]); */
-
 
 
   return (

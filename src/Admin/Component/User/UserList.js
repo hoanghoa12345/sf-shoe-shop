@@ -12,8 +12,6 @@ import Pagination from "../Pagination";
 import { deleteUser, getUser ,TOKEN} from "../../../api/httpRequest";
 import Loading from "../../Loading";
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2ExIiwiZW1haWwiOiJob2FuZ2hvYUBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NTA5NTc0NzksImV4cCI6MTY1MTEzMDI3OX0.qLkaitBYi3CPpidf2zSe5yx34K0-vtEj19nBEZRuBiE'
-
 function UserList() {
 
   const [searchUser, setSearchUser] = useState('');
@@ -26,6 +24,7 @@ function UserList() {
   const [postPerPage] = useState(5);
   const dispatch = useDispatch();
 
+       
    const fetchUser = async () =>{
      try {
        const responseUser = await getUser(TOKEN)

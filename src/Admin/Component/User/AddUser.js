@@ -115,8 +115,8 @@ function AddUser() {
               <div className='newUserItem'>
                 <label>Active</label>
                 <select className='newUserSelect' name='Active' id='Active' value={active} onChange={(e) => setActive(e.target.value)} >
-                  <option value='True'>True</option>
-                  <option value='False'>False</option>
+                  <option value='true'>True</option>
+                  <option value='false'>False</option>
                 </select>
               </div>
 

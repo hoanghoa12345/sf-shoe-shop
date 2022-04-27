@@ -360,8 +360,14 @@
 
 .custumerPrice {
     color: rgb(50, 49, 49);
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 600;
+}
+.headerRight{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 150px;
 }
 
 .tableTop {
