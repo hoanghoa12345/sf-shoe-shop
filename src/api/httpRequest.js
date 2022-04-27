@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios'
 
 const BASE_URL = 'https://sf-shoe-shop-be.herokuapp.com/'
