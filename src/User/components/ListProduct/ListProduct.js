@@ -5,6 +5,7 @@ import { Pagination } from "swiper";
 
 import "./ListProduct.css";
 import Loading from './../Loading/index';
+import { formatPrice } from "../../../utils/common";
 
 
 function ListProduct() {
@@ -82,7 +83,7 @@ function ListProduct() {
             <div className="category__product" key={item.id}>
               <div ><img  className="category__img " src={item.image}/></div>
               <div className="category__name">{item.name}</div>
-              <div className="category__price">{item.price}</div>
+              <div className="category__price">{formatPrice(item.price)}</div>
               <div className="category__action">
                 <button onClick={() => navigate(`/detailProduct/${item._id}`)}>
                   Mua Ngay

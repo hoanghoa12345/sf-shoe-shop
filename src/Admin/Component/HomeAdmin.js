@@ -11,6 +11,7 @@ import { ResponsiveContainer, ComposedChart, Line, Bar, XAxis, YAxis, CartesianG
 import { useSelector } from 'react-redux';
 import { getProducts, getUser, TOKEN } from '../../api/httpRequest';
 import ReactLoading from 'react-loading';
+import { formatPrice } from './../../utils/common';
 
 
 
@@ -35,7 +36,7 @@ function HomeAdmin() {
     }
     let sumPrice = 0
     for (let i = 0; i < data.length; i++) {
-        sumPrice += data[i].price
+        sumPrice += data[i].price * data[i].countInStock
     }
     console.log(sumPrice);
     //User
@@ -93,7 +94,7 @@ function HomeAdmin() {
                                 <div className='productRevenue'>
                                     <div className='productCustumer'>
                                         <h2 className='custumterHeader'>Revenue</h2>
-                                        <h3 className='custumerPrice' >{sumPrice} đ</h3>
+                                        <h3 className='custumerPrice' >{formatPrice(sumPrice)} </h3>
                                     </div>
                                     <div className='productCustumer'>
                                         <h2 className='custumterHeader'>Total Custumer</h2>
@@ -129,7 +130,7 @@ function HomeAdmin() {
                                                 <img className='imgeRight' src={image || imageDefault} />
                                                 <div className='topHeader'>
                                                     <h4 className='headerRight'>{name}</h4>
-                                                    <h4 className='headerh3'>{price} đ</h4>
+                                                    <h4 className='headerh3'>{formatPrice(price)} </h4>
                                                 </div>
 
                                                 <p className='topRest'><TiArrowUpThick />{countInStock}</p>

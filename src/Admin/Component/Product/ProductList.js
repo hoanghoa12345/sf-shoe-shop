@@ -14,6 +14,7 @@ import axios from 'axios';
 import ReactLoading from 'react-loading';
 import { deleteProduct, getProducts,TOKEN } from '../../../api/httpRequest';
 import Loading from '../../Loading';
+import { formatPrice } from './../../../utils/common';
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2ExIiwiZW1haWwiOiJob2FuZ2hvYUBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NTA5NTc0NzksImV4cCI6MTY1MTEzMDI3OX0.qLkaitBYi3CPpidf2zSe5yx34K0-vtEj19nBEZRuBiE'
 
 function ProductList() {
@@ -23,7 +24,7 @@ function ProductList() {
   const [deleteId, setDeleteId] = useState(0);
   const [search, setSearch] = useState('')
   const productLists = useSelector(state => state.contactProducts.products);
-
+  
   const dispatch = useDispatch();
   //products list
   const fetchProducts = async () => {
@@ -42,6 +43,7 @@ function ProductList() {
   const [posts, setPosts] = useState(productLists);
   const [asc, setAsc] = useState('');
   const [des, setDes] = useState('');
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerpage] = useState(8);
   const indexLastPost = currentPage * postPerPage;
@@ -147,7 +149,7 @@ function ProductList() {
                       Count In Stock: {countInStock}
                     </div>
                     <div className="title__">  <h2 className="productTitle">{name}</h2></div>
-                    <h3 className='productPrice'>{price} đ</h3>
+                    <h3 className='productPrice'>{formatPrice(price) } </h3>
                   </div>
                   <div className="productIcon">
                     <div><Link to={`updateproduct/${_id}`}><BiEditAlt className='productEdit' /></Link></div>

@@ -1,65 +1,127 @@
-.productDetailUi{
+.productDetailUi {
     display: flex;
 }
-.productLeft{
-    flex:3;
-    width: 450px;
-    height:100vh;
+
+.productLeft {
+    flex: 3;
+  /*   width: 45%;
+    height: 90vh; */
 }
-.productImage{
- width: 90%;
- 
-}
-.productRight{
-    flex:3;
-}
-.productBod{
-    flex-direction: column;
-}
-.productBrand{
-    font-size: 20px;
- 
+
+.productImage {
+    width: 75%;
+    height: 100%;
 
 }
-.iconBrand{
-    margin-top:20px;
-    margin-right:15px;
+
+.productRight {
+    flex: 3;
+}
+
+.productBod {
+    flex-direction: column;
+}
+
+.productBrand {
+    font-size: 20px;
+
+
+}
+
+.iconBrand {
+    margin-top: 20px;
+    margin-right: 15px;
     font-size: 20px;
 }
-.productName{
-    margin-top:25px;
+
+.productName {
+    margin-top: 25px;
     font-size: 28px;
     font-weight: 600;
 }
-.productprice{
+
+.productprice {
     margin-left: 20px;
-    color:red;
-    margin-top:25px;
+    color: red;
+    margin-top: 25px;
     font-size: 25px;
     font-weight: 600;
 }
-.productDecrip{
-    margin-top:45px;
+
+.productDecrip {
+    margin-top: 45px;
 
     color: rgb(95, 95, 95);
-    line-height:25px;
+    line-height: 25px;
     height: auto;
-}  
-.btnBuy{
+}
+
+.btnBuy {
     font-weight: 600;
     color: rgb(252, 252, 252);
     font-size: 18px;
-    height:45px;
+    height: 45px;
     border-radius: 10px;
-    margin-top:25px;
+    margin-top: 25px;
     background: linear-gradient(to right, #0066ff 0%, #ccccff 100%);
-    width: 50%;
+    width: 100%;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
-.btnBuy:hover{
+
+.btnBuy:hover {
     background: linear-gradient(to right, #3399ff 0%, #ccccff 100%);
     color: rgb(0, 5, 141);
+}
+
+.titleDetail {
+    margin-left: 40px;
+    font-weight: 600;
+
+
+}
+
+.detailProduct__ {
+    margin-bottom: 25px;
+    margin-top: 20px;
+    display: flex;
+    margin-left: 40px;
+    width: 210px;
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 3px solid rgb(142, 138, 138);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.imgDetailProduct {
+    width: 150px;
+ 
+}
+.containerDetail{
+
+    display: flex;
+}
+.detailPrice{
+    color: red;
+
+}
+.detailName {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 180px;
+}
+.detailBodyImg{
+   margin-bottom: 15px;
 }

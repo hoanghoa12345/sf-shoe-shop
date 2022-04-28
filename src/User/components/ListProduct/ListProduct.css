@@ -90,6 +90,10 @@
   transition-delay: 0.1s;
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 220px;
 
 }
 
