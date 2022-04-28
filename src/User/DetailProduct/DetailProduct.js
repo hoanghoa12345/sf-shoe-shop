@@ -11,17 +11,18 @@ import { getProduct, getProducts } from '../../api/httpRequest';
 import Loading from './../components/Loading/index';
 import './detail.css';
 import { formatPrice } from '../../utils/common';
+import { useNavigate } from 'react-router';
+
 
 
 function DetailProduct() {
     const [data, setData] = useState([]);
     const [productList, setProductList] = useState([]);
     const [search, setSearch] = useState('')
-
+    const navigate = useNavigate()
     const fetchProducts = async () => {
         const responseProductList = await getProducts()
         setProductList([...responseProductList.data])
-       
 
     }
 
@@ -73,16 +74,18 @@ function DetailProduct() {
                         <span className="titleDetail">Sản phẩm tương tự</span>
                         <div className="containerDetail">
                             {productList.filter((data) => {
-                                   if(  data.brand.toLowerCase().includes(search.toLocaleLowerCase()))
-                                  {return data}
+                                if (data.brand.toLowerCase().includes(search.toLocaleLowerCase())) { return data }
                             }).map(data => {
                                 const { _id, price, rating, numReviews, name, image, brand, category, description } = data;
                                 return (
-                                    <form className="detailProduct__" key={_id}>
+                                    <form className="detailProduct__" key={_id} >
                                         <div>
-                                          <div className='detailBodyImg'>  <img className="imgDetailProduct" src={data.image} /></div>
+                                            <img className="imgDetailProduct" src={data.image} />
                                             <h4 className="detailName">{name}</h4>
                                             <h4 className="detailPrice">{formatPrice(price)}</h4>
+                                            <button className="btn_detail" onClick={() => navigate(`/detailProduct/${_id}`)}>
+                                                Mua Ngay
+                                            </button>
                                         </div>
                                     </form>
                                 )

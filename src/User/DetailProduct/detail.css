@@ -9,7 +9,7 @@
 }
 
 .productImage {
-    width: 75%;
+    width: 85%;
     height: 100%;
 
 }
@@ -84,6 +84,7 @@
 }
 
 .detailProduct__ {
+   
     margin-bottom: 25px;
     margin-top: 20px;
     display: flex;
@@ -102,8 +103,10 @@
 }
 
 .imgDetailProduct {
-    width: 150px;
- 
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    margin-left: 25px;
 }
 .containerDetail{
 
@@ -111,6 +114,7 @@
 }
 .detailPrice{
     color: red;
+    margin-bottom: 10px;
 
 }
 .detailName {
@@ -124,4 +128,18 @@
 }
 .detailBodyImg{
    margin-bottom: 15px;
+}
+.btn_detail{
+
+    width: 150px;
+    height: 30px;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 8px;
+    background: linear-gradient(to right,#F4A2A6,#FEC5C9); 
+  color:#fff;
+  
+}
+.btn_detail:hover{
+    background: linear-gradient(to right,#ea6c73,#FEC5C9); 
 }
