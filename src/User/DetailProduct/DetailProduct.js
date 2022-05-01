@@ -28,6 +28,8 @@ function DetailProduct() {
     }
     useEffect(() => {
         fetchIdProducts()
+
+        window.scrollTo(0, 0)
     }, [])
 
     const handleAddToCart = data => {

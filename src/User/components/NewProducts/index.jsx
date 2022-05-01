@@ -1,52 +1,30 @@
+import { useEffect, useState } from 'react'
 import { AiFillStar } from 'react-icons/ai'
-import shoes_1 from '../../assets/images/slide_1.png'
-import shoes_2 from '../../assets/images/slide_2.png'
-import shoes_3 from '../../assets/images/slide_3.png'
+import { useNavigate } from 'react-router'
+import { getProducts } from '../../../api/httpRequest'
+import { formatPrice } from '../../../utils/common'
 import './style.scss'
 
 function NewProduct() {
+    const navigate = useNavigate()
+    const [productsNew, setProductsNew] = useState([])
 
-    const data = [
-        {
-            id: 1,
-            name: 'New Nike Airmac shoes',
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum eveniet ipsa nobis earum, assumenda recusandae blanditiis suscipit, quo, maxime vero aliquam adipisci quis accusamus expedita at nisi animi reprehenderit!",
-            urlImage: [
-                shoes_1,
-                shoes_1,
-                shoes_1,
-                shoes_1,
-            ],
-            originPirce: 20,
-            salePrice: 15
-        },
-        {
-            id: 2,
-            name: 'New Nike Airmac shoes',
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum eveniet ipsa nobis earum, assumenda recusandae blanditiis suscipit, quo, maxime vero aliquam adipisci quis accusamus expedita at nisi animi reprehenderit!",
-            urlImage: [
-                shoes_2,
-                shoes_2,
-                shoes_2,
-                shoes_2,
-            ],
-            originPirce: 20,
-            salePrice: 15
-        },
-        {
-            id: 3,
-            name: 'New Nike Airmac shoes',
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum harum eveniet ipsa nobis earum, assumenda recusandae blanditiis suscipit, quo, maxime vero aliquam adipisci quis accusamus expedita at nisi animi reprehenderit!",
-            urlImage: [
-                shoes_3,
-                shoes_3,
-                shoes_3,
-                shoes_3,
-            ],
-            originPirce: 20,
-            salePrice: 15
-        } 
-    ]
+    const handleDetail = id => {
+        navigate(`detailProduct/${id}`)
+    }
+
+    useEffect(() => {
+        ( async () => {
+            const res = await getProducts()
+            const products = res.data
+
+            let count = 0
+            setProductsNew(products.filter(item => {
+                count++
+                return products.length - 3 < count
+            }))
+        })()
+    }, [])
 
     return ( 
         <div className="new">
@@ -54,19 +32,10 @@ function NewProduct() {
                 <h2 className="heading">New <span>Product</span></h2>
                 <div className="new__list">
                     {
-                        data.map((item, index) => (
+                        productsNew.map((item, index) => (
                             <div className="new__item" key={index}>
-                                <div className="new__images">
-                                    {
-                                        item.urlImage.map((img, index) => (
-                                            <div className="new__images-item" key={index}>
-                                                <img src={img} alt='image'/>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
                                 <div className="new__image">
-                                    <img src={item.urlImage[0]} alt='image' />
+                                    <img src={item.image} alt='image' />
                                 </div>
                                 <div className="new__content">
                                     <h3 className="new__name">{item.name}</h3>
@@ -78,19 +47,8 @@ function NewProduct() {
                                         <AiFillStar />
                                     </div>
                                     <p className='new__desc'>{item.description}</p>
-                                    <div className="new__price">
-                                        { 
-                                            item.salePrice > 0 ? (
-                                                <>
-                                                    <span className="new__price-present">${item.salePrice}</span>
-                                                    <span className="new__price-origin">${item.originPirce}</span>
-                                                </>
-                                            ) : ( 
-                                                <div className="new__price-present">${item.originPirce}</div>
-                                            )
-                                        }
-                                    </div>
-                                    <button className="new__button">Add to cart</button>
+                                    <span className="new__price">{formatPrice(item.price)}</span>
+                                    <button className="new__button" onClick={() => handleDetail(item._id)}>Xem chi tiết</button>
                                 </div>
                             </div>
                         ))
