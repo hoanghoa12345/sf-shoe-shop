@@ -37,7 +37,6 @@ function ListProduct() {
     const getProduct = async () =>{
       const {data} = await getProductAPI();
       setProducts([...data]);
-      console.log(data);
     }    
     getProduct();
   }, [])
@@ -64,14 +63,11 @@ function ListProduct() {
           <li className="category__item"  >
             <span to={`/category`} onClick={() =>setProducts('catId')}>ALL</span>
           </li>
-          {categories.map((item) => {
-            const { id } = item
-            return (
-              <li className="category__item" key={id} >
-                <span to={`/category/${item.id}`} onClick={() => hanldeClick(item.id)}>{item.name}</span>
-              </li>
-            )
-          }
+          {categories.map((item) =>(
+            <li className="category__item" key={item.id} >
+              <span to={`/category/${item.id}`} onClick={() => hanldeClick(item.id)}>{item.name}</span>
+            </li>
+          )
           )}
         </ul>
       </div>
@@ -79,7 +75,7 @@ function ListProduct() {
         <div className="category__list">
           { products.length !==0 ?( 
             products.map((item) => (
-            <div className="category__product" key={item.id}>
+            <div className="category__product" key={item._id}>
               <div ><img  className="category__img " src={item.image}/></div>
               <div className="category__name">{item.name}</div>
               <div className="category__price">{item.price}</div>
