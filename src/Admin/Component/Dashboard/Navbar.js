@@ -7,7 +7,7 @@ import '../Style/NavBar.css';
 import logo from'../../image/39b63840e895877b3c2a514a4397c1a1-gigapixel-scale-2_00x copy.png'
 
 function Navbar() {
- 
+    const user = localStorage.getItem('user')
     return (
         <div className='topbar'>
             <div className='topbarwapper'>
@@ -26,7 +26,7 @@ function Navbar() {
 
                         </div>
                     <img src={logo} className='topAvatar' />
-                    <span className="AvatarTop">Zock Foster</span>
+                    <span className="AvatarTop">{JSON.parse(user).name}</span>
                     <h6 className="AvatarTopM">Manager</h6>
 
 
