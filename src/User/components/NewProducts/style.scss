@@ -4,14 +4,14 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px 0;
+        gap: 30px 0;
     }
 
     &__item {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        gap: 0 20px;
+        gap: 0 40px;
         width: 100%;
         padding: 20px;
         border: 1px solid #eee;
@@ -19,37 +19,13 @@
         border-radius: 7px;
     }
 
-    &__images {
-        display: flex;
-        flex-direction: column;
-        gap: 5px 0;
-        width: 100px;
-        
-        &-item {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #eee;
-            cursor: pointer;
-            transition: 0.15s linear;
-
-            img {
-                width: 100%;
-            }
-
-            &:hover {
-                border-color: black;
-            }
-        }
-    }
-
-    &__image,&__content {
-        width: calc(50% - 70px);
+    &__image, &__content {
+        width: calc(50% - 40px);
     }
 
     &__image {
-        height: 90%;
+        height: 100%;
         background-color: #eee;
-        padding: 30px;
 
         img {
             width: 80%;
@@ -69,6 +45,9 @@
         text-transform: uppercase;
         font-size: 18px;
         font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__stars {
@@ -84,21 +63,14 @@
         font-weight: 400;
         color: gray;
         line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     &__price {
-        display: flex;
-        align-items: center;
-        gap: 0 10px;
-
-        &-present {
-            font-size: 20px;
-            font-weight: 600;
-        }
-        &-origin {
-            color: orange;
-            text-decoration: line-through;
-        }
+        font-weight: 500;
     }
     
     &__button {
