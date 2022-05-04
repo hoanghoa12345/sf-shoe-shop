@@ -15,6 +15,7 @@ const postRegister = userInfo => {
     return axios.post(BASE_URL + 'api/users/register', userInfo)
 }
 
+
 const getUser = (TOKEN) => {
     return axios.get(BASE_URL + 'api/users/list/', {
         headers: {

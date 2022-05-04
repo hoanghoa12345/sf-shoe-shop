@@ -77,8 +77,10 @@
 }
 
 .titleDetail {
+    
     margin-left: 40px;
     font-weight: 600;
+    margin-top: 15px;
 
 
 }
@@ -142,4 +144,9 @@
 }
 .btn_detail:hover{
     background: linear-gradient(to right,#ea6c73,#FEC5C9); 
+}
+.detailProductbody{
+    width: 90%;
+    margin-left: 70px;
+    border-top: 2px solid rgb(161, 156, 156);
 }

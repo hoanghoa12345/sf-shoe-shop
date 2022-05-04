@@ -26,6 +26,7 @@
 
 .Dashboard_active {
   color: #00b4d8;
+
 }
 
 .Dashboard_Li {
@@ -49,8 +50,8 @@
   background-color: #ffffe8;
 }
 
-.Dashboard_Li:active,
+/* .Dashboard_Li:active,
 .active {
   background-color: rgb(223, 223, 223);
   
-}
+} */

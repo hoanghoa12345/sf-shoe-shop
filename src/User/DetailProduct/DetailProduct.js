@@ -70,8 +70,8 @@ function DetailProduct() {
                         )
                     }))}
 
-                    <div >
-                        <span className="titleDetail">Sản phẩm tương tự</span>
+                    <div className="detailProductbody" >
+                        <div  className="titleDetail"><span>Sản phẩm tương tự</span></div>
                         <div className="containerDetail">
                             {productList.filter((data) => {
                                 if (data.brand.toLowerCase().includes(search.toLocaleLowerCase())) { return data }

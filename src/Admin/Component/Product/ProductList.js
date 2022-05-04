@@ -12,10 +12,10 @@ import Pagination from '../Pagination';
 import '../Style/ProductList.css';
 import axios from 'axios';
 import ReactLoading from 'react-loading';
-import { deleteProduct, getProducts,TOKEN } from '../../../api/httpRequest';
+import { deleteProduct, getProducts, TOKEN } from '../../../api/httpRequest';
 import Loading from '../../Loading';
 import { formatPrice } from './../../../utils/common';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2ExIiwiZW1haWwiOiJob2FuZ2hvYUBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NTA5NTc0NzksImV4cCI6MTY1MTEzMDI3OX0.qLkaitBYi3CPpidf2zSe5yx34K0-vtEj19nBEZRuBiE'
+
 
 function ProductList() {
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ function ProductList() {
   const [deleteId, setDeleteId] = useState(0);
   const [search, setSearch] = useState('')
   const productLists = useSelector(state => state.contactProducts.products);
-  
+
   const dispatch = useDispatch();
   //products list
   const fetchProducts = async () => {
@@ -37,13 +37,14 @@ function ProductList() {
   useEffect(() => {
     fetchProducts();
   }, [])
+  console.log(productLists);
 
 
   //phan trang
   const [posts, setPosts] = useState(productLists);
   const [asc, setAsc] = useState('');
   const [des, setDes] = useState('');
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerpage] = useState(8);
   const indexLastPost = currentPage * postPerPage;
@@ -57,14 +58,14 @@ function ProductList() {
     setDeleteId(_id)
     setDeletes(true)
   }
-  const hanldeYes = async() => {
+  const hanldeYes = async () => {
     let _id = deleteId;
     try {
       const response = await deleteProduct(_id, TOKEN)
       setDeletes(false);
       toast.success('Xóa thành công')
       dispatch(delete_product(response.data))
-    } catch (error) {}
+    } catch (error) { }
     fetchProducts()
 
   }
@@ -73,19 +74,18 @@ function ProductList() {
     setDeletes(false)
   }
   //Sort products
-  const option = ['Sắp xếp Theo Giá ', 'Tăng Dần', 'Giảm Dần'];
+/*   const option = ['Sắp xếp Theo Giá ', 'Tăng Dần', 'Giảm Dần'];
   const hanldeAsc = () => {
     productLists.sort((a, b) => { return (a.price - b.price) })
   }
 
   const hanldeDes = () => {
     productLists.sort((a, b) => { return (b.price - a.price) })
-  }
+  } */
   useEffect(() => {
     setPosts(productLists)
   }, [fetchProducts])
 
-  //loading
 
   return (
     <div>
@@ -111,7 +111,7 @@ function ProductList() {
         <div className='headerRight'><FaSearch className='iconSearch' />
           <input className='inputSearchProduct' placeholder='Search...' onChange={(e) => setSearch(e.target.value)} disabled={productLists.length === 0} />
         </div>
-       {/*  <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} disabled={productLists.length === 0}>
+        {/*  <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} disabled={productLists.length === 0}>
           <option>Sắp Xếp theo Giá: </option>
           <option value={posts} onClick={hanldeAsc}>Tăng Dần</option>
           <option value={posts} onClick={hanldeDes}>Giảm Dần</option>
@@ -132,7 +132,7 @@ function ProductList() {
             }
           })
             .map((productList, index) => {
-              const { _id, image, countInStock, rating, name, price, numReviews } = productList;
+              const { _id, image, countInStock, rating, sizeList, name, price, numReviews } = productList;
               return (
                 <div className="productList" key={index}>
                   <div className="productCard">
@@ -143,13 +143,23 @@ function ProductList() {
                     <div className="contentBx ">
                       <div className="productTotal">   Reviews: {numReviews}  </div>
                       <div className="productTotal"> Rating: {rating}</div>
-                
+                      <div className='productTotal'>
+                        <label> Size: </label>
+                        <select name='Active' id='Active'  >
+                        
+                           {sizeList.map(sizelist => {
+                            return (
+                              <option value={sizelist}>{sizelist}</option>
+                            )
+                          })} 
+                        </select>
+                      </div>
                     </div>
                     <div className="productRest">
                       Count In Stock: {countInStock}
                     </div>
                     <div className="title__">  <h2 className="productTitle">{name}</h2></div>
-                    <h3 className='productPrice'>{formatPrice(price) } </h3>
+                    <h3 className='productPrice'>{formatPrice(price)} </h3>
                   </div>
                   <div className="productIcon">
                     <div><Link to={`updateproduct/${_id}`}><BiEditAlt className='productEdit' /></Link></div>
@@ -157,7 +167,7 @@ function ProductList() {
                   </div>
                 </div>
               )
-            })) : (<Loading/>)}
+            })) : (<Loading />)}
         </div>
       </div>
 
