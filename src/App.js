@@ -53,7 +53,7 @@ const App = () => {
                 <Route index element={<NotFound />} />
             </Route>
 
-            {/* <Route path="*" element={<Navigate to="/not-found" replace />} /> */}
+            <Route path="*" element={<Navigate to="/not-found" replace />} />
         </Routes>
     )
 }

@@ -61,7 +61,7 @@
         font-weight: 500;
     }
 
-    &__quantily {
+    &__quantity{
         
         &-wrap {
             width: max-content;
@@ -159,7 +159,7 @@
             gap: 0 10px;
         }
 
-        &__quantily {
+        &__quantity{
             padding: 10px 7px;
             gap: 0 20px;
         }
@@ -212,7 +212,7 @@
             margin-top: -40px;
         }
 
-        &__quantily {
+        &__quantity{
             position: relative;
             margin-left: 145px;
             
@@ -229,7 +229,7 @@
     }
 
     @media screen and(max-width: 479px) {
-        &__quantily {
+        &__quantity{
             margin-left: 110px;
         }
     }

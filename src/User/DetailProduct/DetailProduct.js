@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import { GiRunningShoe } from 'react-icons/gi';
 import { GrOverview } from 'react-icons/gr';
-import { MdCategory } from 'react-icons/md';
 import { AiTwotoneStar } from 'react-icons/ai';
 import { useParams } from 'react-router';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import { getProduct, getProducts } from '../../api/httpRequest';
 import Loading from './../components/Loading/index';
 import './detail.css';
 import { formatPrice } from '../../utils/common';
-import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/actions/cartAction';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -26,7 +27,7 @@ function DetailProduct() {
 
     }
 
-
+const dispatch = useDispatch()
     const { id } = useParams()
     const fetchIdProducts = async () => {
         const response = await getProduct(id)
@@ -40,8 +41,23 @@ function DetailProduct() {
     useEffect(() => {
         fetchProducts()
         fetchIdProducts()
+
+        window.scrollTo(0, 0)
     }, [])
 
+    const handleAddToCart = data => {
+        const newProduct = {
+            id: data._id,
+            name: data.name,
+            image: data.image,
+            price: data.price,
+            quantity: 1,
+            size: 30
+        }
+
+        dispatch(addToCart(newProduct))
+        toast.success('Thêm vào giỏ hàng thành công!')
+    }
 
     return (
         <div>
@@ -50,20 +66,22 @@ function DetailProduct() {
                     {data.length === 0 ? (<Loading />) : (data.map(data => {
                         const { _id, price, rating, numReviews, name, image, brand, category, description } = data;
                         return (
-                            <div className="productDetailUi" key={_id}>
-                                <div className="productLeft">
-                                    <img className="productImage" src={image} alt="" />
-                                </div>
-                                <div className="productRight">
-                                    <div className="productBod">
-                                        <p className="productName">{name}</p>
-                                        <p className="productprice">{formatPrice(price)} </p>
-                                        <MdCategory className='iconBrand' /><span className="productBrand">{brand}</span>
-                                        <p className="productBrand">  <AiTwotoneStar className='iconBrand' />{category}</p>
-                                        <p className="productBrand">  <GrOverview className='iconBrand' />{numReviews}</p>
-                                        <p className="productBrand">  <AiTwotoneStar className='iconBrand' />{rating}</p>
-                                        <p className="productDecrip">{description}</p>
-                                        <div><button className="btnBuy">Thêm vào giỏ hàng</button></div>
+                            <div key={_id}>
+                                <div className="productDetailUi">
+                                    <div className="productLeft">
+                                        <img className="productImage" src={image} alt="" />
+                                    </div>
+                                    <div className="productRight">
+                                        <div className="productBod">
+                                            <p className="productName">{name}</p>
+                                            <p className="productprice">{formatPrice(price)} đ</p>
+                                            <GiRunningShoe className='iconBrand' /><span className="productBrand">{brand}</span>
+                                            <p className="productBrand">  <GrOverview className='iconBrand' />{numReviews}</p>
+                                            <p className="productBrand">  <AiTwotoneStar className='iconBrand' />{rating}</p>
+                                            <p className="productDecrip">{description}</p>
+                                            <div><button className="btnBuy" onClick={() => handleAddToCart(data)}>Thêm vào giỏ hàng</button></div>
+                                            <ToastContainer />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
