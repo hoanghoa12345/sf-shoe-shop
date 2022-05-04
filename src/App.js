@@ -10,6 +10,7 @@ import Information from './Admin/Component/User/Information'
 import AddProduct from './Admin/Component/Product/AddProduct'
 import UpdateProduct from './Admin/Component/Product/UpdateProduct'
 import OrderList from './Admin/Component/OrderList/Order'
+import ViewOrder from './Admin/Component/OrderList/ViewOrder'
 
 import Home from './User/pages/Home'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
@@ -53,6 +54,10 @@ const App = () => {
                 <Route path="about" element={<About />} />
 
                 <Route path="orderList" element={<OrderList />} />
+                <Route
+                    path="orderList/information/:id"
+                    element={<ViewOrder />}
+                />
             </Route>
 
             <Route path="not-admin" element={<NotIsAdmin />} />

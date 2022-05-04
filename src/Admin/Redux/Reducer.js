@@ -14,6 +14,7 @@ import {
     DELETE_PRODUCT
 } from './Action'
 import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from './Action'
+import { SET_ORDER, DELETE_ORDER } from './Action'
 
 const initialStateLogin = [
     {
@@ -69,6 +70,24 @@ export const authReducer = (state = initialStateLogin, action) => {
                 _id: '',
                 isAdmin: ''
             }
+        default:
+            return state
+    }
+}
+
+const initialStateOrder = {
+    orders: []
+}
+
+export const orderReducer = (state = initialStateOrder, action) => {
+    switch (action.type) {
+        case SET_ORDER:
+            return { ...state, orders: action.payload }
+        case DELETE_ORDER:
+            const deleteOrder = state.filter(
+                contact => contact.id !== action.payload && contact
+            )
+            return { deleteOrder }
         default:
             return state
     }
