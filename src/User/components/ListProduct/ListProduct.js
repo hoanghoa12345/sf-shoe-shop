@@ -15,20 +15,20 @@ function ListProduct() {
         {
             id: "Sneaker",
             name: "Giày Tây",
-          },
-          {
+        },
+        {
             id: "Shoe",
             name: "Giày Bốt Nam",
-          },
-          {
+        },
+        {
             id: "GUCI",
             name: "Giày lười nam",
-          },
-          {
+        },
+        {
             id: "Shoe",
             name: "Giày Vans",
-          }
-        ]
+        }
+    ]
 
     const getProductAPI = async () => {
         return await axios.get(
@@ -44,13 +44,13 @@ function ListProduct() {
         getProduct();
     }, [])
 
-    // const[pagination,setPagination] = useState({
-    //   _page: 1,
-    //   _limit: 10,
-    //   _totalRows: 11,
+    // const [pagination, setPagination] = useState({
+    //     _page: 1,
+    //     _limit: 10,
+    //     _totalRows: 11,
     // });
-    // function handlePageChange(newPage){
-    //   console.log("new page:", newPage);
+    // function handlePageChange(newPage) {
+    //     console.log("new page:", newPage);
     // }
     const hanldeClick = catItem => {
         const result = productsTemp.filter(curData => {
@@ -66,7 +66,7 @@ function ListProduct() {
                     <li className="category__item"  >
                         <span to={`/category`} onClick={() => setProducts(productsTemp)}>ALL</span>
                     </li>
-                    {categories.map((item,index) => {
+                    {categories.map((item, index) => {
                         const { id } = item
                         return (
                             <li className="category__item" key={index} >
@@ -81,15 +81,15 @@ function ListProduct() {
                     {products.length !== 0 ? (
                         products.map(item => (
                             <div className="category__product" key={item._id}>
-                               <div>
+                                <div>
                                     <img
                                         className="category__image "
-                                       
+
                                         src={item.image}
                                         alt=""
                                     />
                                 </div>
-                               
+
                                 <div className="category__name">
                                     {item.name}
                                 </div>
