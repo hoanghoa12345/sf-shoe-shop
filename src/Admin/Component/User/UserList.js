@@ -37,6 +37,7 @@ function UserList() {
   useEffect(() => {
     fetchUser()
   },[])
+  console.log(userLists);
   useEffect(() => {
     setPosts(userLists)
   }, [userLists])
@@ -96,6 +97,7 @@ function UserList() {
             <th>Số thứ tự</th>
             <th>Họ tên</th>
             <th>Email</th>
+            <th>Password</th>
             <th>Active</th>
             <th>Update</th>
           </tr>
@@ -111,14 +113,15 @@ function UserList() {
               name,
               email,
              isAdmin,
+             password,
             } = userList;
             return (
               <tr key={index}>
                 <td>{index}</td>
-            
                 <td>{name}</td>
                 <td>{email}</td>
-               {isAdmin ? (<td>True</td>):(<td>False</td>)}
+               <td>******************</td>
+               {isAdmin ? (<td><h2 >True</h2></td>):(<td>False</td>)}
                 <td>
                   <Link to={`information/${_id}`}>
                     <button className="btn_edit">Edit</button>

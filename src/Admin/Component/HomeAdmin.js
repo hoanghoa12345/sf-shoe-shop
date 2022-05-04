@@ -11,13 +11,16 @@ import { ResponsiveContainer, ComposedChart, Line, Bar, XAxis, YAxis, CartesianG
 import { useSelector } from 'react-redux';
 import { getProducts, getUser, TOKEN } from '../../api/httpRequest';
 import ReactLoading from 'react-loading';
-
-
-
+import { formatPrice } from './../../utils/common';
 
 function HomeAdmin() {
     const [data, setData] = useState([]);
-    const dataProducts = useSelector(state => state.contactProducts.products);
+    const [dataUser, setDataUser] = useState([])
+    
+    const fetchUser = async () => {
+        const responseUser = await getUser(TOKEN).catch(error => { console.log(error) })
+        setDataUser([responseUser.data])
+    }
 
     const fetchProducts = async () => {
         const response = await getProducts()
@@ -25,25 +28,19 @@ function HomeAdmin() {
         setData([...response.data])
     }
 
-
-
-    const checkPrice = dataProducts.sort((a, b) => { return (b.price - a.price) })
-    if (checkPrice) {
+    const checkPrice = data.sort((a, b) => { return(b.price - a.price); })
+ /*    if (checkPrice) {
         dataProducts.sort((a, b) => {
-            return (a.countInStock - b.countInStock)
+            return (a.price - b.price)
         })
-    }
+    } */
     let sumPrice = 0
     for (let i = 0; i < data.length; i++) {
-        sumPrice += data[i].price
+        sumPrice += data[i].price * data[i].countInStock
     }
     console.log(sumPrice);
     //User
-    const [dataUser, setDataUser] = useState([])
-    const fetchUser = async () => {
-        const responseUser = await getUser(TOKEN).catch(error => { console.log(error) })
-        setDataUser([responseUser.data])
-    }
+ 
 
     let sumUser = 0;
      for(let i =0 ; i<dataUser.length;i++){
@@ -93,7 +90,7 @@ function HomeAdmin() {
                                 <div className='productRevenue'>
                                     <div className='productCustumer'>
                                         <h2 className='custumterHeader'>Revenue</h2>
-                                        <h3 className='custumerPrice' >{sumPrice} đ</h3>
+                                        <h3 className='custumerPrice' >{formatPrice(sumPrice)} </h3>
                                     </div>
                                     <div className='productCustumer'>
                                         <h2 className='custumterHeader'>Total Custumer</h2>
@@ -103,7 +100,7 @@ function HomeAdmin() {
                                         <h3 className='custumerPrice'>0 </h3>
                                     </div>
                                 </div>
-                                <div style={{ width: '100%', height: 300 }}>
+                               {data.length !== 0 ?( <div style={{ width: '100%', height: 300 }}>
                                     <ResponsiveContainer>
                                         <ComposedChart width={500} height={400} data={data} >
                                             <CartesianGrid />
@@ -115,21 +112,21 @@ function HomeAdmin() {
                                             <Line key={data._id} type="monotone" dataKey="countInStock" stroke="#ff7300" />
                                         </ComposedChart>
                                     </ResponsiveContainer>
-                                </div>
+                                </div>):( <ReactLoading />)}
                             </div>
                         </div>
                         <div className='productTop'>
                             <h2 className='headerTop'>Top Products</h2>
                             <div className='boder__'>
                                 <div >
-                                    {data.length !== 0 ? data.map((dataProduct) => {
+                                    {data.length !== 0 && checkPrice ? data.map((dataProduct) => {
                                         const { _id, image, name, price, countInStock, rest } = dataProduct;
                                         return (
                                             <div className='topRight' key={_id}>
                                                 <img className='imgeRight' src={image || imageDefault} />
                                                 <div className='topHeader'>
                                                     <h4 className='headerRight'>{name}</h4>
-                                                    <h4 className='headerh3'>{price} đ</h4>
+                                                    <h4 className='headerh3'>{formatPrice(price)} </h4>
                                                 </div>
 
                                                 <p className='topRest'><TiArrowUpThick />{countInStock}</p>

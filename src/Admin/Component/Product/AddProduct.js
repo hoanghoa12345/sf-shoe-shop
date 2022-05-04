@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
-import { getProducts, saveProduct,TOKEN } from '../../../api/httpRequest';
+import { getProducts, saveProduct, TOKEN } from '../../../api/httpRequest';
 import imageDefault from '../../image/360_F_203190365_ITA15blQuR2DihmeipRp7oWUETVhyWA6-removebg-preview.png'
 import { add_product } from '../../Redux/Action';
-
+import { MultiSelect } from "react-multi-select-component";
 
 
 function AddProduct() {
@@ -18,20 +18,13 @@ function AddProduct() {
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [countInStock, setCountInStock] = useState('');
+  const [sizeObject, setSizeObject] = useState([]);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const data = {
-    image,
-    name,
-    price,
-    brand,
-    category,
-    description,
-    countInStock
-  }
 
   const hanldeCreate = async () => {
-    if(!image || !name || !price || !category || !description || !countInStock || !brand){
+    if (!image || !name || !sizeList || !price || !category || !description || !countInStock || !brand) {
       toast.warning("Vui lòng điền đầy đủ thông tin sản phẩm.")
     }
     try {
@@ -43,7 +36,23 @@ function AddProduct() {
 
     }
   }
- /*  😊😊😊😊 */
+  let sizeList = []
+  sizeObject.forEach(({label, value}) => {
+    sizeList.push(value)
+  })
+  console.log(sizeList);
+  const data = {
+    image,
+    name,
+    sizeList,
+    price,
+    brand,
+    category,
+    description,
+    countInStock
+  }
+
+
   const handleSubmitForm = (e) => {
     e.preventDefault();
   }
@@ -60,7 +69,11 @@ function AddProduct() {
       image && URL.revokeObjectURL(image.preview)
     }
   }, [image])
-
+  //select option 
+  const options = [
+   {label: '28' , value: 28},
+   {label: '29' , value: 29}
+  ]
   return (
     <div>
       <div className='newUserHome'>
@@ -76,7 +89,7 @@ function AddProduct() {
             </label>
             <input type='file' id='file' style={{ display: 'none' }} onChange={hanldeImageProduct} />
           </div>
-         
+
           <form className='newUserForm' onSubmit={handleSubmitForm}  >
             <div className='newUserItem'>
               <label>Or Link image</label>
@@ -103,11 +116,20 @@ function AddProduct() {
               <label>Category</label>
               <input type='text' placeholder='Category' value={category} onChange={(e) => setCategory(e.target.value)} />
             </div>
-          </form>
             <div className='newUserItem'>
-              <label>Decription</label>
-              <textarea className='detail_Texttarea' rows='10' placeholder='Description...' value={description} onChange={(e) => setDescription(e.target.value)} />
+              <label>Size</label>
+              <MultiSelect
+                options={options}
+                value={sizeObject}
+                onChange={setSizeObject}
+                labelledBy="Select"
+              />
             </div>
+          </form>
+          <div className='newUserItem'>
+            <label>Decription</label>
+            <textarea className='detail_Texttarea' rows='10' placeholder='Description...' value={description} onChange={(e) => setDescription(e.target.value)} />
+          </div>
           <button className='listUser_btn btn create' onClick={hanldeCreate} >Create</button>
           <button className='listUser_btn btn' onClick={hanldeClickAdminHome}  > Cancel </button>
         </div>

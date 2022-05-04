@@ -213,6 +213,7 @@
 .productEdit {
     font-size: 35px;
     margin-right: 10px;
+   
 }
 
 .productEdit:hover {
@@ -386,4 +387,7 @@
     100% {
         transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
     }
+}
+.sizeProducts{
+    
 }
