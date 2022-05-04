@@ -8,12 +8,13 @@ import { useParams } from "react-router-dom";
 import { update_user } from "../../Redux/Action";
 import { toast } from "react-toastify";
 import avatarDefaul from '../../image/avatart.jpg'
-import { updateUser,TOKEN } from "../../../api/httpRequest";
+import { updateUser, TOKEN } from "../../../api/httpRequest";
 
 
 function Information() {
   const [isAdmin, setIsAdmin] = useState("");
   const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   const [information, setInformation] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,15 +26,17 @@ function Information() {
     if (findEditUser) {
       setName(findEditUser.name);
       setIsAdmin(findEditUser.isAdmin);
+      setPassword(findEditUser.password);
     }
   }, [findEditUser])
 
   const data = {
     id,
     name,
-    isAdmin
+    isAdmin,
+    password
   };
-
+console.log(findEditUser);
   const hanldeUpdate = async () => {
     try {
       const response = await updateUser(id, data, TOKEN)
@@ -41,7 +44,7 @@ function Information() {
       toast.success("Update successful !!");
       dispatch(update_user(response.data));
       console.log(response.data);
-    } catch (error) {console.log('err',error); }
+    } catch (error) { console.log('err', error); }
 
   };
 
@@ -115,6 +118,15 @@ function Information() {
                             disabled={findEditUser.email}
                             className='userUpdateInput' />
                         </div>
+                        {isAdmin ? (
+                          <div className='userUpdateItem'>
+                            <label className='title_edit'>Password:</label>
+                            <input type='password'
+                            value={password}
+                              placeholder='****************'
+                              onChange={(e)=>setPassword(e.target.value)}
+                              className='userUpdateInput' />
+                          </div>) : (null)}
 
                       </div>
 
