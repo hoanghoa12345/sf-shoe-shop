@@ -4,27 +4,35 @@ import { RiSubtractLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { formatPrice } from "../../../utils/";
+import Loading from "../../components/Loading";
 import { removeItem, setQuantity } from "../../redux/actions/cartAction";
 import "./style.scss";
-import Loading from "../../components/Loading";
 
 function Cart() {
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [loading, setLoading] = useState(true)
-
-  const cartList = useSelector(state => state.cart)
-  console.log(cartList);
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  
+  const [loading, setLoading] = useState(true)
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalQuantity, setTotalQuantity] = useState(0)
+
+  const cartList = useSelector(state => state.cart)
+
+
+  const hanldeSetData = cart => {
+    setTotalPrice(cart.reduce((total, item) => total + item.quantity * item.price, 0))
+    setTotalQuantity(cart.reduce((total, item) => total + item.quantity, 0))
+  }
 
   useEffect(() => {
-      setTotalPrice(cartList.reduce((total, item) => total + item.quantity * item.price, 0))
-  }, [cartList])
+    hanldeSetData(cartList)
+  }, [])
+
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 800)
   })
+
 
   const handleSetQuantity = (id, size, newQuantity) => {
     if(!newQuantity >= 1) return
@@ -44,6 +52,8 @@ function Cart() {
       })
 
       localStorage.setItem('cart', JSON.stringify(newCart))
+
+      hanldeSetData(newCart)
     }
   }
 
@@ -55,6 +65,8 @@ function Cart() {
     const cart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [] 
     cart.splice(index, 1)
     localStorage.setItem('cart', JSON.stringify(cart))
+
+    hanldeSetData(cart)
   }
 
   const handleNavigateShop = () => {
@@ -72,6 +84,7 @@ function Cart() {
   return (
     !loading ? (
       <div className='cart container'>
+        <h3 className="cart__heading">Giỏ hàng <span>{totalQuantity}</span> </h3>
         <div className="cart__title">
           <h4>Sản phẩm</h4>
           <h4>Giá</h4>
