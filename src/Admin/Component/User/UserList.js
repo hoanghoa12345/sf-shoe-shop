@@ -98,7 +98,7 @@ function UserList() {
             <th>Họ tên</th>
             <th>Email</th>
             <th>Password</th>
-            <th>Active</th>
+            <th>IsAdmin</th>
             <th>Update</th>
           </tr>
           { userLists.length !== 0 ? (currentPost.filter((data) => {

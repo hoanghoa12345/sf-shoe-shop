@@ -27,12 +27,34 @@ function Cart() {
   })
 
   const handleSetQuantity = (id, size, newQuantity) => {
-    if(newQuantity >= 1) dispatch( setQuantity({ id, size, newQuantity }) )
+    if(!newQuantity >= 1) return
+    
+    dispatch( setQuantity({ id, size, newQuantity }) )
+
+    // SAVE LOCAL STORAGE
+    const cart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [] 
+    const product = cart.find(item => item.id === id && item.size === size)
+
+    if(product) {
+      const newCart = cart.map(item => {
+        if(item.id === product.id && item.size === size) {
+          item.quantity = newQuantity
+        }
+        return item
+      })
+
+      localStorage.setItem('cart', JSON.stringify(newCart))
+    }
   }
 
   const handleRemoveItem = index => {
     setLoading(true)
     dispatch( removeItem(index) )
+
+    // SAVE LOCAL STORAGE
+    const cart = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [] 
+    cart.splice(index, 1)
+    localStorage.setItem('cart', JSON.stringify(cart))
   }
 
   const handleNavigateShop = () => {
@@ -41,6 +63,10 @@ function Cart() {
 
   const handleNavigateCheckout = () => {
     navigate('/checkout')
+  }
+
+  const handleDetail = id => {
+    navigate(`/detailProduct/${id}`)
   }
 
   return (
@@ -64,8 +90,9 @@ function Cart() {
                         src={item.image}
                         className="cart__image"
                         alt={item.name}
+                        onClick={() => handleDetail(item.id)}
                       />
-                      <h4 className="cart__name">{item.name}</h4>
+                      <h4 className="cart__name" onClick={() => handleDetail(item.id)}>{item.name}</h4>
                     </div>
                     <div className="cart__price cart__row">
                       <h5 className="cart__note">Giá: </h5>

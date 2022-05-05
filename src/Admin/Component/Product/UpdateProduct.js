@@ -141,7 +141,6 @@ function UpdateProduct() {
                   />
                 </div><div className='left-input_'>
                   <span className='lable_'>Size:</span>
-
                   <select className='selectSize' name='Active' id='Active'  >
                     {findIdProducts.sizeList.map(sizelist => {
                       return (

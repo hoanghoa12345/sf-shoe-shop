@@ -1,7 +1,8 @@
 import { ADD_TO_CART, REMOVE_ITEM, SET_QUANTITY } from "../constants/cartConstant"
    
+const initState = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : []
 
-const reducer = (state = [], action) => {
+const reducer = (state = initState, action) => {
     switch(action.type) {
         case ADD_TO_CART:
             const product = state.find(item => item.id === action.payload.id && item.size === action.payload.size)

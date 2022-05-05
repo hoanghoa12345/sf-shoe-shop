@@ -24,6 +24,14 @@ const getOrders = TOKEN => {
     })
 }
 
+const postOrder = (orderInfo, TOKEN) => {
+    return axios.post(BASE_URL + 'api/orders/', orderInfo, {
+        headers: {
+            Authorization: `Bearer ${TOKEN}`
+        }
+    })
+}
+
 const updateOrder = (id, orderBody, TOKEN) => {
     return axios.put(BASE_URL + 'api/orders/' + id, orderBody, {
         headers: {
@@ -108,6 +116,7 @@ const deleteProduct = (id, TOKEN) => {
 export {
     TOKEN,
     getOrders,
+    postOrder,
     updateOrder,
     deleteOrder,
     postLogin,

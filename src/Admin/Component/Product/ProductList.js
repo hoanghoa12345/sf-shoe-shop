@@ -161,7 +161,6 @@ console.log('dataFilter',category,dataFilter);
                       <div className='productTotal'>
                         <label> Size: </label>
                         <select name='Active' id='Active'  >
-
                            {sizeList.map(sizelist => {
                             return (
                               <option value={sizelist}>{sizelist}</option>

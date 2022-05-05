@@ -51,11 +51,37 @@ function DetailProduct() {
             image: data.image,
             price: data.price,
             quantity: 1,
-            size: 30
+            size: 30,
+            product: data._id
         }
 
         dispatch(addToCart(newProduct))
         toast.success('Thêm vào giỏ hàng thành công!')
+
+        // SAVE LOCAL STORAGE
+        const cart = JSON.parse(localStorage.getItem('cart'))
+            ? JSON.parse(localStorage.getItem('cart'))
+            : []
+        const product = cart.find(
+            item => item.id === newProduct.id && item.size === newProduct.size
+        )
+        let newCart
+
+        if (product) {
+            newCart = cart.map(item => {
+                if (
+                    item.id === newProduct.id &&
+                    item.size === newProduct.size
+                ) {
+                    item.quantity = parseInt(item.quantity) + 1
+                }
+                return item
+            })
+        } else {
+            newCart = [...cart, newProduct]
+        }
+
+        localStorage.setItem('cart', JSON.stringify(newCart))
     }
 
     return (

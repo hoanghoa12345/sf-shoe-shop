@@ -18,7 +18,6 @@ function HomeAdmin() {
     console.log(orderList);
     const [data, setData] = useState([]);
     const [dataUser, setDataUser] = useState([])
-
     const fetchUser = async () => {
         const responseUser = await getUser(TOKEN).catch(error => { console.log(error) })
         setDataUser([responseUser.data])
@@ -42,7 +41,6 @@ function HomeAdmin() {
     }
     console.log(sumPrice);
     //User
-
 
     let sumUser = 0;
      for(let i =0 ; i<dataUser.length;i++){
@@ -115,7 +113,7 @@ function HomeAdmin() {
                                             <Tooltip />
                                             <Legend />
                                             <Bar key={data._id} dataKey="countInStock" barSize={20} fill="#413ea0" />
-                                            <Line key={data._id} type="monotone" dataKey="countInStock" stroke="#ff7300" />
+                                          
                                         </ComposedChart>
                                     </ResponsiveContainer>
                                 </div>):( <ReactLoading />)}
