@@ -1,32 +1,14 @@
 /* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable no-unused-vars */
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../Style/ViewOrder.css'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { update_user } from '../../Redux/Action'
-import { toast } from 'react-toastify'
-import avatarDefaul from '../../image/avatart.jpg'
-import { updateUser, TOKEN } from '../../../api/httpRequest'
 
 function ViewOrder() {
-    const [fullname, setFullName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone_number, setPhone_number] = useState('')
-    const [province, setProvince] = useState('')
-    const [district, setDistrict] = useState('')
-    const [ward, setWard] = useState('')
-    const [address, setAddress] = useState('')
-    const [payment_method, setPayment_method] = useState('')
-    const [information, setInformation] = useState(true)
-    const [name, setName] = useState('')
-    const [quantity, setQuantity] = useState('')
-    const [price, setPrice] = useState('')
-    const [size, setSize] = useState('')
+    const [information] = useState(true)
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     var formatter = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
@@ -37,22 +19,8 @@ function ViewOrder() {
     const { id } = useParams()
     const findViewOrder = orderViews.find(orderView => orderView._id === id)
 
+    console.log(findViewOrder)
     console.log(findViewOrder.cartItems)
-    const data = {
-        id,
-        fullname,
-        email,
-        phone_number,
-        province,
-        district,
-        ward,
-        address,
-        payment_method,
-        name,
-        quantity,
-        price,
-        size
-    }
 
     return (
         <>
@@ -76,7 +44,6 @@ function ViewOrder() {
                                         <img
                                             src={image}
                                             className="Order_Image"
-                                            alt
                                         />
                                     </td>
                                     <td>{name}</td>
@@ -130,11 +97,11 @@ function ViewOrder() {
                                             <div className="View_Order_UpdateLeft">
                                                 <div className="View_Order_UpdateItem">
                                                     <label className="View_Order_Title">
-                                                        Name:
+                                                        Tên:
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={
+                                                        defaultValue={
                                                             findViewOrder.fullname
                                                         }
                                                         className="View_Order_Update_Input"
@@ -142,11 +109,11 @@ function ViewOrder() {
                                                 </div>
                                                 <div className="View_Order_UpdateItem">
                                                     <label className="View_Order_Title">
-                                                        Phone:
+                                                        Điện thoại:
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={
+                                                        defaultValue={
                                                             findViewOrder.phone_number
                                                         }
                                                         className="View_Order_Update_Input"
@@ -172,7 +139,7 @@ function ViewOrder() {
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={
+                                                        defaultValue={
                                                             findViewOrder.email
                                                         }
                                                         className="View_Order_Update_Input"
@@ -184,7 +151,7 @@ function ViewOrder() {
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={
+                                                        defaultValue={
                                                             findViewOrder.address +
                                                             ', ' +
                                                             findViewOrder.ward +
@@ -202,7 +169,7 @@ function ViewOrder() {
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={
+                                                        defaultValue={
                                                             findViewOrder.payment_method
                                                         }
                                                         className="View_Order_Update_Input"

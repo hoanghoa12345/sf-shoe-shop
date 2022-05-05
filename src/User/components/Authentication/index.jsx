@@ -103,12 +103,12 @@ function SignIn() {
                         className="sign-in-form"
                         onSubmit={loginSubmit}
                     >
-                        <h2 className="title">Login</h2>
+                        <h2 className="title">Đăng nhập</h2>
                         <div className="input-field">
                             <FaUser className="icon" />
                             <input
                                 type="text"
-                                placeholder="Email"
+                                placeholder="Nhập Email"
                                 className="input-contain"
                                 name="email"
                                 value={formik.values.email}
@@ -127,7 +127,7 @@ function SignIn() {
                             <FaLock className="icon" />
                             <input
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Nhập mật khẩu"
                                 className="input-contain"
                                 name="password"
                                 value={formik.values.password}
@@ -144,17 +144,17 @@ function SignIn() {
                         <input
                             type="submit"
                             className="btn-sign-signup btn-submit input-contain"
-                            value="Login"
+                            value="Đăng nhập"
                         />
                         <Link to="/">
                             <input
                                 type="submit"
                                 className="btn-sign-signup input-contain"
-                                value="Home"
+                                value="Trang chủ"
                             />
                         </Link>
 
-                        <p className="social-text">Login with ...</p>
+                        <p className="social-text">Đăng nhập với ...</p>
 
                         <div className="social-media">
                             <div className="social-media-ul">
@@ -183,12 +183,12 @@ function SignIn() {
                         className="sign-up-form"
                         onSubmit={registerSubmit}
                     >
-                        <h2 className="title">Register</h2>
+                        <h2 className="title">Đăng ký</h2>
                         <div className="input-field">
                             <FaUser className="icon" />
                             <input
                                 type="text"
-                                placeholder="Username"
+                                placeholder="Nhập tên"
                                 className="input-contain"
                                 name="name"
                                 value={formik.values.name}
@@ -204,7 +204,7 @@ function SignIn() {
                             <FaEnvelope className="icon" />
                             <input
                                 type="text"
-                                placeholder="Email"
+                                placeholder="Nhập Email"
                                 className="input-contain"
                                 name="email"
                                 value={formik.values.email}
@@ -222,7 +222,7 @@ function SignIn() {
                             <FaLock className="icon" />
                             <input
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Nhập mật khẩu"
                                 className="input-contain"
                                 name="password"
                                 value={formik.values.password}
@@ -239,17 +239,17 @@ function SignIn() {
                         <input
                             type="submit"
                             className="btn-sign-signup btn-submit"
-                            value="Register"
+                            value="Đăng ký"
                         />
                         <Link to="/">
                             <input
                                 type="submit"
                                 className="btn-sign-signup input-contain"
-                                value="Home"
+                                value="Trang chủ"
                             />
                         </Link>
 
-                        <p className="social-text">Register With ...</p>
+                        <p className="social-text">Đăng ký với ...</p>
 
                         <div className="social-media">
                             <div className="social-media-ul">
@@ -278,14 +278,16 @@ function SignIn() {
             <div className="panels-container">
                 <div className="panel left-panel">
                     <div className="content">
-                        <h3 className="h3-signin-signup">New here?</h3>
-                        <p className="p-signin-signup">lorem ipsum non sit</p>
+                        <h3 className="h3-signin-signup">
+                            Bạn chưa có tài khoản?
+                        </h3>
+                        <p className="p-signin-signup">Hãy đăng ký bên dưới</p>
                         <button
                             className="btn-sign-signup transparent"
                             id="sign-up-btn"
                             onClick={handleClickRegister}
                         >
-                            Register
+                            Đăng ký
                         </button>
                     </div>
                     <img src={SignUpImage} className="image" alt="signin" />
@@ -293,14 +295,18 @@ function SignIn() {
 
                 <div className="panel right-panel">
                     <div className="content">
-                        <h3 className="h3-signin-signup">New here?</h3>
-                        <p className="p-signin-signup">lorem ipsum non sit</p>
+                        <h3 className="h3-signin-signup">
+                            Bạn đã có tài khoản?
+                        </h3>
+                        <p className="p-signin-signup">
+                            Hãy chuyển qua trang đăng nhập
+                        </p>
                         <button
                             className="btn-sign-signup transparent"
                             id="sign-in-btn"
                             onClick={handleClickLogin}
                         >
-                            Login
+                            Đăng nhập
                         </button>
                     </div>
                     <img src={SignInImage} className="image" alt="signin" />

@@ -87,7 +87,6 @@ function UserList() {
                                 phone_number,
                                 cartItems
                             } = orderList
-                            // console.log('cartItems', cartItems[0].name)
                             return (
                                 <tr key={index}>
                                     <td>{index}</td>
