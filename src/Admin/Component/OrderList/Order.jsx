@@ -55,13 +55,7 @@ function UserList() {
         <div>
             <div className="listUsercontainer">
                 <div className="listUser">
-                    <Link to="adduser">
-                        <button className="btn_create">
-                            <AiOutlineUsergroupAdd className="iconBack" />
-                            Thêm đơn
-                        </button>
-                    </Link>
-                    <FaSearch className="iconSerach " />
+                    <FaSearch className="iconSerach_Order " />
                     <input
                         placeholder="Search...."
                         className="serach"

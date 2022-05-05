@@ -61,6 +61,14 @@
     margin-top: 20px;
 }
 
+.iconSerach_Order {
+    position: absolute;
+    margin-left: 25px;
+    margin-top: 8px;
+    color: rgb(111, 110, 110);
+    font-size: 15px;
+}
+
 ::placeholder {
     color: #434343;
     font-size: 13px;

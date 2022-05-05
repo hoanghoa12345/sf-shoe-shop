@@ -134,25 +134,21 @@ export const contactProducts = (state = initialStateProduct, action) => {
         case SET_PRODUCT:
             return { ...state, products: action.payload }
         case ADD_PRODUCT:
-            const products = state.products.concat(action.payload)
+            const products = state.products.concat(action.payload);
             return { ...state, products }
         case UPDATE_PRODUCT:
-            return state.map(contact =>
-                contact.id === action.payload.id ? action.payload : contact
-            )
+            return state.map((contact) => contact.id === action.payload.id ? action.payload : contact);
         case DELETE_PRODUCT:
-            const deleteProducts = state.filter(
-                contact => contact.id !== action.payload && contact
-            )
+            const deleteProducts = state.filter((contact) => contact.id !== action.payload && contact)
             return { deleteProducts }
         default:
-            return state
+            return state;
     }
 }
 export const selectProducts = (state = {}, { type, payload }) => {
     switch (type) {
         case SELECT_PRODUCT:
-            return { ...state, ...payload }
+            return { ...state, ...payload };
         case REMOVE_PRODUCT:
             return {}
         default:
