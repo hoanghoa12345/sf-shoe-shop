@@ -16,7 +16,6 @@ import { formatPrice } from './../../utils/common';
 function HomeAdmin() {
     const [data, setData] = useState([]);
     const [dataUser, setDataUser] = useState([])
-
     const fetchUser = async () => {
         const responseUser = await getUser(TOKEN).catch(error => { console.log(error) })
         setDataUser([responseUser.data])
@@ -40,7 +39,6 @@ function HomeAdmin() {
     }
     console.log(sumPrice);
     //User
-
 
     let sumUser = 0;
      for(let i =0 ; i<dataUser.length;i++){
