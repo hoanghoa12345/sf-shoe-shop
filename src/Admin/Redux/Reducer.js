@@ -1,6 +1,20 @@
-import {SET_USER,SELECT_USER, ADD_USER, UPDATE_USER, DELETE_USER } from './Action';
-import { SET_PRODUCT, SELECT_PRODUCT, REMOVE_PRODUCT, ADD_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT } from './Action';
+import {
+    SET_USER,
+    SELECT_USER,
+    ADD_USER,
+    UPDATE_USER,
+    DELETE_USER
+} from './Action'
+import {
+    SET_PRODUCT,
+    SELECT_PRODUCT,
+    REMOVE_PRODUCT,
+    ADD_PRODUCT,
+    UPDATE_PRODUCT,
+    DELETE_PRODUCT
+} from './Action'
 import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from './Action'
+import { SET_ORDER, DELETE_ORDER } from './Action'
 
 const initialStateLogin = [
     {
@@ -24,8 +38,6 @@ const initialStateLogin = [
             localStorage.getItem('user') === null
                 ? ''
                 : JSON.parse(localStorage.getItem('user')).isAdmin
-
-        // isAuthenticated: false
     }
 ]
 
@@ -34,41 +46,52 @@ export const authReducer = (state = initialStateLogin, action) => {
         case LOGIN_SUCCESS:
             localStorage.setItem('user', localStorage.getItem('user'))
             return {
-                ...state,
                 token: JSON.parse(localStorage.getItem('user')).token,
                 name: JSON.parse(localStorage.getItem('user')).name,
                 email: JSON.parse(localStorage.getItem('user')).email,
                 _id: JSON.parse(localStorage.getItem('user'))._id,
                 isAdmin: JSON.parse(localStorage.getItem('user')).isAdmin
-                // isAuthenticated: true
             }
         case LOGIN_FAILURE:
             localStorage.removeItem('user')
             return {
-                ...state,
                 token: '',
                 name: '',
                 email: '',
                 _id: '',
                 isAdmin: ''
-                // isAuthenticated: false
             }
         case LOGOUT:
             localStorage.removeItem('user')
             return {
-                ...state,
                 token: '',
                 name: '',
                 email: '',
                 _id: '',
                 isAdmin: ''
-                // isAuthenticated: false
             }
         default:
             return state
     }
 }
 
+const initialStateOrder = {
+    orders: []
+}
+
+export const orderReducer = (state = initialStateOrder, action) => {
+    switch (action.type) {
+        case SET_ORDER:
+            return { ...state, orders: action.payload }
+        case DELETE_ORDER:
+            const deleteOrder = state.filter(
+                contact => contact.id !== action.payload && contact
+            )
+            return { deleteOrder }
+        default:
+            return state
+    }
+}
 
 const initialStateUser = {
     users: []
@@ -77,30 +100,31 @@ const initialStateUser = {
 export const selectUser = (state = {}, { type, payload }) => {
     switch (type) {
         case SELECT_USER:
-            return {...state, ...payload}
+            return { ...state, ...payload }
         default:
-            return state;
+            return state
     }
 }
-
 
 export const contactReducer = (state = initialStateUser, action) => {
     switch (action.type) {
         case SET_USER:
-            return{ ...state, users: action.payload}
+            return { ...state, users: action.payload }
         case ADD_USER:
             const users = state.users.concat(action.payload)
-            return {...state, users};
+            return { ...state, users }
         case UPDATE_USER:
-            return state.map((contact) => contact.id === action.payload.id ? action.payload : contact)
+            return state.map(contact =>
+                contact.id === action.payload.id ? action.payload : contact
+            )
         case DELETE_USER:
-             const deleteuser =state.filter((contact) => contact.id !== action.payload && contact)
-            return {deleteuser}
+            const deleteuser = state.filter(
+                contact => contact.id !== action.payload && contact
+            )
+            return { deleteuser }
         default:
             return state
     }
-
-
 }
 const initialStateProduct = {
     products: []

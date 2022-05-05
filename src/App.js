@@ -1,24 +1,29 @@
 import React from 'react'
 import './App.css'
 import HomeAdmin from './Admin/Component/HomeAdmin'
-import Home from './User/pages/Home'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import AdminLayout from './Admin/AdminLayout/AdminLayout'
 import UserList from './Admin/Component/User/UserList'
 import ProductList from './Admin/Component/Product/ProductList'
 import About from './Admin/Component/About'
 import AddUser from './Admin/Component/User/AddUser'
+import Information from './Admin/Component/User/Information'
+import AddProduct from './Admin/Component/Product/AddProduct'
+import UpdateProduct from './Admin/Component/Product/UpdateProduct'
+import OrderList from './Admin/Component/OrderList/Order'
+import ViewOrder from './Admin/Component/OrderList/ViewOrder'
+
+import Home from './User/pages/Home'
 import Auth from './User/pages/Auth'
 import NotFound from './User/pages/NotFound'
 import UserLayout from './User/Layout/UserLayout'
 import Checkout from './User/pages/checkout/Checkout'
 import DetailProduct from './User/DetailProduct/DetailProduct'
-import Information from './Admin/Component/User/Information'
 import Cart from './User/pages/Cart'
 import UserProfile from './User/pages/profile/UserProfile'
-import AddProduct from './Admin/Component/Product/AddProduct'
-import UpdateProduct from './Admin/Component/Product/UpdateProduct'
 import ListProduct from './User/components/ListProduct/ListProduct'
+import NotIsAdmin from './User/components/NotIsAdmin'
+
 const App = () => {
     return (
         <Routes>
@@ -47,7 +52,15 @@ const App = () => {
                     element={<UpdateProduct />}
                 />
                 <Route path="about" element={<About />} />
+
+                <Route path="orderList" element={<OrderList />} />
+                <Route
+                    path="orderList/information/:id"
+                    element={<ViewOrder />}
+                />
             </Route>
+
+            <Route path="not-admin" element={<NotIsAdmin />} />
 
             <Route path="/not-found" element={<Outlet />}>
                 <Route index element={<NotFound />} />
