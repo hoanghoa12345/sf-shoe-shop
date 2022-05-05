@@ -21,6 +21,7 @@ function ProductList() {
     const [currentSort, setCurrentSort] = useState('default')
     const [deletes, setDeletes] = useState(false)
     const [deleteId, setDeleteId] = useState(0)
+    const [category, setCategory] = useState('')
     const [search, setSearch] = useState('')
     const productLists = useSelector(state => state.contactProducts.products)
 
@@ -36,7 +37,6 @@ function ProductList() {
     useEffect(() => {
         fetchProducts()
     }, [])
-    // console.log(productLists);
 
     //phan trang
     const [posts, setPosts] = useState(productLists)

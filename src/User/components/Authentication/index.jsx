@@ -1,5 +1,6 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useFormik } from 'formik'
@@ -19,11 +20,7 @@ import SignInImage from '../../assets/images/SignInImage.svg'
 import SignUpImage from '../../assets/images/SignUpImage.svg'
 
 import './style.scss'
-import Loading from '../../../Admin/Loading'
-
 function SignIn() {
-    const [isLoading, setIsLoading] = useState(false)
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -63,7 +60,6 @@ function SignIn() {
                 navigate('/')
             }
             dispatch(login_success(email, password))
-            setIsLoading(true)
         } catch (err) {
             console.log('Login Error', err)
             alert('Đăng nhập thất bại')

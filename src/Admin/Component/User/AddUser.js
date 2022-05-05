@@ -7,40 +7,42 @@ import { useSelector, useDispatch } from 'react-redux';
 import { add_user } from '../../Redux/Action';
 import { toast } from 'react-toastify';
 import avatarDefault from '../../image/avatart.jpg'
-import { saveUser ,TOKEN} from '../../../api/httpRequest';
+import { saveUser, TOKEN } from '../../../api/httpRequest';
 
 
 
 function AddUser() {
-
-
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [active, setActive] = useState('true')
+  const [isAdmin, setIsAdmin] = useState('true');
+
   const navigater = useNavigate();
   const dispatch = useDispatch();
+
+
 
   const hanldeClickAdminHome = () => {
     navigater(-1)
   }
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
   const data = {
+    isAdmin,
     name,
     email,
     password,
-    active
 
   }
+
   const hanldeCreate = async () => {
     try {
-      if(!name || !email || !password){
-       return (toast.warning(`Please enter full information !!!`))
+      if (!name || !email || !password) {
+        return (toast.warning(`Please enter full information !!!`))
       } else {
-        if(!regex.test(email)){
-       return (toast.warning(`Please enter correct email format (...@gmail.com) !!!`))
+        if (!regex.test(email)) {
+          return (toast.warning(`Please enter correct email format (...@gmail.com) !!!`))
 
-        }else {
+        } else {
           const response = await saveUser(data, TOKEN)
           toast.success('Thêm người dùng mới thành công !!');
           navigater(-1);
@@ -48,40 +50,7 @@ function AddUser() {
         }
       }
 
-
-    } catch (error) {
-
-    }
-
-    /*   if (!fullname || !userName || !gender || !age || !email || !password || !phone || !address) {
-       return (toast.warning(`Please enter full information !!!`))
-     }
-     if (!regex.test(email)) {
-       return (toast.warning(`Please enter correct email format (...@gmail.com) !!!`))
-
-     }
-     if (phone.length !== 10) {
-       return (toast.warning(`Please enter the correct phone number format (10 numbers) !!!`))
-
-     }
-       const hanldeChangeImg = (e) => {
-    const file = e.target.files[0];
-    file.preview = URL.createObjectURL(file)
-    setAvatar(file);
-
-  }
-  useEffect(() => {
-    //clean
-    return () => {
-      avatar && URL.revokeObjectURL(avatar.preview)
-    }
-  }, [avatar]) */
-
-    /*  //localStorage update
-     useEffect(()=>{
-       localStorage.getItem('username',JSON.stringify(username))
-     },[username]) */
-
+    } catch (error) { }
   }
 
   return (
@@ -114,7 +83,7 @@ function AddUser() {
               </div>
               <div className='newUserItem'>
                 <label>Active</label>
-                <select className='newUserSelect' name='Active' id='Active' value={active} onChange={(e) => setActive(e.target.value)} >
+                <select className='newUserSelect' name='Active' value={isAdmin} onChange={(e) => setIsAdmin(e.target.value)} >
                   <option value='true'>True</option>
                   <option value='false'>False</option>
                 </select>

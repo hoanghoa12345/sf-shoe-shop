@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react'
 import { FaMoneyBillAlt } from 'react-icons/fa'
 import { ImCancelCircle } from 'react-icons/im'
@@ -23,6 +24,8 @@ import ReactLoading from 'react-loading'
 import { formatPrice } from './../../utils/common'
 
 function HomeAdmin() {
+    const orderList = useSelector(state => state.orderReducer.orders)
+    console.log(orderList)
     const [data, setData] = useState([])
     const [dataUser, setDataUser] = useState([])
     const fetchUser = async () => {
@@ -58,6 +61,12 @@ function HomeAdmin() {
     for (let i = 0; i < dataUser.length; i++) {
         sumUser += dataUser[i].length
     }
+    let sumTodayIncome = 0
+    for (let i = 0; i < orderList.length; i++) {
+        sumTodayIncome +=
+            orderList[i].cartItems[0].price * orderList[i].cartItems[0].quantity
+    }
+    console.log(sumTodayIncome)
 
     useEffect(() => {
         fetchProducts()
@@ -70,7 +79,7 @@ function HomeAdmin() {
                 <div className="admin_top">
                     <div className="top_oder">
                         <p className="top_title">ORDER PENDING</p>
-                        <p className="top_number">2</p>
+                        <p className="top_number">{orderList.length}</p>
                         <div className="boder_icon_pending">
                             {' '}
                             <VscDebugRestart className="icon_pending" />
@@ -86,7 +95,7 @@ function HomeAdmin() {
                     </div>
                     <div className="top_oder_process">
                         <p className="top_title">ORDER PROCESS</p>
-                        <p className="top_number">5</p>
+                        <p className="top_number">0</p>
                         <div className="boder_icon_process">
                             {' '}
                             <MdAutorenew className="icon_pending" />
@@ -94,7 +103,9 @@ function HomeAdmin() {
                     </div>
                     <div className="top_oder_income">
                         <p className="top_title">TODAY INCOME</p>
-                        <p className="top_number">$200000</p>
+                        <p className="top_number">
+                            {formatPrice(sumTodayIncome)}
+                        </p>
                         <div className="boder_icon">
                             {' '}
                             <FaMoneyBillAlt className="icon_pending" />
@@ -153,12 +164,6 @@ function HomeAdmin() {
                                                     dataKey="countInStock"
                                                     barSize={20}
                                                     fill="#413ea0"
-                                                />
-                                                <Line
-                                                    key={data._id}
-                                                    type="monotone"
-                                                    dataKey="countInStock"
-                                                    stroke="#ff7300"
                                                 />
                                             </ComposedChart>
                                         </ResponsiveContainer>

@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { GiRunningShoe } from 'react-icons/gi'
-import { GrOverview } from 'react-icons/gr'
-import { AiTwotoneStar } from 'react-icons/ai'
-import { useParams } from 'react-router'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import { getProduct, getProducts } from '../../api/httpRequest'
-import Loading from './../components/Loading/index'
-import './detail.css'
-import { useDispatch } from 'react-redux'
-import { addToCart } from '../redux/actions/cartAction'
-import { ToastContainer, toast } from 'react-toastify'
-import { formatPrice } from '../../utils/common'
-import { useNavigate } from 'react-router'
+
+import { useEffect, useState } from 'react';
+import { GiRunningShoe } from 'react-icons/gi';
+import { GrOverview } from 'react-icons/gr';
+import { AiTwotoneStar } from 'react-icons/ai';
+import { useParams } from 'react-router';
+import { getProduct, getProducts } from '../../api/httpRequest';
+import Loading from './../components/Loading/index';
+import './detail.css';
+import { formatPrice } from '../../utils/common';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/actions/cartAction';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 function DetailProduct() {
-    const [data, setData] = useState([])
-    const [productList, setProductList] = useState([])
+    const [data, setData] = useState([]);
+    const [productList, setProductList] = useState([]);
     const [search, setSearch] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -24,6 +26,7 @@ function DetailProduct() {
         const responseProductList = await getProducts()
         setProductList([...responseProductList.data])
     }
+
 
     const { id } = useParams()
     const fetchIdProducts = async () => {

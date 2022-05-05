@@ -13,6 +13,7 @@ import { updateUser, TOKEN } from '../../../api/httpRequest'
 function Information() {
     const [isAdmin, setIsAdmin] = useState('')
     const [name, setName] = useState('')
+    const [active, setActive] = useState('')
     const [password, setPassword] = useState('')
     const [information, setInformation] = useState(true)
     const navigate = useNavigate()
