@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function AdminLayout() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ToastContainer />
       <div className="Container"> 
           <Dashboard />
