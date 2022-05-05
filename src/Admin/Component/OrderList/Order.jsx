@@ -18,6 +18,11 @@ function UserList() {
     const [postPerPage] = useState(5)
     const dispatch = useDispatch()
 
+    var formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    })
+
     const fetchOrder = async () => {
         try {
             const responseOrder = await getOrders(TOKEN)
@@ -25,7 +30,7 @@ function UserList() {
         } catch (error) {}
     }
 
-    console.log('orderList', orderList)
+    // console.log('orderList', orderList)
     useEffect(() => {
         fetchOrder()
     }, [])
@@ -70,7 +75,6 @@ function UserList() {
                         <th>Họ tên</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Sản phẩm</th>
                         <th>Giá</th>
                         <th>Update</th>
                     </tr>
@@ -91,8 +95,15 @@ function UserList() {
                                     <td>{fullname}</td>
                                     <td>{email}</td>
                                     <td>{phone_number}</td>
-                                    <td>{cartItems[0].name}</td>
-                                    <td>{cartItems[0].price}</td>
+                                    <td>
+                                        {formatter.format(
+                                            cartItems.reduce(
+                                                (a, c) =>
+                                                    a + c.price * c.quantity,
+                                                0
+                                            )
+                                        )}
+                                    </td>
                                     <td>
                                         <Link to={`information/${_id}`}>
                                             <button className="btn_edit">

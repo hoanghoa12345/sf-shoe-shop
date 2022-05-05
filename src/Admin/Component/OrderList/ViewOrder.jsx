@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import '../Style/ViewOrder.css'
@@ -26,10 +27,17 @@ function ViewOrder() {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    var formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    })
+
     const orderViews = useSelector(state => state.orderReducer.orders)
     const { id } = useParams()
     const findViewOrder = orderViews.find(orderView => orderView._id === id)
 
+    console.log(findViewOrder.cartItems)
     const data = {
         id,
         fullname,
@@ -48,27 +56,71 @@ function ViewOrder() {
 
     return (
         <>
+            <div className="column">
+                <h2 style={{ padding: '10px' }}>Chi tiết đơn hàng</h2>
+                <table className="shop_table">
+                    <thead>
+                        <tr>
+                            <th>Hình Ảnh</th>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Size</th>
+                            <th>Tạm tính</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {findViewOrder.cartItems.map(
+                            ({ name, quantity, price, image, size }, i) => (
+                                <tr key={i}>
+                                    <td>
+                                        <img
+                                            src={image}
+                                            className="Order_Image"
+                                            alt
+                                        />
+                                    </td>
+                                    <td>{name}</td>
+                                    <td>{quantity}</td>
+                                    <td>{size}</td>
+                                    <td>
+                                        {formatter.format(price * quantity)}
+                                    </td>
+                                </tr>
+                            )
+                        )}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <b>Tổng</b>
+                            </td>
+                            <td>
+                                <b>-</b>
+                            </td>
+                            <td>
+                                {findViewOrder.cartItems.reduce(
+                                    (a, c) => a + c.quantity,
+                                    0
+                                )}
+                            </td>
+                            <td>
+                                <b>-</b>
+                            </td>
+                            <td>
+                                {formatter.format(
+                                    findViewOrder.cartItems.reduce(
+                                        (a, c) => a + c.price * c.quantity,
+                                        0
+                                    )
+                                )}
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
             <div className="View_Order_Container">
                 <div className="View_Order">
-                    <div className="View_Order_left">
-                        <div className="View_Order_Show_Left">
-                            <div>
-                                <img
-                                    className="View_Order_avatar"
-                                    src={findViewOrder.cartItems[0].image}
-                                    alt="imgDefault"
-                                />
-                            </div>
-                            <div className="View_Order_Show_In_for_Title">
-                                <h3 className="View_Order_name">
-                                    ID: {findViewOrder._id}
-                                </h3>
-                                <h3 className="View_Order_name">
-                                    Name: {findViewOrder.cartItems[0].name}
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
                     {information ? (
                         <div className="View_Order_right">
                             <div className="right_">
@@ -78,12 +130,11 @@ function ViewOrder() {
                                             <div className="View_Order_UpdateLeft">
                                                 <div className="View_Order_UpdateItem">
                                                     <label className="View_Order_Title">
-                                                        Email:
+                                                        Name:
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={fullname}
-                                                        placeholder={
+                                                        value={
                                                             findViewOrder.fullname
                                                         }
                                                         className="View_Order_Update_Input"
@@ -95,37 +146,8 @@ function ViewOrder() {
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={phone_number}
-                                                        placeholder={
+                                                        value={
                                                             findViewOrder.phone_number
-                                                        }
-                                                        className="View_Order_Update_Input"
-                                                    />
-                                                </div>
-                                                <div className="View_Order_UpdateItem">
-                                                    <label className="View_Order_Title">
-                                                        Pay men:
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        value={payment_method}
-                                                        placeholder={
-                                                            findViewOrder.payment_method
-                                                        }
-                                                        className="View_Order_Update_Input"
-                                                    />
-                                                </div>
-                                                <div className="View_Order_UpdateItem">
-                                                    <label className="View_Order_Title">
-                                                        Quantity:
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        value={quantity}
-                                                        placeholder={
-                                                            findViewOrder
-                                                                .cartItems[0]
-                                                                .quantity
                                                         }
                                                         className="View_Order_Update_Input"
                                                     />
@@ -146,12 +168,11 @@ function ViewOrder() {
                                             <div className="userUpdateLeft">
                                                 <div className="View_Order_UpdateItem">
                                                     <label className="View_Order_Title">
-                                                        FullName:
+                                                        Email:
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={email}
-                                                        placeholder={
+                                                        value={
                                                             findViewOrder.email
                                                         }
                                                         className="View_Order_Update_Input"
@@ -159,12 +180,11 @@ function ViewOrder() {
                                                 </div>
                                                 <div className="View_Order_UpdateItem">
                                                     <label className="View_Order_Title">
-                                                        Province:
+                                                        Địa Chỉ:
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={province}
-                                                        placeholder={
+                                                        value={
                                                             findViewOrder.address +
                                                             ', ' +
                                                             findViewOrder.ward +
@@ -178,33 +198,15 @@ function ViewOrder() {
                                                 </div>
                                                 <div className="View_Order_UpdateItem">
                                                     <label className="View_Order_Title">
-                                                        Size:
+                                                        Phương Thức Thanh Toán:
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        value={size}
-                                                        placeholder={
-                                                            findViewOrder
-                                                                .cartItems[0]
-                                                                .size
+                                                        value={
+                                                            findViewOrder.payment_method
                                                         }
                                                         className="View_Order_Update_Input"
                                                     />
-                                                    <div className="View_Order_UpdateItem">
-                                                        <label className="View_Order_Title">
-                                                            Price:
-                                                        </label>
-                                                        <input
-                                                            type="text"
-                                                            value={price}
-                                                            placeholder={
-                                                                findViewOrder
-                                                                    .cartItems[0]
-                                                                    .price
-                                                            }
-                                                            className="View_Order_Update_Input"
-                                                        />
-                                                    </div>
                                                 </div>
                                             </div>
                                         </form>

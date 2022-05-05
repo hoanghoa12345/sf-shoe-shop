@@ -61,6 +61,12 @@
     margin-top: 20px;
 }
 
+.Order_Image {
+    width: 70px;
+    height: 70px;
+    display: inline-block;
+}
+
 .iconSerach_Order {
     position: absolute;
     margin-left: 25px;
@@ -113,7 +119,7 @@
 
 .View_Order_Update_Input {
     border: none;
-    width: 350px;
+    width: 450px;
     border-bottom: 1px solid #89895d;
     outline: none;
     margin-left: 5px;
