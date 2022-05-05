@@ -77,25 +77,22 @@
 }
 
 .titleDetail {
-    
+
     margin-left: 40px;
     font-weight: 600;
     margin-top: 15px;
+    margin-bottom: 25px;
 
 
 }
 
+
 .detailProduct__ {
-   
-    margin-bottom: 25px;
-    margin-top: 20px;
-    display: flex;
-    margin-left: 40px;
-    width: 210px;
-    height: 250px;
-    justify-content: center;
-    align-items: center;
+    width: calc(25% - 22.5px);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 3px solid rgb(142, 138, 138);
     border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -105,14 +102,13 @@
 }
 
 .imgDetailProduct {
-    justify-content: center;
-    align-items: center;
-    width: 130px;
-    margin-left: 25px;
+    margin: 0 auto;
+    width: 70%;
 }
 .containerDetail{
-
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px 30px;
 }
 .detailPrice{
     color: red;
@@ -120,6 +116,8 @@
 
 }
 .detailName {
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 15px;
     margin-bottom: 15px;
     font-weight: 600;
@@ -135,15 +133,15 @@
 
     width: 150px;
     height: 30px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     cursor: pointer;
     border-radius: 8px;
-    background: linear-gradient(to right,#F4A2A6,#FEC5C9); 
+    background: linear-gradient(to right,#F4A2A6,#FEC5C9);
   color:#fff;
-  
+
 }
 .btn_detail:hover{
-    background: linear-gradient(to right,#ea6c73,#FEC5C9); 
+    background: linear-gradient(to right,#ea6c73,#FEC5C9);
 }
 .detailProductbody{
     width: 90%;

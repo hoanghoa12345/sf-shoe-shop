@@ -69,7 +69,7 @@ function AddProduct() {
       image && URL.revokeObjectURL(image.preview)
     }
   }, [image])
-  //select option 
+  //select option
   const options = [
    {label: '28' , value: 28},
    {label: '29' , value: 29}

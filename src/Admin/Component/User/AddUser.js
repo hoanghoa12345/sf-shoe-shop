@@ -50,7 +50,6 @@ function AddUser() {
         }
       }
 
-
     } catch (error) { }
   }
 

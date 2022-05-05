@@ -16,7 +16,7 @@ function UserList() {
 
   const [searchUser, setSearchUser] = useState('');
   const [sortValue, setSortValue] = useState('');
- 
+
   const userLists = useSelector((state) => state.contactReducer.users);
 
   const [posts, setPosts] = useState(userLists);
@@ -24,16 +24,16 @@ function UserList() {
   const [postPerPage] = useState(5);
   const dispatch = useDispatch();
 
-       
+
    const fetchUser = async () =>{
      try {
        const responseUser = await getUser(TOKEN)
        dispatch(set_User(responseUser.data))
-       
+
      } catch (error) {
-       
+
      }
-  } 
+  }
   useEffect(() => {
     fetchUser()
   },[])
@@ -47,7 +47,7 @@ function UserList() {
       const response = await deleteUser(_id, TOKEN);
       toast.success("Xóa người dùng thành công !!");
       dispatch(delete_user(response.data))
-      
+
     } catch (error) { }
     fetchUser()
   };
@@ -63,7 +63,7 @@ function UserList() {
   const indexFirstPost = indexLastPost - postPerPage;//0
   const currentPost = posts.slice(indexFirstPost, indexLastPost);
 
-  //change page 
+  //change page
   const paginate = pageNumbers => setCurrentPage(pageNumbers)
 
   return (

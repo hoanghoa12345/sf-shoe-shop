@@ -14,9 +14,11 @@ import ReactLoading from 'react-loading';
 import { formatPrice } from './../../utils/common';
 
 function HomeAdmin() {
+    const orderList = useSelector(state => state.orderReducer.orders)
+    console.log(orderList);
     const [data, setData] = useState([]);
     const [dataUser, setDataUser] = useState([])
-    
+
     const fetchUser = async () => {
         const responseUser = await getUser(TOKEN).catch(error => { console.log(error) })
         setDataUser([responseUser.data])
@@ -40,13 +42,17 @@ function HomeAdmin() {
     }
     console.log(sumPrice);
     //User
- 
+
 
     let sumUser = 0;
      for(let i =0 ; i<dataUser.length;i++){
          sumUser += dataUser[i].length
      }
-
+ let sumTodayIncome = 0;
+ for(let i =0 ; i<orderList.length ;i++){
+    sumTodayIncome+= orderList[i].cartItems[0].price * orderList[i].cartItems[0].quantity
+ }
+ console.log(sumTodayIncome);
 
     useEffect(() => {
         fetchProducts();
@@ -59,7 +65,7 @@ function HomeAdmin() {
                 <div className="admin_top">
                     <div className="top_oder">
                         <p className="top_title">ORDER PENDING</p>
-                        <p className="top_number">2</p>
+                        <p className="top_number">{orderList.length}</p>
                         <div className="boder_icon_pending">  <VscDebugRestart className='icon_pending' /></div>
                     </div>
                     <div className="top_oder_cancel">
@@ -69,12 +75,12 @@ function HomeAdmin() {
                     </div>
                     <div className="top_oder_process">
                         <p className="top_title">ORDER PROCESS</p>
-                        <p className="top_number">5</p>
+                        <p className="top_number">0</p>
                         <div className="boder_icon_process">  <MdAutorenew className='icon_pending' /></div>
                     </div>
                     <div className="top_oder_income">
                         <p className="top_title">TODAY INCOME</p>
-                        <p className="top_number">$200000</p>
+                        <p className="top_number">{formatPrice(sumTodayIncome)}</p>
                         <div className="boder_icon">  <FaMoneyBillAlt className='icon_pending' /></div>
                     </div>
                 </div>

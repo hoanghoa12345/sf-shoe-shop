@@ -35,7 +35,7 @@ function UpdateProduct() {
         dispatch(update_product(response.data))
 
       } catch (error) {
-        
+
       }
     } */
   const { id } = useParams();
@@ -141,7 +141,7 @@ function UpdateProduct() {
                   />
                 </div><div className='left-input_'>
                   <span className='lable_'>Size:</span>
-          
+
                   <select className='selectSize' name='Active' id='Active'  >
                     {findIdProducts.sizeList.map(sizelist => {
                       return (

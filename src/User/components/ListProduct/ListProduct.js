@@ -1,11 +1,12 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Pagination } from "swiper";
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import "./ListProduct.css";
-import Loading from './../Loading/index';
-import { formatPrice } from "../../../utils/common";
+import './ListProduct.css'
+import Loading from './../Loading/index'
+import { formatPrice } from '../../../utils/common'
+
+import './ListProduct.css'
 
 function ListProduct() {
     const navigate = useNavigate()
@@ -101,7 +102,7 @@ function ListProduct() {
                                     {item.name}
                                 </div>
                                 <div className="category__price">
-                                    { formatPrice(item.price)}
+                                    {formatPrice(item.price)}
                                 </div>
                                 <div className="category__action">
                                     <button
