@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import {
     FaUser,
     FaLock,
@@ -17,71 +19,63 @@ import SignInImage from '../../assets/images/SignInImage.svg'
 import SignUpImage from '../../assets/images/SignUpImage.svg'
 
 import './style.scss'
+import Loading from '../../../Admin/Loading'
 
 function SignIn() {
-    // const loginSuccess = useSelector(state => state.authReducer)
+    const [isLoading, setIsLoading] = useState(false)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [login, setLogin] = useState({
-        email: '',
-        password: ''
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            password: ''
+        },
+        validationSchema: Yup.object({
+            name: Yup.string().required('Không để trống'),
+            email: Yup.string()
+                .required('Không để trống')
+                .matches(
+                    /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                    'Email không hợp lệ'
+                ),
+            password: Yup.string()
+                .required('Không để trống')
+                .min(6, 'Mật khẩu có ít nhất 6 ký tự')
+        })
     })
 
-    const [register, setRegister] = useState({
-        name: '',
-        email: '',
-        password: ''
-    })
-
-    const onChangeInputLogin = e => {
-        const { name, value } = e.target
-        setLogin({ ...login, [name]: value })
-    }
+    // console.log(formik.values)
+    // console.log(formik.errors)
 
     const loginSubmit = async e => {
         e.preventDefault()
 
         try {
-            const { data } = await postLogin({ ...login })
-
+            const { email, password } = formik.values
+            const { data } = await postLogin({ email, password })
             localStorage.setItem('user', JSON.stringify(data))
-            // localStorage.setItem('firstLogin', true)
-
-            // window.location.href = '/'
-            // getUser.isAdmin === true ? navigate('/admin') : navigate('/')
-
             if (data.isAdmin) {
                 navigate('/admin')
             } else {
                 navigate('/')
             }
-
-            // navigate('/')
-
-            dispatch(login_success(login))
+            dispatch(login_success(email, password))
+            setIsLoading(true)
         } catch (err) {
             console.log('Login Error', err)
-            // alert('Đăng nhập thất bại')
+            alert('Đăng nhập thất bại')
             dispatch(login_failure(err))
         }
-    }
-
-    const onChangeInputRegister = e => {
-        const { name, value } = e.target
-        setRegister({ ...register, [name]: value })
     }
 
     const registerSubmit = async e => {
         e.preventDefault()
         try {
-            await postRegister({ ...register })
-            // await axios.post('/user/register', { ...user })
-
-            // localStorage.setItem('firstLogin', true)
-
-            // window.location.href = '/'
-            // navigate('/')
+            const { name, email, password } = formik.values
+            await postRegister({ name, email, password })
             const signIn = document.querySelector('.signin')
             signIn.classList.remove('sign-up-mode')
         } catch (err) {
@@ -117,10 +111,18 @@ function SignIn() {
                                 placeholder="Email"
                                 className="input-contain"
                                 name="email"
-                                value={login.email}
-                                onChange={onChangeInputLogin}
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
                             />
                         </div>
+                        <div className="errors">
+                            {formik.errors.email && (
+                                <p className="errorMsg">
+                                    {formik.errors.email}
+                                </p>
+                            )}
+                        </div>
+
                         <div className="input-field">
                             <FaLock className="icon" />
                             <input
@@ -128,14 +130,21 @@ function SignIn() {
                                 placeholder="Password"
                                 className="input-contain"
                                 name="password"
-                                value={login.password}
-                                onChange={onChangeInputLogin}
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
                             />
+                        </div>
+                        <div className="errors">
+                            {formik.errors.password && (
+                                <p className="errorMsg">
+                                    {formik.errors.password}
+                                </p>
+                            )}
                         </div>
                         <input
                             type="submit"
                             className="btn-sign-signup btn-submit input-contain"
-                            value="Sign in"
+                            value="Login"
                         />
                         <Link to="/">
                             <input
@@ -182,9 +191,14 @@ function SignIn() {
                                 placeholder="Username"
                                 className="input-contain"
                                 name="name"
-                                value={register.name}
-                                onChange={onChangeInputRegister}
+                                value={formik.values.name}
+                                onChange={formik.handleChange}
                             />
+                        </div>
+                        <div className="errors">
+                            {formik.errors.name && (
+                                <p className="errorMsg">{formik.errors.name}</p>
+                            )}
                         </div>
                         <div className="input-field">
                             <FaEnvelope className="icon" />
@@ -193,9 +207,16 @@ function SignIn() {
                                 placeholder="Email"
                                 className="input-contain"
                                 name="email"
-                                value={register.email}
-                                onChange={onChangeInputRegister}
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
                             />
+                        </div>
+                        <div className="errors">
+                            {formik.errors.email && (
+                                <p className="errorMsg">
+                                    {formik.errors.email}
+                                </p>
+                            )}
                         </div>
                         <div className="input-field">
                             <FaLock className="icon" />
@@ -204,14 +225,21 @@ function SignIn() {
                                 placeholder="Password"
                                 className="input-contain"
                                 name="password"
-                                value={register.password}
-                                onChange={onChangeInputRegister}
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
                             />
+                        </div>
+                        <div className="errors">
+                            {formik.errors.password && (
+                                <p className="errorMsg">
+                                    {formik.errors.password}
+                                </p>
+                            )}
                         </div>
                         <input
                             type="submit"
                             className="btn-sign-signup btn-submit"
-                            value="Sign Up"
+                            value="Register"
                         />
                         <Link to="/">
                             <input

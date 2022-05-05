@@ -16,10 +16,42 @@ const postRegister = userInfo => {
     return axios.post(BASE_URL + 'api/users/register', userInfo)
 }
 
-const getUser = (TOKEN) => {
+const getOrders = TOKEN => {
+    return axios.get(BASE_URL + 'api/orders', {
+        headers: {
+            Authorization: `Bearer ${TOKEN}`
+        }
+    })
+}
+
+const postOrder = (orderInfo, TOKEN) => {
+    return axios.post(BASE_URL + 'api/orders/', orderInfo, {
+        headers: {
+            Authorization: `Bearer ${TOKEN}`
+        }
+    })
+}
+
+const updateOrder = (id, orderBody, TOKEN) => {
+    return axios.put(BASE_URL + 'api/orders/' + id, orderBody, {
+        headers: {
+            Authorization: `Bearer ${TOKEN}`
+        }
+    })
+}
+
+const deleteOrder = (id, TOKEN) => {
+    return axios.delete(BASE_URL + 'api/orders/' + id, {
+        headers: {
+            Authorization: `Bearer ${TOKEN}`
+        }
+    })
+}
+
+const getUser = TOKEN => {
     return axios.get(BASE_URL + 'api/users/list/', {
         headers: {
-            Authorization:`Bearer ${TOKEN}`
+            Authorization: `Bearer ${TOKEN}`
         }
     })
 }
@@ -83,6 +115,10 @@ const deleteProduct = (id, TOKEN) => {
 
 export {
     TOKEN,
+    getOrders,
+    postOrder,
+    updateOrder,
+    deleteOrder,
     postLogin,
     postRegister,
     getUsers,

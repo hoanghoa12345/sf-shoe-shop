@@ -1,25 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
 import { createCheckout } from '../../actions/checkoutActions'
 import './Checkout.scss'
 import cashIcon from '../../assets/icons/payment_cash.png'
 import ewalletIcon from '../../assets/icons/payment_ewallet.png'
+import { postOrder } from '../../../api/httpRequest'
 const Checkout = () => {
-    const shoppingCart = [
-        {
-            name: 'Giày 1',
-            quantity: 1,
-            price: 500000
-        },
-        {
-            name: 'Giày 2',
-            quantity: 2,
-            price: 200000
-        }
-    ]
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const user = useSelector(state => state.authReducer[0])
-
+    const shoppingCart = useSelector(state => state.cart)
+    console.log(shoppingCart)
     var formatter = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND'
@@ -55,10 +47,19 @@ const Checkout = () => {
         )[0].districts
         setDistricts(Object.values(districtsObj))
     }
-    const submitHandler = e => {
+    const submitHandler = async e => {
         e.preventDefault()
         console.log(formData)
-        dispatch(createCheckout({ ...formData, cartItems: shoppingCart }))
+        let cartItems = []
+        shoppingCart.forEach(items => {
+            cartItems.push({ ...items, product: items.id })
+        })
+        let orderInfo = { ...formData, cartItems }
+        dispatch(createCheckout(orderInfo))
+        const res = await postOrder(orderInfo, user.token)
+        if (res.status === 201) {
+            alert('Đặt hàng thành công!')
+        }
     }
     return (
         <div className="content">
@@ -76,14 +77,24 @@ const Checkout = () => {
                 <div className="row">
                     <div className="column mt-60 mb-60">
                         <div>
-                            <div className="notices-wrapper">
-                                <div className="message">
-                                    <span className="button">
-                                        Tiếp tục xem sản phẩm
-                                    </span>{' '}
-                                    'product.name' đã được thêm vào giỏ hàng
+                            {shoppingCart.length > 0 && (
+                                <div className="notices-wrapper">
+                                    <div className="message">
+                                        <button
+                                            onClick={() =>
+                                                navigate(
+                                                    `/detailProduct/${shoppingCart[0].id}`
+                                                )
+                                            }
+                                            className="button"
+                                        >
+                                            Tiếp tục xem sản phẩm
+                                        </button>
+                                        '{shoppingCart[0].name}' đã được thêm
+                                        vào giỏ hàng
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                             <form className="coupon">
                                 <div className="coupon_label">
                                     Vui lòng nhập mã giảm giá của bạn vào ô bên
@@ -298,6 +309,7 @@ const Checkout = () => {
                                         <thead>
                                             <tr>
                                                 <th>Sản phẩm</th>
+                                                <th>Số lượng</th>
                                                 <th>Tạm tính</th>
                                             </tr>
                                         </thead>
@@ -308,9 +320,8 @@ const Checkout = () => {
                                                     i
                                                 ) => (
                                                     <tr key={i}>
-                                                        <td>
-                                                            {name} ({quantity})
-                                                        </td>
+                                                        <td>{name}</td>
+                                                        <td>{quantity}</td>
                                                         <td>
                                                             {formatter.format(
                                                                 price * quantity
@@ -325,6 +336,7 @@ const Checkout = () => {
                                                 <td>
                                                     <b>Tạm tính</b>
                                                 </td>
+                                                <td>-</td>
                                                 <td>
                                                     {formatter.format(
                                                         shoppingCart.reduce(
@@ -341,12 +353,14 @@ const Checkout = () => {
                                                 <td>
                                                     <b>Giao hàng</b>
                                                 </td>
+                                                <td>-</td>
                                                 <td>Miễn phí</td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <b>Tổng</b>
                                                 </td>
+                                                <td>-</td>
                                                 <td>
                                                     {formatter.format(
                                                         shoppingCart.reduce(

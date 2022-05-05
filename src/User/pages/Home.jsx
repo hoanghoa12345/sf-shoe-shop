@@ -1,14 +1,16 @@
-import LatestProducts from "../components/LatestProducts";
+import { useEffect } from "react";
+import AllProducts from "../components/AllProducts";
 import NewProduct from "../components/NewProducts";
-import Slider from "../components/Slider";
 import Policy from "../components/Policy";
+import Slider from "../components/Slider";
 
 function Home() {
+
   return (
     <>
       <Slider />
       <Policy />
-      <LatestProducts />
+      <AllProducts />
       <NewProduct />
     </>
   );

@@ -14,6 +14,9 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const LOGOUT = 'LOGOUT'
 
+export const SET_ORDER = 'SET_ORDER'
+export const DELETE_ORDER = 'DELETE_ORDER'
+
 // Login
 export const login_success = user => {
     return {
@@ -26,6 +29,21 @@ export const login_failure = error => {
     return {
         type: LOGIN_FAILURE,
         payload: error
+    }
+}
+
+//Order
+export const set_Order = setOrder => {
+    return {
+        type: SET_ORDER,
+        payload: setOrder
+    }
+}
+
+export const delete_Order = deleteOrder => {
+    return {
+        type: DELETE_ORDER,
+        payload: deleteOrder
     }
 }
 

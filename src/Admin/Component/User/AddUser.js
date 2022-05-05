@@ -10,7 +10,7 @@ import avatarDefault from '../../image/avatart.jpg'
 import { saveUser ,TOKEN} from '../../../api/httpRequest';
 
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2EiLCJlbWFpbCI6ImhvYW5naG9hQGdtYWlsLmNvbSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1MDg0OTczMCwiZXhwIjoxNjUxMDIyNTMwfQ.dkdKSfRbonO9AJxoTg29yvsH-FArQSiU6Qqc3NK3JvM'
+
 function AddUser() {
 
 
@@ -47,23 +47,23 @@ function AddUser() {
           dispatch(add_user(response.data));
         }
       }
-   
-      
+
+
     } catch (error) {
 
     }
-   
+
     /*   if (!fullname || !userName || !gender || !age || !email || !password || !phone || !address) {
        return (toast.warning(`Please enter full information !!!`))
      }
      if (!regex.test(email)) {
        return (toast.warning(`Please enter correct email format (...@gmail.com) !!!`))
- 
+
      }
      if (phone.length !== 10) {
        return (toast.warning(`Please enter the correct phone number format (10 numbers) !!!`))
- 
-     } 
+
+     }
        const hanldeChangeImg = (e) => {
     const file = e.target.files[0];
     file.preview = URL.createObjectURL(file)

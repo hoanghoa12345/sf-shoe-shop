@@ -10,13 +10,15 @@ import { useNavigate } from 'react-router-dom';
 import posterDefault from '../../image/poster.png';
 import { getProduct, updateProduct, TOKEN } from '../../../api/httpRequest';
 import Loading from '../../Loading';
+import { formatPrice } from './../../../utils/common';
+import { MultiSelect } from "react-multi-select-component";
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjVmNzljNjkwZTkyOTY2OTg1ZWY3ZmUiLCJuYW1lIjoiaG9hbmdob2ExIiwiZW1haWwiOiJob2FuZ2hvYUBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NTA5NTc0NzksImV4cCI6MTY1MTEzMDI3OX0.qLkaitBYi3CPpidf2zSe5yx34K0-vtEj19nBEZRuBiE'
 
 function UpdateProduct() {
 
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
+  const [size, setSize] = useState('');
   const [price, setPrice] = useState('');
   const [brand, setBrand] = useState('');
   const [category, setCategory] = useState('');
@@ -33,7 +35,7 @@ function UpdateProduct() {
         dispatch(update_product(response.data))
 
       } catch (error) {
-        
+
       }
     } */
   const { id } = useParams();
@@ -42,6 +44,7 @@ function UpdateProduct() {
     if (findIdProducts) {
       setImage(findIdProducts.image)
       setName(findIdProducts.name)
+      setSize(findIdProducts.size)
       setPrice(findIdProducts.price)
       setBrand(findIdProducts.brand)
       setCategory(findIdProducts.category)
@@ -61,6 +64,7 @@ function UpdateProduct() {
     id,
     image,
     name,
+    size,
     price,
     brand,
     category,
@@ -93,6 +97,11 @@ function UpdateProduct() {
   const hanldeClickAdminHome = () => {
     navigate(-1);
   }
+  let option= [];
+  {findIdProducts.sizeList.map(sizelist =>{
+    option=sizelist
+  })}
+  console.log(option);
   return (
     <div className='container_edit'>
       <div className="editProduct">
@@ -101,7 +110,7 @@ function UpdateProduct() {
             {image ? (<img className=' avatar' src={image} alt={id} />) : (<img className=' avatar' src={imageDefault} alt='imgaProduct' />)}
             <div className='userShowInforTitle'>
               <h3 className='edit_name'>{findIdProducts.name}</h3>
-              <h6 className='edit_fullname price'>{findIdProducts.price} đ</h6>
+              <h6 className='edit_fullname price'>{formatPrice(findIdProducts.price)} </h6>
             </div>
           </div>
           <div className='left_btn topbtn'>
@@ -130,13 +139,23 @@ function UpdateProduct() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
+                </div><div className='left-input_'>
+                  <span className='lable_'>Size:</span>
+
+                  <select className='selectSize' name='Active' id='Active'  >
+                    {findIdProducts.sizeList.map(sizelist => {
+                      return (
+                        <option key={sizelist} value={sizelist}>{sizelist}</option>
+                      )
+                    })}
+                  </select>
                 </div>
               </div>
               <div className='left-input_'>
                 <span className='lable_'>Price:</span>
                 <input className='input_'
                   type='number'
-                  placeholder={findIdProducts.price}
+                  placeholder={formatPrice(findIdProducts.price)}
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
@@ -182,8 +201,8 @@ function UpdateProduct() {
                 </div>
 
               </div>
-            <button className='listUser_btn productBtn ' onClick={hanldeClickUpdateProduct}>Update</button>
-            <button className='listUser_btn btn' onClick={hanldeClickAdminHome} > Cancel </button>
+              <button className='listUser_btn productBtn ' onClick={hanldeClickUpdateProduct}>Update</button>
+              <button className='listUser_btn btn' onClick={hanldeClickAdminHome} > Cancel </button>
             </div>
           </div>
         ) : (<div className='bottom_edit'>

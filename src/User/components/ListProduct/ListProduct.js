@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Pagination } from 'swiper'
+import { useNavigate } from 'react-router-dom'
 
 import './ListProduct.css'
 import Loading from './../Loading/index'
+import { formatPrice } from '../../../utils/common'
+
+import './ListProduct.css'
 
 function ListProduct() {
     const navigate = useNavigate()
@@ -91,7 +93,7 @@ function ListProduct() {
                             <div className="category__product" key={item.id}>
                                 <div>
                                     <img
-                                        className="category__img "
+                                        className="category__image "
                                         src={item.image}
                                         alt=""
                                     />
@@ -100,7 +102,7 @@ function ListProduct() {
                                     {item.name}
                                 </div>
                                 <div className="category__price">
-                                    {item.price}
+                                    {formatPrice(item.price)}
                                 </div>
                                 <div className="category__action">
                                     <button

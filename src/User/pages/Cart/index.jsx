@@ -13,6 +13,7 @@ function Cart() {
   const [loading, setLoading] = useState(true)
 
   const cartList = useSelector(state => state.cart)
+  console.log(cartList);
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -25,17 +26,21 @@ function Cart() {
     setTimeout(() => setLoading(false), 800)
   })
 
-  const handleSetQuantity = (id, quantity) => {
-    if(quantity >= 1) dispatch( setQuantity({id, quantity}) )
+  const handleSetQuantity = (id, size, newQuantity) => {
+    if(newQuantity >= 1) dispatch( setQuantity({ id, size, newQuantity }) )
   }
 
-  const handleRemoveItem = id => {
+  const handleRemoveItem = index => {
     setLoading(true)
-    dispatch( removeItem(id) )
+    dispatch( removeItem(index) )
   }
 
   const handleNavigateShop = () => {
     navigate('/products')
+  }
+
+  const handleNavigateCheckout = () => {
+    navigate('/checkout')
   }
 
   return (
@@ -52,49 +57,49 @@ function Cart() {
         {cartList.length > 0 ? (
           <>
             <div className="cart__list">
-              {cartList.map((item) => (
-                <div className="cart__item" key={item.id}>
-                  <div className="cart__infor">
-                    <img
-                      src={item.urlImage}
-                      className="cart__image"
-                      alt={item.name}
-                    />
-                    <h4 className="cart__name">{item.name}</h4>
-                  </div>
-                  <div className="cart__price cart__row">
-                    <h5 className="cart__note">Giá: </h5>
-                    <span className="cart__price-number">{formatPrice(item.price)}</span>
-                  </div>
-                  <div className="cart__quantily cart__row">
-                    <h5 className="cart__note">Số lượng: </h5>
-                    <div className="cart__quantily-wrap">
-                      <RiSubtractLine 
-                        className="cart__reduce cart__icon"
-                        onClick={() => handleSetQuantity(item.id, item.quantity - 1)} 
-                        />
-                      <span className="cart__quantily-number">
-                        {item.quantity}
-                      </span>
-                      <AiOutlinePlus 
-                        className="cart__increase cart__icon" 
-                        onClick={() => handleSetQuantity(item.id, item.quantity + 1)} 
+                {cartList.map((item, index) => (
+                  <div className="cart__item" key={item.id}>
+                    <div className="cart__infor">
+                      <img
+                        src={item.image}
+                        className="cart__image"
+                        alt={item.name}
                       />
+                      <h4 className="cart__name">{item.name}</h4>
                     </div>
+                    <div className="cart__price cart__row">
+                      <h5 className="cart__note">Giá: </h5>
+                      <span className="cart__price-number">{formatPrice(item.price)}</span>
+                    </div>
+                    <div className="cart__quantity cart__row">
+                      <h5 className="cart__note">Số lượng: </h5>
+                      <div className="cart__quantity-wrap">
+                        <RiSubtractLine 
+                          className="cart__reduce cart__icon"
+                          onClick={() => handleSetQuantity(item.id, item.size, item.quantity - 1)} 
+                          />
+                        <span className="cart__quantity-number">
+                          {item.quantity}
+                        </span>
+                        <AiOutlinePlus 
+                          className="cart__increase cart__icon" 
+                          onClick={() => handleSetQuantity(item.id,  item.size, item.quantity + 1)} 
+                        />
+                      </div>
+                    </div>
+                    <div className="cart__size cart__row">
+                      <h5 className="cart__note">Size: </h5>
+                      <span className="cart__size-nuumber">{item.size}</span>
+                    </div>
+                    <div className="cart__total cart__row">
+                      <h5 className="cart__note">Tổng:</h5>
+                      <span className="cart__total-number">
+                        {formatPrice(item.price * item.quantity)}
+                      </span>
+                    </div>
+                    <AiFillDelete className="cart__remove cart__icon" onClick={() => handleRemoveItem(index)} />
                   </div>
-                  <div className="cart__size cart__row">
-                    <h5 className="cart__note">Size: </h5>
-                    <span className="cart__size-nuumber">{item.size}</span>
-                  </div>
-                  <div className="cart__total cart__row">
-                    <h5 className="cart__note">Tổng:</h5>
-                    <span className="cart__total-number">
-                      {formatPrice(item.price * item.quantity)}
-                    </span>
-                  </div>
-                  <AiFillDelete className="cart__remove cart__icon" onClick={() => handleRemoveItem(item.id)} />
-                </div>
-              ))}
+                ))}
             </div>
 
             <div className="cart__bottom">
@@ -102,7 +107,7 @@ function Cart() {
                 <h4>Tổng tiền:</h4>
                 <span>{formatPrice(totalPrice)}</span>
               </div>
-              <button className="cart__payment">Tiến hành thanh toán</button>
+              <button className="cart__payment" onClick={handleNavigateCheckout}>Tiến hành thanh toán</button>
               <button className="cart__buymore" onClick={handleNavigateShop}>Mua thêm sản phẩm khác</button>
             </div>
           </>
