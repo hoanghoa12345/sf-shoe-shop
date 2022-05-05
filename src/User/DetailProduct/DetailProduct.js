@@ -64,7 +64,7 @@ const dispatch = useDispatch()
             <div className="card-wrapper">
                 <div className="card">
                     {data.length === 0 ? (<Loading />) : (data.map(data => {
-                        const { _id, price, rating, numReviews, name, image, brand, category, description } = data;
+                        const { _id, price, rating, numReviews, name, image, brand, sizeList, description } = data;
                         return (
                             <div key={_id}>
                                 <div className="productDetailUi">
@@ -78,6 +78,7 @@ const dispatch = useDispatch()
                                             <GiRunningShoe className='iconBrand' /><span className="productBrand">{brand}</span>
                                             <p className="productBrand">  <GrOverview className='iconBrand' />{numReviews}</p>
                                             <p className="productBrand">  <AiTwotoneStar className='iconBrand' />{rating}</p>
+                                          
                                             <p className="productDecrip">{description}</p>
                                             <div><button className="btnBuy" onClick={() => handleAddToCart(data)}>Thêm vào giỏ hàng</button></div>
                                             <ToastContainer />

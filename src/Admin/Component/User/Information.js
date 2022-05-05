@@ -14,6 +14,7 @@ import { updateUser, TOKEN } from "../../../api/httpRequest";
 function Information() {
   const [isAdmin, setIsAdmin] = useState("");
   const [name, setName] = useState("");
+  const [active, setActive] = useState('');
   const [password, setPassword] = useState("");
   const [information, setInformation] = useState(true);
   const navigate = useNavigate();
@@ -36,14 +37,13 @@ function Information() {
     isAdmin,
     password
   };
-console.log(findEditUser);
+
   const hanldeUpdate = async () => {
     try {
       const response = await updateUser(id, data, TOKEN)
       navigate(-1);
       toast.success("Update successful !!");
       dispatch(update_user(response.data));
-      console.log(response.data);
     } catch (error) { console.log('err', error); }
 
   };
@@ -93,7 +93,9 @@ console.log(findEditUser);
                         className='userUpdateInput' />
                     </div>
                     <label className='title_edit'>Active:</label>
-                    {findEditUser.isAdmin ? (
+                  
+                     {findEditUser.isAdmin ? (
+
                       <input type='text'
                         value={isAdmin}
                         onChange={(e) => setIsAdmin(e.target.value)}
@@ -101,7 +103,7 @@ console.log(findEditUser);
                       <input type='Text'
                         value={isAdmin}
                         onChange={(e) => setIsAdmin(e.target.value)}
-                        className='userUpdateInput' />)}
+                        className='userUpdateInput' />)} 
                   </div>
                   <button className='listUser_btn ' onClick={hanldeUpdate}>Update</button>
                   <button className='listUser_btn ' onClick={() => navigate(-1)} >cancel</button>
@@ -122,9 +124,9 @@ console.log(findEditUser);
                           <div className='userUpdateItem'>
                             <label className='title_edit'>Password:</label>
                             <input type='password'
-                            value={password}
+                              value={password}
                               placeholder='****************'
-                              onChange={(e)=>setPassword(e.target.value)}
+                              onChange={(e) => setPassword(e.target.value)}
                               className='userUpdateInput' />
                           </div>) : (null)}
 

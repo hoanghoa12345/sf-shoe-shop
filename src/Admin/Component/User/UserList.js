@@ -37,7 +37,7 @@ function UserList() {
   useEffect(() => {
     fetchUser()
   },[])
-  console.log(userLists);
+ 
   useEffect(() => {
     setPosts(userLists)
   }, [userLists])

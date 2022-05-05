@@ -22,7 +22,8 @@ function ProductList() {
   const [currentSort, setCurrentSort] = useState('default');
   const [deletes, setDeletes] = useState(false)
   const [deleteId, setDeleteId] = useState(0);
-  const [search, setSearch] = useState('')
+  const [category, setCategory] = useState('')
+  const [search, setSearch] = useState('');
   const productLists = useSelector(state => state.contactProducts.products);
 
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function ProductList() {
   useEffect(() => {
     fetchProducts();
   }, [])
-  console.log(productLists);
+
 
 
   //phan trang
@@ -73,19 +74,30 @@ function ProductList() {
   const handleNo = () => {
     setDeletes(false)
   }
-  //Sort products
-/*   const option = ['Sắp xếp Theo Giá ', 'Tăng Dần', 'Giảm Dần'];
-  const hanldeAsc = () => {
-    productLists.sort((a, b) => { return (a.price - b.price) })
-  }
 
-  const hanldeDes = () => {
-    productLists.sort((a, b) => { return (b.price - a.price) })
-  } */
   useEffect(() => {
     setPosts(productLists)
   }, [fetchProducts])
 
+  //category product
+  const categoryProduct = productLists.map((brand) => {
+    return (brand.brand)
+  })
+  let result = [];
+  result = categoryProduct.filter(item => { return result.includes(item) ? '' : result.push(item) })
+ const dataFilter = productLists.filter( item =>{ 
+   if(category === category){return item}
+   else if(result.includes(category)){return item}
+})
+ console.log('réult',result );
+console.log('dataFilter',category,dataFilter);
+// console.log('brand',dataFilter[''].brand);
+// const arry=['1','1','2','3','4','5','6','7','8',''];
+  // ary.filter((item, index) => ary.indexOf(item) === index)
+  /* arry.reduce((unique,index)=>{ 
+    return unique.includes(index) ? unique : [...unique ,index]
+  },[]) */
+  
 
   return (
     <div>
@@ -111,11 +123,15 @@ function ProductList() {
         <div className='headerRight'><FaSearch className='iconSearch' />
           <input className='inputSearchProduct' placeholder='Search...' onChange={(e) => setSearch(e.target.value)} disabled={productLists.length === 0} />
         </div>
-        {/*  <select className='sortProduct' name='sort' id='active' onChange={(e) => setCurrentSort(e.target.value)} disabled={productLists.length === 0}>
-          <option>Sắp Xếp theo Giá: </option>
-          <option value={posts} onClick={hanldeAsc}>Tăng Dần</option>
-          <option value={posts} onClick={hanldeDes}>Giảm Dần</option>
-        </select> */}
+        <select className='sortProduct' name='sort' id='active' value={category} onChange={(e) => setCategory(e.target.value)} disabled={productLists.length === 0}>
+          {result.map(item => {
+            return (
+              <option value={item} >{item}</option>
+              
+            )
+          })}
+        </select>
+
       </div>
       <Pagination
         postPerPage={postPerPage}
@@ -130,8 +146,7 @@ function ProductList() {
             } else if (data.name.toLowerCase().includes(search.toLowerCase())) {
               return data
             }
-          })
-            .map((productList, index) => {
+          }).map((productList, index) => {
               const { _id, image, countInStock, rating, sizeList, name, price, numReviews } = productList;
               return (
                 <div className="productList" key={index}>
@@ -146,12 +161,11 @@ function ProductList() {
                       <div className='productTotal'>
                         <label> Size: </label>
                         <select name='Active' id='Active'  >
-                        
-                           {sizeList.map(sizelist => {
+                          {sizeList.map(sizelist => {
                             return (
                               <option value={sizelist}>{sizelist}</option>
                             )
-                          })} 
+                          })}
                         </select>
                       </div>
                     </div>
