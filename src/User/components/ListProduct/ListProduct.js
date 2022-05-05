@@ -7,6 +7,7 @@ import Loading from './../Loading/index'
 import { formatPrice } from '../../../utils/common'
 
 import './ListProduct.css'
+import { getProducts } from '../../../api/httpRequest'
 
 function ListProduct() {
     const navigate = useNavigate();
@@ -16,47 +17,35 @@ function ListProduct() {
     const categories = [
         {
             id: "Sneaker",
-            name: "Giày Tây",
+            name: "Giày Sneaker",
         },
         {
-            id: "Shoe",
-            name: "Giày Bốt Nam",
+            id: "Jordan",
+            name: "Giày Jordan",
         },
         {
-            id: "GUCI",
-            name: "Giày lười nam",
+            id: "Sport",
+            name: "Giày Sport",
         },
         {
-            id: "Shoe",
-            name: "Giày Vans",
+            id: "Guci",
+            name: "Giày Guci",
         }
     ]
 
-    const getProductAPI = async () => {
-        return await axios.get(
-            'https://sf-shoe-shop-be.herokuapp.com/api/products/'
-        );
-    }
+ 
     useEffect(() => {
         const getProduct = async () => {
-            const { data } = await getProductAPI();
+            const { data } = await getProducts();
             setProducts([...data]);
             setProductsTemp([...data]);
         }
         getProduct();
     }, [])
 
-    // const [pagination, setPagination] = useState({
-    //     _page: 1,
-    //     _limit: 10,
-    //     _totalRows: 11,
-    // });
-    // function handlePageChange(newPage) {
-    //     console.log("new page:", newPage);
-    // }
     const hanldeClick = catItem => {
         const result = productsTemp.filter(curData => {
-            return curData.category === catItem;
+            return curData.brand === catItem;
         });
         setProducts(result)
     }
