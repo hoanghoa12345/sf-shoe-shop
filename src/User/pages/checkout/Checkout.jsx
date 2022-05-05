@@ -11,7 +11,6 @@ const Checkout = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.authReducer[0])
     const shoppingCart = useSelector(state => state.cart)
-    console.log(shoppingCart)
     var formatter = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND'
@@ -50,11 +49,7 @@ const Checkout = () => {
     const submitHandler = async e => {
         e.preventDefault()
         console.log(formData)
-        let cartItems = []
-        shoppingCart.forEach(items => {
-            cartItems.push({ ...items, product: items.id })
-        })
-        let orderInfo = { ...formData, cartItems }
+        let orderInfo = { ...formData, cartItems: shoppingCart }
         dispatch(createCheckout(orderInfo))
         const res = await postOrder(orderInfo, user.token)
         if (res.status === 201) {
